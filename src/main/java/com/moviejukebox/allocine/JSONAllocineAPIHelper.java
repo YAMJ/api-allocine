@@ -36,6 +36,11 @@ import java.util.List;
  */
 public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
+    private static final String CODE = "code";
+    private static final String TITLE = "title";
+    private static final String ORIGINAL_TITLE = "originalTitle";
+    private static final String YEAR_START = "yearStart";
+    private static final String YEAR_END = "yearEnd";
     /**
      * The JSON object mapper
      */
@@ -74,13 +79,13 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
         if (feedNode != null && !feedNode.isNull()) {
             JsonNode moviesNode = feedNode.get("movie");
             if (moviesNode != null && !moviesNode.isNull() && moviesNode.size() > 0) {
-                for (int i=0; i < moviesNode.size(); i++) {
+                for (int i = 0; i < moviesNode.size(); i++) {
                     JsonNode movieNode = moviesNode.get(i);
                     if (movieNode != null && !movieNode.isNull()) {
                         Movie movie = new Movie();
-                        movie.setCode(getValueAsInt(movieNode.get("code")));
-                        movie.setTitle(getValueAsString(movieNode.get("title")));
-                        movie.setOriginalTitle(getValueAsString(movieNode.get("originalTitle")));
+                        movie.setCode(getValueAsInt(movieNode.get(CODE)));
+                        movie.setTitle(getValueAsString(movieNode.get(TITLE)));
+                        movie.setOriginalTitle(getValueAsString(movieNode.get(ORIGINAL_TITLE)));
                         movie.setProductionYear(getValueAsString(movieNode.get("productionYear")));
                         // enough values for search result
 
@@ -116,18 +121,18 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
         }
 
         JsonNode feedNode = rootNode.get("feed");
-        if (feedNode != null && !feedNode.isNull())  {
+        if (feedNode != null && !feedNode.isNull()) {
             JsonNode tvseriesNode = feedNode.get("tvseries");
             if (tvseriesNode != null && !tvseriesNode.isNull() && tvseriesNode.size() > 0) {
-                for (int i=0; i < tvseriesNode.size(); i++) {
+                for (int i = 0; i < tvseriesNode.size(); i++) {
                     JsonNode tvserieNode = tvseriesNode.get(i);
                     if (tvserieNode != null && !tvserieNode.isNull()) {
                         Tvseries tvseries = new Tvseries();
-                        tvseries.setCode(getValueAsInt(tvserieNode.get("code")));
-                        tvseries.setTitle(getValueAsString(tvserieNode.get("title")));
-                        tvseries.setOriginalTitle(getValueAsString(tvserieNode.get("originalTitle")));
-                        tvseries.setYearStart(getValueAsString(tvserieNode.get("yearStart")));
-                        tvseries.setYearEnd(getValueAsString(tvserieNode.get("yearEnd")));
+                        tvseries.setCode(getValueAsInt(tvserieNode.get(CODE)));
+                        tvseries.setTitle(getValueAsString(tvserieNode.get(TITLE)));
+                        tvseries.setOriginalTitle(getValueAsString(tvserieNode.get(ORIGINAL_TITLE)));
+                        tvseries.setYearStart(getValueAsString(tvserieNode.get(YEAR_START)));
+                        tvseries.setYearEnd(getValueAsString(tvserieNode.get(YEAR_END)));
                         // enough values for search result
 
                         search.getTvseries().add(tvseries);
@@ -163,9 +168,9 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
         JsonNode movieNode = rootNode.get("movie");
         if (movieNode != null && !movieNode.isNull()) {
-            infos.setCode(getValueAsInt(movieNode.get("code")));
-            infos.setTitle(getValueAsString(movieNode.get("title")));
-            infos.setOriginalTitle(getValueAsString(movieNode.get("originalTitle")));
+            infos.setCode(getValueAsInt(movieNode.get(CODE)));
+            infos.setTitle(getValueAsString(movieNode.get(TITLE)));
+            infos.setOriginalTitle(getValueAsString(movieNode.get(ORIGINAL_TITLE)));
             infos.setProductionYear(getValueAsString(movieNode.get("productionYear")));
             infos.setRuntime(getValueAsInt(movieNode.get("runtime")));
 
@@ -222,11 +227,11 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
         JsonNode tvseriesNode = rootNode.get("tvseries");
         if (tvseriesNode != null && !tvseriesNode.isNull()) {
-            infos.setCode(getValueAsInt(tvseriesNode.get("code")));
-            infos.setTitle(getValueAsString(tvseriesNode.get("title")));
-            infos.setOriginalTitle(getValueAsString(tvseriesNode.get("originalTitle")));
-            infos.setYearStart(getValueAsString(tvseriesNode.get("yearStart")));
-            infos.setYearEnd(getValueAsString(tvseriesNode.get("yearEnd")));
+            infos.setCode(getValueAsInt(tvseriesNode.get(CODE)));
+            infos.setTitle(getValueAsString(tvseriesNode.get(TITLE)));
+            infos.setOriginalTitle(getValueAsString(tvseriesNode.get(ORIGINAL_TITLE)));
+            infos.setYearStart(getValueAsString(tvseriesNode.get(YEAR_START)));
+            infos.setYearEnd(getValueAsString(tvseriesNode.get(YEAR_END)));
             infos.setSeasonCount(getValueAsInt(tvseriesNode.get("seasonCount")));
 
             // parse original channel
@@ -282,10 +287,10 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
         JsonNode seasonNode = rootNode.get("season");
         if (seasonNode != null && !seasonNode.isNull()) {
-            infos.setCode(getValueAsInt(seasonNode.get("code")));
+            infos.setCode(getValueAsInt(seasonNode.get(CODE)));
             infos.setSeasonNumber(getValueAsInt(seasonNode.get("seasonNumber")));
-            infos.setYearStart(getValueAsString(seasonNode.get("yearStart")));
-            infos.setYearEnd(getValueAsString(seasonNode.get("yearEnd")));
+            infos.setYearStart(getValueAsString(seasonNode.get(YEAR_START)));
+            infos.setYearEnd(getValueAsString(seasonNode.get(YEAR_END)));
 
             // parse episodes
             parseEpisodeList(infos.getEpisodeList(), seasonNode);
@@ -331,7 +336,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
     private static void parseListValues(List<String> values, JsonNode valuesNode) {
         if (valuesNode != null && !valuesNode.isNull() && (valuesNode.size() > 0)) {
-            for (int i=0; i<valuesNode.size(); i++) {
+            for (int i = 0; i < valuesNode.size(); i++) {
                 JsonNode valueNode = valuesNode.get(i);
                 if (valueNode != null && !valueNode.isNull()) {
                     String value = getValueAsString(valueNode.get("$"));
@@ -389,7 +394,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
             JsonNode ratingNode = node.get("rating");
             if (ratingNode != null && !ratingNode.isNull() && (ratingNode.size() > 0)) {
                 Statistics statistics = new Statistics();
-                for (int i=0; i<ratingNode.size(); i++) {
+                for (int i = 0; i < ratingNode.size(); i++) {
                     node = ratingNode.get(i);
                     if (node != null && !node.isNull()) {
                         RatingType ratingType = new RatingType();
@@ -415,7 +420,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     private static void parseMedia(List<Media> mediaList, JsonNode rootNode) {
         JsonNode node = rootNode.get("media");
         if (node != null && !node.isNull() && (node.size() > 0)) {
-            for (int i=0; i<node.size(); i++) {
+            for (int i = 0; i < node.size(); i++) {
                 JsonNode mediaNode = node.get(i);
                 if (mediaNode != null && !mediaNode.isNull()) {
                     Media media = new Media();
@@ -423,11 +428,11 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
                     JsonNode innerNode = mediaNode.get("type");
                     if (innerNode != null && !innerNode.isNull()) {
                         TypeType typeType = new TypeType();
-                        typeType.setCode(getValueAsInt(innerNode.get("code")));
+                        typeType.setCode(getValueAsInt(innerNode.get(CODE)));
                         media.setType(typeType);
-                   }
+                    }
 
-                    innerNode= mediaNode.get("thumbnail");
+                    innerNode = mediaNode.get("thumbnail");
                     if (innerNode != null && !innerNode.isNull()) {
                         ThumbnailType thumbnailType = new ThumbnailType();
                         thumbnailType.setHref(getValueAsString(innerNode.get("href")));
@@ -443,7 +448,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     private static void parseCasting(List<CastMember> members, JsonNode rootNode) {
         JsonNode node = rootNode.get("castMember");
         if (node != null && !node.isNull() && (node.size() > 0)) {
-            for (int i=0; i<node.size(); i++) {
+            for (int i = 0; i < node.size(); i++) {
                 JsonNode memberNode = node.get(i);
                 if (memberNode != null && !memberNode.isNull()) {
 
@@ -453,7 +458,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
                     JsonNode personNode = memberNode.get("person");
                     if (personNode != null && !personNode.isNull()) {
                         Person person = new Person();
-                        person.setCode(getValueAsInt(personNode.get("code")));
+                        person.setCode(getValueAsInt(personNode.get(CODE)));
                         person.setName(getValueAsString(personNode.get("name")));
                         member.setPerson(person);
                     }
@@ -461,7 +466,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
                     JsonNode activityNode = memberNode.get("activity");
                     if (activityNode != null && !activityNode.isNull()) {
                         ActivityType activityType = new ActivityType();
-                        activityType.setCode(Integer.valueOf(getValueAsInt(activityNode.get("code"))));
+                        activityType.setCode(Integer.valueOf(getValueAsInt(activityNode.get(CODE))));
                         member.setActivity(activityType);
                     }
 
@@ -474,14 +479,14 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     private static void parseSeasonList(List<Season> seasons, JsonNode rootNode) {
         JsonNode node = rootNode.get("season");
         if (node != null && !node.isNull() && (node.size() > 0)) {
-            for (int i=0; i<node.size(); i++) {
+            for (int i = 0; i < node.size(); i++) {
                 JsonNode seasonNode = node.get(i);
                 if (seasonNode != null && !seasonNode.isNull()) {
                     Season season = new Season();
-                    season.setCode(getValueAsInt(seasonNode.get("code")));
+                    season.setCode(getValueAsInt(seasonNode.get(CODE)));
                     season.setSeasonNumber(getValueAsInt(seasonNode.get("seasonNumber")));
-                    season.setYearStart(getValueAsString(seasonNode.get("yearStart")));
-                    season.setYearEnd(getValueAsString(seasonNode.get("yearEnd")));
+                    season.setYearStart(getValueAsString(seasonNode.get(YEAR_START)));
+                    season.setYearEnd(getValueAsString(seasonNode.get(YEAR_END)));
                     seasons.add(season);
                 }
             }
@@ -491,13 +496,13 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     private static void parseEpisodeList(List<Episode> episodes, JsonNode rootNode) {
         JsonNode node = rootNode.get("episode");
         if (node != null && !node.isNull() && (node.size() > 0)) {
-            for (int i=0; i<node.size(); i++) {
+            for (int i = 0; i < node.size(); i++) {
                 JsonNode episodeNode = node.get(i);
                 if (episodeNode != null && !episodeNode.isNull()) {
                     Episode episode = new Episode();
-                    episode.setCode(getValueAsInt(episodeNode.get("code")));
-                    episode.setTitle(getValueAsString(episodeNode.get("title")));
-                    episode.setOriginalTitle(getValueAsString(episodeNode.get("originalTitle")));
+                    episode.setCode(getValueAsInt(episodeNode.get(CODE)));
+                    episode.setTitle(getValueAsString(episodeNode.get(TITLE)));
+                    episode.setOriginalTitle(getValueAsString(episodeNode.get(ORIGINAL_TITLE)));
                     episode.setEpisodeNumberSeries(getValueAsInt(episodeNode.get("episodeNumberSeries")));
                     episode.setEpisodeNumberSeason(getValueAsInt(episodeNode.get("episodeNumberSeason")));
                     episode.setSynopsis(getValueAsString(episodeNode.get("synopsis")));
