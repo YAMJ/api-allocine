@@ -22,8 +22,6 @@
  */
 package com.moviejukebox.allocine;
 
-import java.io.IOException;
-
 /**
  * The Allocine API.
  * This is for version 3 of the API as specified here: http://wiki.gromez.fr/dev/api/allocine_v3
@@ -32,13 +30,13 @@ public interface AllocineAPIHelper {
 
     void setProxy(String proxyHost, String proxyPort, String username, String password);
 
-    Search searchMovieInfos(String query) throws IOException;
+    Search searchMovieInfos(String query) throws Exception;
 
-    Search searchTvseriesInfos(String query) throws IOException;
+    Search searchTvseriesInfos(String query) throws Exception;
 
-    MovieInfos getMovieInfos(String allocineId) throws IOException;
+    MovieInfos getMovieInfos(String allocineId) throws Exception;
 
-    TvSeriesInfos getTvSeriesInfos(String allocineId) throws IOException;
+    TvSeriesInfos getTvSeriesInfos(String allocineId) throws Exception;
 
-    TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws IOException;
+    TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws Exception;
 }
