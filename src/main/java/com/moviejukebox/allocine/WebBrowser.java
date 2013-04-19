@@ -33,6 +33,10 @@ public final class WebBrowser {
     private static String proxyPort = null;
     private static String proxyEncodedPassword = null;
 
+    private WebBrowser() {
+        throw new UnsupportedOperationException("Class cannot be initialised");
+    }
+
     /**
      * Open a connection using proxy parameters if they exist.
      *
@@ -52,7 +56,7 @@ public final class WebBrowser {
         if (proxyEncodedPassword != null) {
             connection.setRequestProperty("Proxy-Authorization", proxyEncodedPassword);
         }
-        
+
         return connection;
     }
 
