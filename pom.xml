@@ -19,7 +19,7 @@
 
     <name>API-Allocine</name>
     <description>API for the Allocine Website</description>
-    <url>https://github.com/Omertron/api-allocine</url>
+    <url>https://github.com/YAMJ/api-allocine</url>
     <inceptionYear>2011</inceptionYear>
 
     <developers>
@@ -43,22 +43,22 @@
     </licenses>
 
     <scm>
-        <url>scm:git:git@github.com:Omertron/api-allocine.git</url>
-        <connection>scm:git:git@github.com:Omertron/api-allocine.git</connection>
-        <developerConnection>scm:git:git@github.com:Omertron/api-allocine.git</developerConnection>
+        <url>scm:git:git@github.com:YAMJ/api-allocine.git</url>
+        <connection>scm:git:git@github.com:YAMJ/api-allocine.git</connection>
+        <developerConnection>scm:git:git@github.com:YAMJ/api-allocine.git</developerConnection>
     </scm>
 
     <distributionManagement>
         <site>
             <id>github-project-site</id>
             <name>GitHub Project Pages</name>
-            <url>gitsite:git@github.com/Omertron/api-allocine.git</url>
+            <url>gitsite:git@github.com/YAMJ/api-allocine.git</url>
         </site>
     </distributionManagement>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/Omertron/api-allocine/issues</url>
+        <url>https://github.com/YAMJ/api-allocine/issues</url>
     </issueManagement>
 
     <ciManagement>
@@ -405,13 +405,5 @@
         </extensions>
 
     </build>
-
-    <!--    <repositories>
-        <repository>
-            <id>m2.dev.java.net</id>
-            <url>http://download.java.net/maven/2</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>-->
 
 </project>

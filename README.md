@@ -10,4 +10,4 @@ But anyone can feel free to use it for other projects as well.
 
 Project Documentation
 ---------------------
-The automatically generated documentation can be found [HERE](http://omertron.github.com/api-allocine/)
+The automatically generated documentation can be found [HERE](http://yamj.github.com/api-allocine/)
