@@ -25,6 +25,7 @@ package com.moviejukebox.allocine;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.jaxb.*;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.util.List;
@@ -56,7 +57,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     }
 
     @Override
-    public Search searchMovieInfos(String query) throws Exception {
+    public Search searchMovieInfos(String query) throws IOException {
         JsonNode rootNode = null;
         URLConnection connection = null;
         InputStream inputStream = null;
@@ -101,7 +102,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     }
 
     @Override
-    public Search searchTvseriesInfos(String query) throws Exception {
+    public Search searchTvseriesInfos(String query) throws IOException {
         JsonNode rootNode = null;
         URLConnection connection = null;
         InputStream inputStream = null;
@@ -147,7 +148,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     }
 
     @Override
-    public MovieInfos getMovieInfos(String allocineId) throws Exception {
+    public MovieInfos getMovieInfos(String allocineId) throws IOException {
         JsonNode rootNode = null;
         URLConnection connection = null;
         InputStream inputStream = null;
@@ -206,7 +207,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     }
 
     @Override
-    public TvSeriesInfos getTvSeriesInfos(String allocineId) throws Exception {
+    public TvSeriesInfos getTvSeriesInfos(String allocineId) throws IOException {
         JsonNode rootNode = null;
         URLConnection connection = null;
         InputStream inputStream = null;
@@ -266,7 +267,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     }
 
     @Override
-    public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws Exception {
+    public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws IOException {
         JsonNode rootNode = null;
         URLConnection connection = null;
         InputStream inputStream = null;
@@ -305,9 +306,10 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
         } else if (node.isNull()) {
             return -1;
         }
+
         try {
             return Integer.parseInt(node.asText());
-        } catch (Exception ignore) {
+        } catch (NumberFormatException ignore) {
             return -1;
         }
     }
@@ -320,7 +322,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
         }
         try {
             return Float.parseFloat(node.asText());
-        } catch (Exception ignore) {
+        } catch (NumberFormatException ignore) {
             return 0f;
         }
     }
