@@ -48,8 +48,8 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
      *
      * @param apiKey The API key for allocine
      */
-    public XMLAllocineAPIHelper(String apiKey) {
-        super(apiKey, "xml");
+    public XMLAllocineAPIHelper(String partnerKey, String secretKey) {
+        super(partnerKey, secretKey, "xml");
     }
 
     private static JAXBContext initContext() {
@@ -70,7 +70,7 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
     @Override
     public Search searchMovieInfos(String query) throws IOException, JAXBException, XMLStreamException {
         Unmarshaller unmarshaller = createAllocineUnmarshaller();
-        
+
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
@@ -85,7 +85,7 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
     @Override
     public Search searchTvseriesInfos(String query) throws IOException, JAXBException, XMLStreamException {
         Unmarshaller unmarshaller = createAllocineUnmarshaller();
-        
+
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
@@ -100,7 +100,7 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
     @Override
     public MovieInfos getMovieInfos(String allocineId) throws IOException, JAXBException, XMLStreamException {
         Unmarshaller unmarshaller = createAllocineUnmarshaller();
-        
+
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
@@ -120,7 +120,7 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
     @Override
     public TvSeriesInfos getTvSeriesInfos(String allocineId) throws IOException, JAXBException, XMLStreamException {
         Unmarshaller unmarshaller = createAllocineUnmarshaller();
-        
+
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
@@ -135,7 +135,7 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
     @Override
     public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws IOException, JAXBException, XMLStreamException {
         Unmarshaller unmarshaller = createAllocineUnmarshaller();
-        
+
         URLConnection connection = null;
         InputStream inputStream = null;
         try {

@@ -61,8 +61,8 @@ public class TvSeriesInfos extends Tvseries {
 
     public final String getSynopsis() {
         String synopsis = "";
-        HtmlSynopsisType htmlSynopsis = getHtmlSynopsis();
-        if (htmlSynopsis != null) {
+        HtmlSynopsisType readSynopsis = getHtmlSynopsis();
+        if (readSynopsis != null) {
             for (Object obj : getHtmlSynopsis().getContent()) {
                 String str = "";
                 if (obj instanceof String) {
@@ -171,5 +171,10 @@ public class TvSeriesInfos extends Tvseries {
             }
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return "TvSeriesInfos{" + "actors=" + actors + ", writers=" + writers + ", directors=" + directors + ", posterURLS=" + posterURLS + '}';
     }
 }

@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation for JSON format
@@ -37,6 +39,7 @@ import java.util.List;
  */
 public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
+    private static final Logger LOG = LoggerFactory.getLogger(JSONAllocineAPIHelper.class);
     private static final String CODE = "code";
     private static final String TITLE = "title";
     private static final String ORIGINAL_TITLE = "originalTitle";
@@ -52,8 +55,8 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
      *
      * @param apiKey The API key for allocine
      */
-    public JSONAllocineAPIHelper(String apiKey) {
-        super(apiKey, "json");
+    public JSONAllocineAPIHelper(String partnerKey, String secretKey) {
+        super(partnerKey, secretKey, "json");
     }
 
     @Override
@@ -217,6 +220,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
             inputStream = connection.getInputStream();
 
             rootNode = mapper.readTree(inputStream);
+            LOG.trace("RootNote: \n{} ", rootNode.toString());
         } finally {
             close(connection, inputStream);
         }

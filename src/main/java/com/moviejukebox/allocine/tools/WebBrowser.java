@@ -20,7 +20,7 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.tools;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +32,9 @@ public final class WebBrowser {
     private static String proxyHost = null;
     private static String proxyPort = null;
     private static String proxyEncodedPassword = null;
+//    private static String userAgent = "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)";
+//    private static String userAgent = "Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)";
+    private static String userAgent = "Dalvik/1.6.0 (Linux; U; Android 4.0.3; GT-P3100 Build/IML74K)";
 
     private WebBrowser() {
         throw new UnsupportedOperationException("Class cannot be initialised");
@@ -51,7 +54,7 @@ public final class WebBrowser {
         }
 
         URLConnection connection = url.openConnection();
-        connection.addRequestProperty("User-Agent", "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)");
+        connection.addRequestProperty("User-Agent", userAgent);
 
         if (proxyEncodedPassword != null) {
             connection.setRequestProperty("Proxy-Authorization", proxyEncodedPassword);
@@ -76,6 +79,15 @@ public final class WebBrowser {
      */
     public static void setProxyPort(String proxyPort) {
         WebBrowser.proxyPort = proxyPort;
+    }
+
+    /**
+     * Set the user agent to use
+     *
+     * @param userAgent
+     */
+    public static void setUserAgent(String userAgent) {
+        WebBrowser.userAgent = userAgent;
     }
 
     /**
