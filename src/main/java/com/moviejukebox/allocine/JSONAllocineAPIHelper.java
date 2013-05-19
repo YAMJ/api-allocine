@@ -220,7 +220,6 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
             inputStream = connection.getInputStream();
 
             rootNode = mapper.readTree(inputStream);
-            LOG.trace("RootNote: \n{} ", rootNode.toString());
         } finally {
             close(connection, inputStream);
         }

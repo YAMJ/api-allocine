@@ -29,7 +29,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -52,10 +51,8 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
     private static final String PARAM_FORMAT = "format";
     private static final String PARAM_CODE = "code";
     private static final String METHOD_SEASON = "season";
-    ApiUrl apiUrl;
+    private ApiUrl apiUrl;
     private final String format;
-    @Deprecated
-    private final String apiKey = "";
 
     /**
      * Create the API
@@ -94,12 +91,6 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
         }
     }
 
-    protected URLConnection connectSearchMovieInfos_OLD(String query) throws IOException {
-        String encode = URLEncoder.encode(query, "UTF-8");
-        URL url = new URL("http://api.allocine.fr/rest/v3/search?partner=" + apiKey + "&format=" + format + "&filter=movie&q=" + encode);
-        return WebBrowser.openProxiedConnection(url);
-    }
-
     protected URLConnection connectSearchMovieInfos(String query) throws IOException {
         Map<String, String> params = new LinkedHashMap<String, String>();
 
@@ -115,12 +106,6 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
         return WebBrowser.openProxiedConnection(url);
     }
 
-    protected URLConnection connectSearchTvseriesInfos_OLD(String query) throws IOException {
-        String encode = URLEncoder.encode(query, "UTF-8");
-        URL url = new URL("http://api.allocine.fr/rest/v3/search?partner=" + apiKey + "&format=" + format + "&filter=tvseries&q=" + encode);
-        return WebBrowser.openProxiedConnection(url);
-    }
-
     protected URLConnection connectSearchTvseriesInfos(String query) throws IOException {
         Map<String, String> params = new LinkedHashMap<String, String>();
 
@@ -129,12 +114,6 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
         params.put("q", query);
 
         URL url = apiUrl.generateUrl(METHOD_SEARCH, params);
-        return WebBrowser.openProxiedConnection(url);
-    }
-
-    protected URLConnection connectGetMovieInfos_OLD(String allocineId) throws IOException {
-        // HTML tags are removed from synopsis & synopsisshort
-        URL url = new URL("http://api.allocine.fr/rest/v3/movie?partner=" + apiKey + "&profile=large&mediafmt=mp4-lc&format=" + format + "&filter=movie&striptags=synopsis,synopsisshort&code=" + allocineId);
         return WebBrowser.openProxiedConnection(url);
     }
 
@@ -152,12 +131,6 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
         return WebBrowser.openProxiedConnection(url);
     }
 
-    protected URLConnection connectGetTvSeriesInfos_OLD(String allocineId) throws IOException {
-        // HTML tags are removed from synopsis & synopsisshort
-        URL url = new URL("http://api.allocine.fr/rest/v3/tvseries?partner=" + apiKey + "&profile=large&mediafmt=mp4-lc&format=" + format + "&filter=movie&striptags=synopsis,synopsisshort&code=" + allocineId);
-        return WebBrowser.openProxiedConnection(url);
-    }
-
     protected URLConnection connectGetTvSeriesInfos(String allocineId) throws IOException {
         Map<String, String> params = new LinkedHashMap<String, String>();
 
@@ -169,12 +142,6 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
         params.put(PARAM_CODE, allocineId);
 
         URL url = apiUrl.generateUrl(METHOD_TVSERIES, params);
-        return WebBrowser.openProxiedConnection(url);
-    }
-
-    protected URLConnection connectGetTvSeasonInfos_OLD(Integer seasonCode) throws IOException {
-        // HTML tags are removed from synopsis & synopsisshort
-        URL url = new URL("http://api.allocine.fr/rest/v3/season?partner=" + apiKey + "&profile=large&mediafmt=mp4-lc&format=" + format + "&filter=movie&striptags=synopsis,synopsisshort&code=" + seasonCode);
         return WebBrowser.openProxiedConnection(url);
     }
 
