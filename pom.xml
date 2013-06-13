@@ -70,6 +70,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <distribution.format>zip</distribution.format>
+		<jaxb.version>2.2.4-1</jaxb.version>
     </properties>
 
     <dependencies>
@@ -97,19 +98,19 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
 
         <!-- XML PARSING -->
@@ -117,13 +118,13 @@
         <dependency>
             <groupId>com.github.jaxb-xew-plugin</groupId>
             <artifactId>jaxb-xew-plugin</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.2.4-1</version>
+            <version>${jaxb.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>stax-api</artifactId>
@@ -139,7 +140,7 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-xjc</artifactId>
-            <version>2.2.4-1</version>
+            <version>${jaxb.version}</version>
         </dependency>
 
         <!--- LOGGING -->
@@ -204,7 +205,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>2.7</version>
                 </plugin>
 
                 <plugin>
@@ -402,7 +403,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.3</version>
                 <configuration>
                     <reportPlugins>
                         <plugin>
