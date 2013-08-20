@@ -98,10 +98,10 @@ public class JSONAllocineAPIHelperTest {
         assertEquals(1, tvseriesInfos.getNationalityList().size());
 //        assertEquals(1, tvseriesInfos.getDirectors().size());
 //        assertEquals(6, tvseriesInfos.getWriters().size());
-        assertEquals(5, tvseriesInfos.getActors().size());
+        assertTrue(tvseriesInfos.getActors().size() >= 5);
         assertEquals(-1, tvseriesInfos.getRating());
-        assertTrue(tvseriesInfos.getSeasonCount()>10);
-        assertTrue(tvseriesInfos.getSeasonList().size()>10);
+        assertTrue(tvseriesInfos.getSeasonCount() > 10);
+        assertTrue(tvseriesInfos.getSeasonList().size() > 10);
     }
 
     @Test
