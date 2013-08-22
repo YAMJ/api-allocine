@@ -143,7 +143,7 @@
             <version>${jaxb.version}</version>
         </dependency>
 
-        <!--- LOGGING -->
+        <!-- LOGGING -->
 
         <dependency>
             <groupId>org.slf4j</groupId>
