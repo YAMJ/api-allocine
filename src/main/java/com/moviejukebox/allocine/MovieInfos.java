@@ -64,8 +64,8 @@ public class MovieInfos extends Movie {
 
     public final String getSynopsis() {
         String synopsis = "";
-        HtmlSynopsisType htmlSynopsis = getHtmlSynopsis();
-        if (htmlSynopsis != null) {
+        HtmlSynopsisType tmpSynopsis = getHtmlSynopsis();
+        if (tmpSynopsis != null) {
             for (Object obj : getHtmlSynopsis().getContent()) {
                 String str = "";
                 if (obj instanceof String) {
@@ -139,7 +139,7 @@ public class MovieInfos extends Movie {
                 scripts.add(member.getPerson().getName());
             }
         }
-        
+
         // add scripts to writers
         writers.addAll(scripts);
     }

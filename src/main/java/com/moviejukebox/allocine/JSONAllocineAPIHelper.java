@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -194,7 +195,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
             parseListValues(infos.getNationalityList(), movieNode.get("nationality"));
 
             // parse certificates
-            parseListValues(infos.getMovieCertificate(), movieNode.get("movieCertificate"));
+            parseCertificate(infos.getMovieCertificate(), movieNode.get("movieCertificate"));
 
             // parse media
             parseMedia(infos.getMediaList(), movieNode);
@@ -378,6 +379,16 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
             return release;
         }
         return null;
+    }
+
+    private static void parseCertificate(List<String> values, JsonNode valuesNode) {
+        JsonNode node = valuesNode.get("certificate");
+        if (node != null && !node.isNull()) {
+            String value = getValueAsString(node.get("$"));
+            if (StringUtils.isNotBlank(value)) {
+                values.add(value);
+            }
+        }
     }
 
     private static PosterType parsePosterType(JsonNode rootNode) {

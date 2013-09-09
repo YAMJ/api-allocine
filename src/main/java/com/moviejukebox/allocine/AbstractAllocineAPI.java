@@ -39,18 +39,21 @@ import java.util.Map;
  */
 public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
 
+    // Methods
     private static final String METHOD_SEARCH = "search";
-    private static final String FILTER_MOVIE = "movie";
-    private static final String FILTER_TVSERIES = "tvseries";
     private static final String METHOD_MOVIE = "movie";
     private static final String METHOD_TVSERIES = "tvseries";
+    private static final String METHOD_SEASON = "season";
+    // Filters
+    private static final String FILTER_MOVIE = "movie";
+    private static final String FILTER_TVSERIES = "tvseries";
+    // Parameters
     private static final String PARAM_PROFILE = "profile";
     private static final String PARAM_MEDIAFMT = "mediafmt";
     private static final String PARAM_FILTER = "filter";
     private static final String PARAM_STRIPTAGS = "striptags";
     private static final String PARAM_FORMAT = "format";
     private static final String PARAM_CODE = "code";
-    private static final String METHOD_SEASON = "season";
     private ApiUrl apiUrl;
     private final String format;
 
@@ -120,12 +123,12 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
     protected URLConnection connectGetMovieInfos(String allocineId) throws IOException {
         Map<String, String> params = new LinkedHashMap<String, String>();
 
+        params.put(PARAM_CODE, allocineId);
         params.put(PARAM_PROFILE, "large");
-        params.put(PARAM_MEDIAFMT, "mp4-lc");
+        params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_STRIPTAGS, "synopsis,synopsisshort");
         params.put(PARAM_FORMAT, format);
-        params.put(PARAM_FILTER, FILTER_MOVIE);
-        params.put(PARAM_CODE, allocineId);
+//        params.put(PARAM_MEDIAFMT, "mp4-lc");
 
         URL url = apiUrl.generateUrl(METHOD_MOVIE, params);
         return WebBrowser.openProxiedConnection(url);
