@@ -382,11 +382,13 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     }
 
     private static void parseCertificate(List<String> values, JsonNode valuesNode) {
-        JsonNode node = valuesNode.get("certificate");
-        if (node != null && !node.isNull()) {
-            String value = getValueAsString(node.get("$"));
-            if (StringUtils.isNotBlank(value)) {
-                values.add(value);
+        if (valuesNode != null && !valuesNode.isNull()) {
+            JsonNode node = valuesNode.get("certificate");
+            if (node != null && !node.isNull()) {
+                String value = getValueAsString(node.get("$"));
+                if (StringUtils.isNotBlank(value)) {
+                    values.add(value);
+                }
             }
         }
     }
