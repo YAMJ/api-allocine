@@ -114,4 +114,13 @@ public class JSONAllocineAPIHelperTest {
         assertEquals("2013", tvseasonInfos.getYearEnd());
         assertTrue(tvseasonInfos.getEpisodeList().size() > 19);
     }
+
+    @Test
+    public void testCertification() throws Exception {
+        LOG.info("testCertification");
+        MovieInfos movieInfos = api.getMovieInfos("21189"); // Fight club, should be a "16"
+        assertEquals("Incorrect certificate", "16", movieInfos.getCertification());
+        movieInfos = api.getMovieInfos("61282"); // Avatar - has no certificate, should be "All"
+        assertEquals("Incorrect certificate", "All", movieInfos.getCertification());
+    }
 }
