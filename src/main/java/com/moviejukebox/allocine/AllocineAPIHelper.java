@@ -28,7 +28,7 @@ package com.moviejukebox.allocine;
  */
 public interface AllocineAPIHelper {
 
-    void setProxy(String proxyHost, String proxyPort, String username, String password);
+    void setProxy(String proxyHost, int proxyPort, String username, String password);
 
     Search searchMovieInfos(String query) throws Exception;
 

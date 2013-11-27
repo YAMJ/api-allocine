@@ -70,7 +70,7 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
     }
 
     @Override
-    public void setProxy(String host, String port, String username, String password) {
+    public void setProxy(String host, int port, String username, String password) {
         WebBrowser.setProxyHost(host);
         WebBrowser.setProxyPort(port);
         WebBrowser.setProxyPassword(username, password);

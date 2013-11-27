@@ -30,7 +30,7 @@ import org.apache.commons.codec.binary.Base64;
 public final class WebBrowser {
 
     private static String proxyHost = null;
-    private static String proxyPort = null;
+    private static int proxyPort = 0;
     private static String proxyEncodedPassword = null;
 //    private static String userAgent = "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)";
 //    private static String userAgent = "Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)";
@@ -44,6 +44,7 @@ public final class WebBrowser {
      * Open a connection using proxy parameters if they exist.
      *
      * @param url
+     * @return
      * @throws IOException
      */
     public static URLConnection openProxiedConnection(URL url) throws IOException {
@@ -77,7 +78,7 @@ public final class WebBrowser {
      *
      * @param proxyPort
      */
-    public static void setProxyPort(String proxyPort) {
+    public static void setProxyPort(int proxyPort) {
         WebBrowser.proxyPort = proxyPort;
     }
 
@@ -91,6 +92,7 @@ public final class WebBrowser {
     }
 
     /**
+     * @param proxyUsername
      * @param proxyPassword
      */
     public static void setProxyPassword(String proxyUsername, String proxyPassword) {
