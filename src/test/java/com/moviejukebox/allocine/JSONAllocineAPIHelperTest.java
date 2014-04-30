@@ -105,7 +105,6 @@ public class JSONAllocineAPIHelperTest {
         assertEquals(132, tvseriesInfos.getCode());
         assertEquals("Mon oncle Charlie", tvseriesInfos.getTitle());
         assertEquals("Two and a Half Men", tvseriesInfos.getOriginalTitle());
-        System.err.println(tvseriesInfos.getSynopsis());
         assertEquals("2003", tvseriesInfos.getYearStart());
         assertNull(tvseriesInfos.getYearEnd());
         assertNull(tvseriesInfos.getOriginalChannel());
