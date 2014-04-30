@@ -28,6 +28,7 @@ import com.moviejukebox.allocine.jaxb.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
@@ -351,14 +352,15 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
         }
     }
 
-    private static HtmlSynopsisType parseHtmlSynopsis(JsonNode rootNode) {
+    private static List<Object> parseHtmlSynopsis(JsonNode rootNode) {
+        List<Object> objects = new ArrayList<Object>();
+
         JsonNode node = rootNode.get("synopsis");
         if (node != null && !node.isNull()) {
-            HtmlSynopsisType synopsis = new HtmlSynopsisType();
-            synopsis.getContent().add(getValueAsString(node));
-            return synopsis;
+            objects.add(getValueAsString(node));
         }
-        return null;
+        
+        return objects;
     }
 
     private static Release parseRelease(JsonNode rootNode) {

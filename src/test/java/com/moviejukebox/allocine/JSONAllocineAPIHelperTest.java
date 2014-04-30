@@ -62,14 +62,14 @@ public class JSONAllocineAPIHelperTest {
         assertTrue("Movie not found in search", found);
     }
 
-    //@Test
+    @Test
     public void testSearchMovieInfos() throws Exception {
         LOG.info("testSearchMovieInfos");
         Search search = api.searchMovieInfos("avatar");
         assertEquals(10, search.getMovie().size());
     }
 
-    //@Test
+    @Test
     public void testSearchTvseriesInfos() throws Exception {
         LOG.info("testSearchTvseriesInfos");
         Search search = api.searchTvseriesInfos("glee");
@@ -95,7 +95,7 @@ public class JSONAllocineAPIHelperTest {
         assertEquals(1, movieInfos.getDirectors().size());
         assertEquals(1, movieInfos.getWriters().size());
         assertEquals(42, movieInfos.getActors().size());
-        assertEquals(83, movieInfos.getRating());
+        assertEquals(82, movieInfos.getRating());
     }
 
     //@Test
@@ -105,17 +105,18 @@ public class JSONAllocineAPIHelperTest {
         assertEquals(132, tvseriesInfos.getCode());
         assertEquals("Mon oncle Charlie", tvseriesInfos.getTitle());
         assertEquals("Two and a Half Men", tvseriesInfos.getOriginalTitle());
+        System.err.println(tvseriesInfos.getSynopsis());
         assertEquals("2003", tvseriesInfos.getYearStart());
         assertNull(tvseriesInfos.getYearEnd());
-        assertEquals("CBS", tvseriesInfos.getOriginalChannel());
+        assertNull(tvseriesInfos.getOriginalChannel());
         assertNull(tvseriesInfos.getRelease());
-        assertNotNull(tvseriesInfos.getSynopsis());
+        assertEquals("La vie d'un riche célibataire est bouleversée lorsque son frère divorcé et son neveu de 10 ans débarquent dans sa propriété de Malibu. Malgré leurs différences, les deux frères décident de co-habiter pour offrir un foyer au jeune Jake.", tvseriesInfos.getSynopsis());
         assertEquals(1, tvseriesInfos.getGenreList().size());
         assertEquals(1, tvseriesInfos.getNationalityList().size());
-//        assertEquals(1, tvseriesInfos.getDirectors().size());
-//        assertEquals(6, tvseriesInfos.getWriters().size());
+        assertEquals(1, tvseriesInfos.getDirectors().size());
+        assertEquals(16, tvseriesInfos.getWriters().size());
         assertTrue(tvseriesInfos.getActors().size() >= 5);
-        assertEquals(-1, tvseriesInfos.getRating());
+        assertEquals(85, tvseriesInfos.getRating());
         assertTrue(tvseriesInfos.getSeasonCount() > 10);
         assertTrue(tvseriesInfos.getSeasonList().size() > 10);
     }

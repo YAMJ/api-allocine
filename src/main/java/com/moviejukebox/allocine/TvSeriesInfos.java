@@ -61,18 +61,15 @@ public class TvSeriesInfos extends Tvseries {
 
     public final String getSynopsis() {
         String synopsis = "";
-        HtmlSynopsisType readSynopsis = getHtmlSynopsis();
-        if (readSynopsis != null) {
-            for (Object obj : getHtmlSynopsis().getContent()) {
-                String str = "";
-                if (obj instanceof String) {
-                    str = (String) obj;
-                } else if (obj instanceof Element) {
-                    Element element = (Element) obj;
-                    str = element.getTextContent();
-                }
-                synopsis = synopsis.concat(str);
+        for (Object obj : getHtmlSynopsis()) {
+            String str = "";
+            if (obj instanceof String) {
+                str = (String) obj;
+            } else if (obj instanceof Element) {
+                Element element = (Element) obj;
+                str = element.getTextContent();
             }
+            synopsis = synopsis.concat(str);
         }
         // Normalize the string (remove LF and collapse WhiteSpaces)
         synopsis = synopsis.replaceAll("\\r+", "\n").replaceAll("\\n+", " ").replaceAll("\\s+", " ").trim();
