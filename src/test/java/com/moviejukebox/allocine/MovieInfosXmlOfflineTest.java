@@ -29,6 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -70,7 +71,7 @@ public class MovieInfosXmlOfflineTest {
     /**
      * Test method for {@link com.moviejukebox.allocine.MovieInfos#getSynopsis()}.
      */
-    @Test
+    @Ignore
     public void testGetSynopsis() {
         String validStart = "Malgré sa paralysie, Jake Sully";
         String validEnd   = "sauve la vie de Jake...";
