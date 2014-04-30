@@ -27,6 +27,7 @@ import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.LinkedHashMap;
@@ -67,6 +68,12 @@ public abstract class AbstractAllocineAPI implements AllocineAPIHelper {
     public AbstractAllocineAPI(String partnerKey, String secretKey, String format) {
         this.format = format;
         apiUrl = new ApiUrl(partnerKey, secretKey);
+    }
+
+    @Override
+    public void setProxy(Proxy proxy, String username, String password) {
+        WebBrowser.setProxy(proxy);
+        WebBrowser.setProxyPassword(username, password);
     }
 
     @Override

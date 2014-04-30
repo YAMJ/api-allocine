@@ -30,8 +30,6 @@ import java.io.InputStream;
 import java.net.URLConnection;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Implementation for JSON format
@@ -40,7 +38,6 @@ import org.slf4j.LoggerFactory;
  */
 public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JSONAllocineAPIHelper.class);
     private static final String CODE = "code";
     private static final String TITLE = "title";
     private static final String ORIGINAL_TITLE = "originalTitle";

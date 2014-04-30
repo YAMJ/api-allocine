@@ -22,11 +22,15 @@
  */
 package com.moviejukebox.allocine;
 
+import java.net.Proxy;
+
 /**
  * The Allocine API.
  * This is for version 3 of the API as specified here: http://wiki.gromez.fr/dev/api/allocine_v3
  */
 public interface AllocineAPIHelper {
+
+    void setProxy(Proxy proxy, String username, String password);
 
     void setProxy(String proxyHost, int proxyPort, String username, String password);
 

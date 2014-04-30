@@ -22,13 +22,19 @@
  */
 package com.moviejukebox.allocine.tools;
 
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import org.apache.commons.codec.binary.Base64;
 
 public final class WebBrowser {
 
+    private static Proxy proxy;
     private static String proxyHost = null;
     private static int proxyPort = 0;
     private static String proxyEncodedPassword = null;
@@ -48,13 +54,17 @@ public final class WebBrowser {
      * @throws IOException
      */
     public static URLConnection openProxiedConnection(URL url) throws IOException {
-        if (proxyHost != null) {
-            System.getProperties().put("proxySet", "true");
-            System.getProperties().put("proxyHost", proxyHost);
-            System.getProperties().put("proxyPort", proxyPort);
+        if (proxy == null ) {
+            // create the proxy object
+            if (StringUtils.isBlank(proxyHost)) {
+                proxy = Proxy.NO_PROXY;
+            } else {
+                SocketAddress socketAddress = new InetSocketAddress(proxyHost, proxyPort);
+                proxy = new Proxy(Proxy.Type.HTTP, socketAddress);
+            }
         }
 
-        URLConnection connection = url.openConnection();
+        URLConnection connection = url.openConnection(proxy);
         connection.addRequestProperty("User-Agent", userAgent);
 
         if (proxyEncodedPassword != null) {
@@ -62,6 +72,16 @@ public final class WebBrowser {
         }
 
         return connection;
+    }
+
+    
+    /**
+     * Set the proxy
+     *
+     * @param proxyHost
+     */
+    public static void setProxy(Proxy proxy) {
+        WebBrowser.proxy = proxy;
     }
 
     /**
