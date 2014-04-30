@@ -78,7 +78,7 @@ public final class WebBrowser {
     /**
      * Set the proxy
      *
-     * @param proxyHost
+     * @param proxy
      */
     public static void setProxy(Proxy proxy) {
         WebBrowser.proxy = proxy;
