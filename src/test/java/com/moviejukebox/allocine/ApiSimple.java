@@ -39,12 +39,9 @@ import java.util.Map;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ApiSimple {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ApiSimple.class);
     private static String mainPartnerKey = "100043982026";
     private static String mainSecretKey = "29d185d98c984a359e6e6f26a0474269";
     private static Map<String, String> ids = new LinkedHashMap<String, String>();
@@ -59,15 +56,12 @@ public class ApiSimple {
 //        ids.put("45866", "Salut Berthe!");
 //        ids.put("136190", "Iron Man 2");
 
-        WebBrowser.setUserAgent(USER_AGENT);
-
         for (Map.Entry<String, String> entry : ids.entrySet()) {
             String stringUrl = api.get(entry.getKey());
             String tempUrl = tApi.get(entry.getKey()).toString();
             System.out.println("ID: " + entry.getKey() + " Title '" + entry.getValue() + "' \nURL: " + stringUrl);
             System.out.println("URL: " + tempUrl);
 
-//            WebBrowser.setUserAgent(USER_AGENT);
             dumpUrl(stringUrl);
             dumpUrl(tempUrl);
         }
