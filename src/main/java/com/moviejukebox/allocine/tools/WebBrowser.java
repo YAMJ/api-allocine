@@ -22,19 +22,12 @@
  */
 package com.moviejukebox.allocine.tools;
 
-import org.apache.http.protocol.HTTP;
-
-import org.yamj.api.common.http.UserAgentSelector;
-
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.IOException;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.protocol.HTTP;
+import org.yamj.api.common.http.UserAgentSelector;
 
 public final class WebBrowser {
 
