@@ -22,6 +22,8 @@
  */
 package com.moviejukebox.allocine.tools;
 
+import org.apache.http.protocol.HTTP;
+
 import org.yamj.api.common.http.UserAgentSelector;
 
 import java.net.InetSocketAddress;
@@ -64,7 +66,7 @@ public final class WebBrowser {
         }
 
         URLConnection connection = url.openConnection(proxy);
-        connection.addRequestProperty("User-Agent", UserAgentSelector.randomUserAgent());
+        connection.addRequestProperty(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
 
         if (proxyEncodedPassword != null) {
             connection.setRequestProperty("Proxy-Authorization", proxyEncodedPassword);
