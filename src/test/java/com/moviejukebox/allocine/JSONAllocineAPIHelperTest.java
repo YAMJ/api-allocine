@@ -33,7 +33,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
 public class JSONAllocineAPIHelperTest {
@@ -45,7 +44,7 @@ public class JSONAllocineAPIHelperTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        CommonHttpClient httpClient = new DefaultPoolingHttpClient();
+        DefaultPoolingHttpClient httpClient = new DefaultPoolingHttpClient();
         api = new JSONAllocineAPIHelper(PARTNER_KEY, SECRET_KEY, httpClient);
         TestLogger.Configure();
     }
@@ -82,8 +81,8 @@ public class JSONAllocineAPIHelperTest {
         Search search = api.searchTvseriesInfos("glee");
         assertEquals(1, search.getTvseries().size());
     }
-
-    //@Test
+    
+    @Test
     public void testGetMovieInfos() throws Exception {
         LOG.info("testGetMovieInfos");
         MovieInfos movieInfos = api.getMovieInfos("61282");

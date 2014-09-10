@@ -71,7 +71,7 @@
         <distribution.format>zip</distribution.format>
         <!--NOTE: Do not change the jaxb version-->
         <jaxb.version>2.2.4-1</jaxb.version>
-        <version.jackson>2.3.2</version.jackson>
+        <version.jackson>2.4.2</version.jackson>
         <version.slf4j>1.7.6</version.slf4j>
     </properties>
 

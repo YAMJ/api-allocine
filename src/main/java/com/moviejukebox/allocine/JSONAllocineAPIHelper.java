@@ -22,17 +22,22 @@
  */
 package com.moviejukebox.allocine;
 
+import org.apache.http.protocol.HTTP;
+import org.yamj.api.common.http.UserAgentSelector;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.jaxb.*;
 import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.methods.HttpGet;
 import org.yamj.api.common.http.CommonHttpClient;
 
 /**
@@ -69,6 +74,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
     private JsonNode getRootNode(URL url) throws IOException {
         JsonNode rootNode;
+        
         if (httpClient == null) {
             URLConnection connection = null;
             InputStream inputStream = null;
@@ -80,8 +86,16 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
                 close(connection, inputStream);
             }
         } else {
-            String content = this.httpClient.requestContent(url);
-            rootNode = mapper.readTree(content);
+            HttpGet httpGet;
+            try {
+                httpGet = new HttpGet(url.toURI());
+            } catch (URISyntaxException e) {
+                throw new IOException(e.getMessage(), e);
+            }
+            
+            httpGet.addHeader("accept", "application/json");
+            httpGet.setHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
+            rootNode = mapper.readTree(this.httpClient.requestContent(httpGet));
         }
         return rootNode;
     }
