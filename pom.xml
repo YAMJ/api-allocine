@@ -91,6 +91,7 @@
             <groupId>com.github.jaxb-xew-plugin</groupId>
             <artifactId>jaxb-xew-plugin</artifactId>
             <version>1.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
@@ -111,6 +112,7 @@
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-xjc</artifactId>
             <version>${jaxb.version}</version>
+            <scope>provided</scope>
         </dependency>
         <!-- OTHER -->
         <dependency>
@@ -146,12 +148,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${version.slf4j}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>${version.slf4j}</version>
-            <scope>test</scope>
         </dependency>
         <!--COMMON HTTP TOOLS-->
         <dependency>
