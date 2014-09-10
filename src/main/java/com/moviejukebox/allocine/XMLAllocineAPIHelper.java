@@ -22,17 +22,18 @@
  */
 package com.moviejukebox.allocine;
 
+import com.moviejukebox.allocine.jaxb.ObjectFactory;
+import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.net.URLConnection;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLStreamException;
-
-import com.moviejukebox.allocine.jaxb.ObjectFactory;
+import org.yamj.api.common.http.CommonHttpClient;
 
 /**
  * Implementation for XML format
@@ -45,11 +46,16 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
 
     /**
      * Constructor.
-     *
-     * @param apiKey The API key for allocine
      */
     public XMLAllocineAPIHelper(String partnerKey, String secretKey) {
         super(partnerKey, secretKey, "xml");
+    }
+
+    /**
+     * Constructor.
+     */
+    public XMLAllocineAPIHelper(String partnerKey, String secretKey, CommonHttpClient httpClient) {
+        super(partnerKey, secretKey, "xml", httpClient);
     }
 
     private static JAXBContext initContext() {
@@ -74,8 +80,15 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
-            connection = connectSearchMovieInfos(query);
-            inputStream = connection.getInputStream();
+            URL url = urlSearchMovieInfos(query);
+
+            if (this.httpClient == null) {
+                connection = WebBrowser.openProxiedConnection(url);
+                inputStream = connection.getInputStream();
+            } else {
+                inputStream = this.httpClient.requestResource(url).getContent();
+            }
+
             return validSearchElement(unmarshaller.unmarshal(inputStream));
         } finally {
             close(connection, inputStream);
@@ -89,8 +102,15 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
-            connection = connectSearchTvseriesInfos(query);
-            inputStream = connection.getInputStream();
+            URL url = urlSearchTvseriesInfos(query);
+
+            if (this.httpClient == null) {
+                connection = WebBrowser.openProxiedConnection(url);
+                inputStream = connection.getInputStream();
+            } else {
+                inputStream = this.httpClient.requestResource(url).getContent();
+            }
+
             return validSearchElement(unmarshaller.unmarshal(inputStream));
         } finally {
             close(connection, inputStream);
@@ -104,8 +124,15 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
-            connection = connectGetMovieInfos(allocineId);
-            inputStream = connection.getInputStream();
+            URL url = urlGetMovieInfos(allocineId);
+
+            if (this.httpClient == null) {
+                connection = WebBrowser.openProxiedConnection(url);
+                inputStream = connection.getInputStream();
+            } else {
+                inputStream = this.httpClient.requestResource(url).getContent();
+            }
+
             return validMovieElement(unmarshaller.unmarshal(inputStream));
         } finally {
             close(connection, inputStream);
@@ -124,8 +151,15 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
-            connection = connectGetTvSeriesInfos(allocineId);
-            inputStream = connection.getInputStream();
+            URL url = urlGetTvSeriesInfos(allocineId);
+
+            if (this.httpClient == null) {
+                connection = WebBrowser.openProxiedConnection(url);
+                inputStream = connection.getInputStream();
+            } else {
+                inputStream = this.httpClient.requestResource(url).getContent();
+            }
+
             return validTvSeriesElement(unmarshaller.unmarshal(inputStream));
         } finally {
             close(connection, inputStream);
@@ -139,8 +173,15 @@ public final class XMLAllocineAPIHelper extends AbstractAllocineAPI {
         URLConnection connection = null;
         InputStream inputStream = null;
         try {
-            connection = connectGetTvSeasonInfos(seasonCode);
-            inputStream = connection.getInputStream();
+            URL url = urlGetTvSeasonInfos(seasonCode);
+
+            if (this.httpClient == null) {
+                connection = WebBrowser.openProxiedConnection(url);
+                inputStream = connection.getInputStream();
+            } else {
+                inputStream = this.httpClient.requestResource(url).getContent();
+            }
+
             return validTvSeasonElement(unmarshaller.unmarshal(inputStream));
         } finally {
             close(connection, inputStream);

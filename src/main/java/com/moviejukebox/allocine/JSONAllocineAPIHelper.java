@@ -25,12 +25,15 @@ package com.moviejukebox.allocine;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.jaxb.*;
+import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import org.yamj.api.common.http.CommonHttpClient;
 
 /**
  * Implementation for JSON format
@@ -44,6 +47,7 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
     private static final String ORIGINAL_TITLE = "originalTitle";
     private static final String YEAR_START = "yearStart";
     private static final String YEAR_END = "yearEnd";
+
     /**
      * The JSON object mapper
      */
@@ -51,27 +55,41 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
     /**
      * Constructor.
-     *
-     * @param apiKey The API key for allocine
      */
     public JSONAllocineAPIHelper(String partnerKey, String secretKey) {
         super(partnerKey, secretKey, "json");
     }
 
+    /**
+     * Constructor.
+     */
+    public JSONAllocineAPIHelper(String partnerKey, String secretKey, CommonHttpClient httpClient) {
+        super(partnerKey, secretKey, "json", httpClient);
+    }
+
+    private JsonNode getRootNode(URL url) throws IOException {
+        JsonNode rootNode;
+        if (httpClient == null) {
+            URLConnection connection = null;
+            InputStream inputStream = null;
+            try {
+                connection = WebBrowser.openProxiedConnection(url);
+                inputStream = connection.getInputStream();
+                rootNode = mapper.readTree(inputStream);
+            } finally {
+                close(connection, inputStream);
+            }
+        } else {
+            String content = this.httpClient.requestContent(url);
+            rootNode = mapper.readTree(content);
+        }
+        return rootNode;
+    }
+    
     @Override
     public Search searchMovieInfos(String query) throws IOException {
-        JsonNode rootNode = null;
-        URLConnection connection = null;
-        InputStream inputStream = null;
-
-        try {
-            connection = connectSearchMovieInfos(query);
-            inputStream = connection.getInputStream();
-
-            rootNode = mapper.readTree(inputStream);
-        } finally {
-            close(connection, inputStream);
-        }
+        URL url = urlSearchMovieInfos(query);
+        JsonNode rootNode = this.getRootNode(url);
 
         Search search = new Search();
         if (rootNode == null || rootNode.isNull()) {
@@ -105,18 +123,8 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
     @Override
     public Search searchTvseriesInfos(String query) throws IOException {
-        JsonNode rootNode = null;
-        URLConnection connection = null;
-        InputStream inputStream = null;
-
-        try {
-            connection = connectSearchTvseriesInfos(query);
-            inputStream = connection.getInputStream();
-
-            rootNode = mapper.readTree(inputStream);
-        } finally {
-            close(connection, inputStream);
-        }
+        URL url = urlSearchTvseriesInfos(query);
+        JsonNode rootNode = this.getRootNode(url);
 
         Search search = new Search();
         if (rootNode == null || rootNode.isNull()) {
@@ -151,18 +159,8 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
     @Override
     public MovieInfos getMovieInfos(String allocineId) throws IOException {
-        JsonNode rootNode = null;
-        URLConnection connection = null;
-        InputStream inputStream = null;
-
-        try {
-            connection = connectGetMovieInfos(allocineId);
-            inputStream = connection.getInputStream();
-
-            rootNode = mapper.readTree(inputStream);
-        } finally {
-            close(connection, inputStream);
-        }
+        URL url = urlGetMovieInfos(allocineId);
+        JsonNode rootNode = this.getRootNode(url);
 
         MovieInfos infos = new MovieInfos();
         if (rootNode == null || rootNode.isNull()) {
@@ -210,18 +208,8 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
     @Override
     public TvSeriesInfos getTvSeriesInfos(String allocineId) throws IOException {
-        JsonNode rootNode = null;
-        URLConnection connection = null;
-        InputStream inputStream = null;
-
-        try {
-            connection = connectGetTvSeriesInfos(allocineId);
-            inputStream = connection.getInputStream();
-
-            rootNode = mapper.readTree(inputStream);
-        } finally {
-            close(connection, inputStream);
-        }
+        URL url = urlGetTvSeriesInfos(allocineId);
+        JsonNode rootNode = this.getRootNode(url);
 
         TvSeriesInfos infos = new TvSeriesInfos();
         if (rootNode == null || rootNode.isNull()) {
@@ -270,18 +258,9 @@ public final class JSONAllocineAPIHelper extends AbstractAllocineAPI {
 
     @Override
     public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws IOException {
-        JsonNode rootNode = null;
-        URLConnection connection = null;
-        InputStream inputStream = null;
+        URL url = urlGetTvSeasonInfos(seasonCode);
+        JsonNode rootNode = this.getRootNode(url);
 
-        try {
-            connection = connectGetTvSeasonInfos(seasonCode);
-            inputStream = connection.getInputStream();
-
-            rootNode = mapper.readTree(inputStream);
-        } finally {
-            close(connection, inputStream);
-        }
 
         TvSeasonInfos infos = new TvSeasonInfos();
         if (rootNode == null || rootNode.isNull()) {

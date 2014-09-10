@@ -22,13 +22,19 @@
  */
 package com.moviejukebox.allocine;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import com.moviejukebox.allocine.jaxb.Movie;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yamj.api.common.http.CommonHttpClient;
+import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
 public class JSONAllocineAPIHelperTest {
 
@@ -39,7 +45,8 @@ public class JSONAllocineAPIHelperTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        api = new JSONAllocineAPIHelper(PARTNER_KEY, SECRET_KEY);
+        CommonHttpClient httpClient = new DefaultPoolingHttpClient();
+        api = new JSONAllocineAPIHelper(PARTNER_KEY, SECRET_KEY, httpClient);
         TestLogger.Configure();
     }
 
