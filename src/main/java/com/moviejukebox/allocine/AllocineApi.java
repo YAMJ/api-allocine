@@ -50,9 +50,11 @@ public class AllocineApi {
     private static final String METHOD_MOVIE = "movie";
     private static final String METHOD_TVSERIES = "tvseries";
     private static final String METHOD_SEASON = "season";
+    private static final String METHOD_PERSON = "person";
     // Filters
     private static final String FILTER_MOVIE = "movie";
     private static final String FILTER_TVSERIES = "tvseries";
+    private static final String FILTER_PERSON = "person";
     // Parameters
     private static final String PARAM_PROFILE = "profile";
     private static final String PARAM_MEDIAFMT = "mediafmt";
@@ -170,6 +172,24 @@ public class AllocineApi {
         return search;
     }
 
+    public Search searchPersons(String query) throws Exception {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("q", query);
+        params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
+        params.put(PARAM_FILTER, FILTER_PERSON);
+        String url = apiUrl.generateUrl(METHOD_SEARCH, params);
+
+        Search search;
+        try {
+            search = this.readJsonObject(new URL(url), Search.class);
+        } catch (MalformedURLException error) {
+            LOG.warn("Failed to convert '{}' to an URL, error: {}", url, error.getMessage());
+            throw error;
+        }
+        
+        return search;
+    }
+
     public MovieInfos getMovieInfos(String allocineId) throws Exception {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_CODE, allocineId);
@@ -227,5 +247,22 @@ public class AllocineApi {
         }
 
         return tvSeasonInfos;
+    }
+
+    public PersonInfos getPersonInfos(String allocineId) throws Exception {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put(PARAM_PROFILE, "large");
+        params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
+        params.put(PARAM_CODE, allocineId);
+        String url = apiUrl.generateUrl(METHOD_PERSON, params);
+
+        PersonInfos personInfos;
+        try {
+            personInfos = this.readJsonObject(new URL(url), PersonInfos.class);
+        } catch (MalformedURLException error) {
+            LOG.warn("Failed to convert '{}' to an URL, error: {}", url, error.getMessage());
+            throw error;
+        }
+        return personInfos;
     }
 }

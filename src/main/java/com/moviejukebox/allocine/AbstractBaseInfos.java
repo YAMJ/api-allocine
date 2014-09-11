@@ -22,6 +22,8 @@
  */
 package com.moviejukebox.allocine;
 
+import com.moviejukebox.allocine.tools.HtmlTools;
+
 import com.moviejukebox.allocine.model.*;
 import java.util.Collections;
 import java.util.HashSet;
@@ -63,14 +65,14 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         if (base == null) {
             return null;
         }
-        return base.getSynopsis();
+        return HtmlTools.removeHtmlTags(base.getSynopsis());
     }
 
     protected String getSynopsisShort(AbstractBaseMapping base) {
         if (base == null) {
             return null;
         }
-        return base.getSynopsisShort();
+        return HtmlTools.removeHtmlTags(base.getSynopsisShort());
     }
 
     protected int getUserRating(AbstractBaseMapping base) {
@@ -142,8 +144,8 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
             for (CastMember member : base.getCastMember()) {
                 if (member.isActor()) {
                     MoviePerson person = new MoviePerson();
-                    person.setCode(member.getPerson().getCode());
-                    person.setName(member.getPerson().getName());
+                    person.setCode(member.getShortPerson().getCode());
+                    person.setName(member.getShortPerson().getName());
                     person.setRole(member.getRole());
                     person.setLeadActor(member.isLeadActor());
                     if (member.getPicture() != null) {
@@ -152,16 +154,16 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
                     actors.add(person);
                 } else if (member.isDirector()) {
                     MoviePerson person = new MoviePerson();
-                    person.setCode(member.getPerson().getCode());
-                    person.setName(member.getPerson().getName());
+                    person.setCode(member.getShortPerson().getCode());
+                    person.setName(member.getShortPerson().getName());
                     if (member.getPicture() != null) {
                         person.setPhotoURL(member.getPicture().getHref());
                     }
                     directors.add(person);
                 } else if (member.isWriter()) {
                     MoviePerson person = new MoviePerson();
-                    person.setCode(member.getPerson().getCode());
-                    person.setName(member.getPerson().getName());
+                    person.setCode(member.getShortPerson().getCode());
+                    person.setName(member.getShortPerson().getName());
                     if (member.getPicture() != null) {
                         person.setPhotoURL(member.getPicture().getHref());
                     }

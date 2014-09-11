@@ -29,25 +29,115 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Person extends AbstractJsonUnknownHandleMapping {
 
     private static final long serialVersionUID = 6405799546704312370L;
-    
-    @JsonProperty("code")
-    private long code;
-    @JsonProperty("name")
-    private String name;
 
-    public long getCode() {
+    @JsonProperty("code")
+    private int code;
+    @JsonProperty("name")
+    private PersonName personName;
+    @JsonProperty("realName")
+    private String realName;
+    @JsonProperty("gender")
+    private int gender;
+    @JsonProperty("biographyShort")
+    private String biographyShort;
+    @JsonProperty("biography")
+    private String biography;
+    @JsonProperty("birthDate")
+    private String birthDate;
+    @JsonProperty("birthPlace")
+    private String birthPlace;
+    @JsonProperty("deathDate")
+    private String deathDate;
+    @JsonProperty("deathPlace")
+    private String deathPlace;
+    @JsonProperty("picture")
+    private Picture picture;
+    
+    public int getCode() {
         return code;
     }
 
-    public void setCode(long code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
-    public String getName() {
-        return name;
+    public PersonName getPersonName() {
+        return personName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPersonName(PersonName personName) {
+        this.personName = personName;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String getBiographyShort() {
+        return biographyShort;
+    }
+
+    public void setBiographyShort(String biographyShort) {
+        this.biographyShort = biographyShort;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getBirthPlace() {
+        return birthPlace;
+    }
+
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
+    public String getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(String deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public String getDeathPlace() {
+        return deathPlace;
+    }
+
+    public void setDeathPlace(String deathPlace) {
+        this.deathPlace = deathPlace;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 }

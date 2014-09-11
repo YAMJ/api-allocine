@@ -23,10 +23,7 @@
 package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
-import com.moviejukebox.allocine.model.Feed;
-import com.moviejukebox.allocine.model.Movie;
-import com.moviejukebox.allocine.model.TvSeries;
+import com.moviejukebox.allocine.model.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -74,5 +71,12 @@ public class Search extends AbstractJsonUnknownHandleMapping {
             return Collections.emptyList();
         }
         return feed.getTvSeries();
+    }
+
+    public List<ShortPerson> getPersons() {
+        if (feed == null) {
+            return Collections.emptyList();
+        }
+        return feed.getPersons();
     }
 }

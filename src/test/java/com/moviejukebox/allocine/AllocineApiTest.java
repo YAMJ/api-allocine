@@ -77,10 +77,18 @@ public class AllocineApiTest {
     }
 
     @Test
+    public void testSearchPersons() throws Exception {
+        LOG.info("testSearchPersons");
+        Search search = api.searchPersons("Sam Worthington");
+        assertEquals(1, search.getPersons().size());
+    }
+
+    @Test
     public void testGetMovieInfos() throws Exception {
         LOG.info("testGetMovieInfos");
         MovieInfos movieInfos = api.getMovieInfos("61282"); // AVATAR
         //MovieInfos movieInfos = api.getMovieInfos("25722"); // SHAFT
+        
         assertEquals(61282, movieInfos.getCode());
         assertEquals(9720, movieInfos.getRuntime());
         assertEquals("Avatar", movieInfos.getTitle());
@@ -137,5 +145,13 @@ public class AllocineApiTest {
         assertEquals("Incorrect certificate", "16", movieInfos.getCertification());
         movieInfos = api.getMovieInfos("61282"); // Avatar - has no certificate, should be "All"
         assertEquals("Incorrect certificate", "All", movieInfos.getCertification());
+    }
+
+    @Test
+    public void testGetPersonInfos() throws Exception {
+        LOG.info("testGetPersonInfos");
+        PersonInfos personInfos = api.getPersonInfos("5711");
+        assertEquals(41339, personInfos.getCode());
+        assertEquals("1976-08-02", personInfos.getBirthDate());
     }
 }

@@ -38,6 +38,8 @@ public class Feed extends AbstractJsonUnknownHandleMapping {
     private List<Movie> movies = new ArrayList<Movie>();
     @JsonProperty("tvseries")
     private List<TvSeries> tvseries = new ArrayList<TvSeries>();
+    @JsonProperty("person")
+    private List<ShortPerson> persons = new ArrayList<ShortPerson>();
 
     public long getTotalResults() {
         return totalResults;
@@ -61,5 +63,13 @@ public class Feed extends AbstractJsonUnknownHandleMapping {
 
     public void setTvSeries(List<TvSeries> tvseries) {
         this.tvseries = tvseries;
+    }
+
+    public List<ShortPerson> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<ShortPerson> persons) {
+        this.persons = persons;
     }
 }

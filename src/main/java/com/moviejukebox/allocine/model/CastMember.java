@@ -35,7 +35,7 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
     private static final long SCRIPT_ACTIVITY_CODE   = 8043;
 
     @JsonProperty("person")
-    private Person person;
+    private ShortPerson shortPerson;
     @JsonProperty("activity")
     private Activity activity;
     @JsonProperty("picture")
@@ -44,13 +44,13 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
     private String role;
     @JsonProperty("isLeadActor")
     private boolean isLeadActor = false;
-    
-    public Person getPerson() {
-        return person;
+
+    public ShortPerson getShortPerson() {
+        return shortPerson;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setShortPerson(ShortPerson shortPerson) {
+        this.shortPerson = shortPerson;
     }
 
     public Activity getActivity() {
