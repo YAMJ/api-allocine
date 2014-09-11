@@ -22,8 +22,6 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.tools.HtmlTools;
-
 import com.moviejukebox.allocine.model.*;
 import java.util.Collections;
 import java.util.HashSet;
@@ -65,14 +63,14 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         if (base == null) {
             return null;
         }
-        return HtmlTools.removeHtmlTags(base.getSynopsis());
+        return base.getSynopsis();
     }
 
     protected String getSynopsisShort(AbstractBaseMapping base) {
         if (base == null) {
             return null;
         }
-        return HtmlTools.removeHtmlTags(base.getSynopsisShort());
+        return base.getSynopsisShort();
     }
 
     protected int getUserRating(AbstractBaseMapping base) {

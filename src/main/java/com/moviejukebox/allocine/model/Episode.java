@@ -22,8 +22,6 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.moviejukebox.allocine.tools.HtmlTools;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -72,7 +70,7 @@ public class Episode extends AbstractJsonUnknownHandleMapping {
     }
 
     public String getSynopsis() {
-        return HtmlTools.removeHtmlTags(synopsis);
+        return synopsis;
     }
 
     public void setSynopsis(String synopsis) {

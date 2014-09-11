@@ -116,7 +116,7 @@ public class AllocineApiTest {
         assertEquals(2003, tvseriesInfos.getYearStart());
         assertEquals(0, tvseriesInfos.getYearEnd());
         assertEquals("CBS", tvseriesInfos.getOriginalChannel());
-        //assertEquals("La vie d'un riche célibataire est bouleversée lorsque son frère divorcé et son neveu de 10 ans débarquent dans sa propriété de Malibu. Malgré leurs différences, les deux frères décident de co-habiter pour offrir un foyer au jeune Jake.", tvseriesInfos.getSynopsis());
+        assertEquals("La vie d'un riche célibataire est bouleversée lorsque son frère divorcé et son neveu de 10 ans débarquent dans sa propriété de Malibu. Malgré leurs différences, les deux frères décident de co-habiter pour offrir un foyer au jeune Jake.", tvseriesInfos.getSynopsis());
         assertEquals(1, tvseriesInfos.getGenres().size());
         assertEquals(1, tvseriesInfos.getNationalities().size());
         assertEquals(1, tvseriesInfos.getDirectors().size());

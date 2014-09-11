@@ -61,6 +61,7 @@ public class AllocineApi {
     private static final String PARAM_FILTER = "filter";
     private static final String PARAM_FORMAT = "format";
     private static final String PARAM_CODE = "code";
+    private static final String PARAM_STRIPTAGS = "striptags";
     private static final String PARAM_FORMAT_VALUE = "json";
         
     private final ApiUrl apiUrl;
@@ -139,6 +140,7 @@ public class AllocineApi {
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_MOVIE);
+        params.put(PARAM_STRIPTAGS, "synopsis,synopsisshort");
         String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
         Search search;
@@ -216,6 +218,7 @@ public class AllocineApi {
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
+        params.put(PARAM_STRIPTAGS, "synopsis,synopsisshort");
         String url = apiUrl.generateUrl(METHOD_TVSERIES, params);
 
         TvSeriesInfos tvSeriesInfo;
@@ -236,6 +239,7 @@ public class AllocineApi {
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, String.valueOf(seasonCode));
+        params.put(PARAM_STRIPTAGS, "synopsis,synopsisshort");
         String url = apiUrl.generateUrl(METHOD_SEASON, params);
         
         TvSeasonInfos tvSeasonInfos; 
@@ -254,6 +258,7 @@ public class AllocineApi {
         params.put(PARAM_PROFILE, "large");
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
+        params.put(PARAM_STRIPTAGS, "biography,biographyshort");
         String url = apiUrl.generateUrl(METHOD_PERSON, params);
 
         PersonInfos personInfos;

@@ -25,7 +25,6 @@ package com.moviejukebox.allocine;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
 import com.moviejukebox.allocine.model.Person;
-import com.moviejukebox.allocine.tools.HtmlTools;
 
 /**
  * This is the Person Search bean for the api.allocine.fr search
@@ -76,14 +75,14 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
         if (person == null) {
             return null;
         }
-        return HtmlTools.removeHtmlTags(person.getBiographyShort());
+        return person.getBiographyShort();
     }
 
     public String getBiography() {
         if (person == null) {
             return null;
         }
-        return HtmlTools.removeHtmlTags(person.getBiography());
+        return person.getBiography();
     }
 
     public String getBirthDate() {
