@@ -82,6 +82,7 @@ public class AllocineApiTest {
         MovieInfos movieInfos = api.getMovieInfos("61282"); // AVATAR
         //MovieInfos movieInfos = api.getMovieInfos("25722"); // SHAFT
         assertEquals(61282, movieInfos.getCode());
+        assertEquals(9720, movieInfos.getRuntime());
         assertEquals("Avatar", movieInfos.getTitle());
         assertEquals("Avatar", movieInfos.getOriginalTitle());
         assertEquals(2009, movieInfos.getProductionYear());

@@ -103,8 +103,10 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         }
         if (genres == null) {
             genres = new HashSet<String>();
-            for (Genre genre : base.getGenre()) {
-                genres.add(genre.getName());
+            if (base.getGenre() != null) {
+                for (Genre genre : base.getGenre()) {
+                    genres.add(genre.getName());
+                }
             }
         }
         return genres;
@@ -188,11 +190,20 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         }
     }
     
-    public Set<String> getPosterUrls(AbstractBaseMapping base) {
+    protected Set<String> getPosterUrls(AbstractBaseMapping base) {
         if (posterURLS == null) {
             parseMediaList(base);
         }
         return posterURLS;
     }
 
+    protected String getReleaseDate(AbstractBaseMapping base) {
+        if (base == null) {
+            return null;
+        }
+        if (base.getRelease() == null) {
+            return null;
+        }
+        return base.getRelease().getReleaseDate();
+    }
 }

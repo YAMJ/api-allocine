@@ -86,6 +86,10 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         return tvSeries.getYearEnd();
     }
 
+    public String getReleaseDate() {
+        return this.getReleaseDate(tvSeries);
+    }
+
     public String getSynopsis() {
         return this.getSynopsis(tvSeries);
     }

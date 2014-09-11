@@ -52,7 +52,9 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
     private List<Medium> media = new ArrayList<Medium>();
     @JsonProperty("poster")
     private Poster poster;
-    
+    @JsonProperty("release")
+    private Release release;
+
     public int getCode() {
         return code;
     }
@@ -139,5 +141,13 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
 
     public void setPoster(Poster poster) {
         this.poster = poster;
+    }
+
+    public Release getRelease() {
+        return release;
+    }
+
+    public void setRelease(Release release) {
+        this.release = release;
     }
 }

@@ -80,14 +80,15 @@ public class MovieInfos extends AbstractBaseInfos {
         return movie.getProductionYear();
     }
 
-    public String getReleaseDate() {
+    public int getRuntime() {
         if (movie == null) {
-            return null;
+            return -1;
         }
-        if (movie.getRelease() == null) {
-            return null;
-        }
-        return movie.getRelease().getReleaseDate();
+        return movie.getRuntime();
+    }
+    
+    public String getReleaseDate() {
+        return this.getReleaseDate(movie);
     }
 
     public String getSynopsis() {

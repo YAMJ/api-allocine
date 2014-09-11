@@ -32,7 +32,8 @@ public class Movie extends AbstractBaseMapping {
     
     @JsonProperty("productionYear")
     private int productionYear;
-    private Release release;
+    @JsonProperty("runtime")
+    private int runtime;
     @JsonProperty("trailer")
     private Trailer trailer;
     @JsonProperty("movieCertificate")
@@ -45,13 +46,13 @@ public class Movie extends AbstractBaseMapping {
     public void setProductionYear(int productionYear) {
         this.productionYear = productionYear;
     }
-
-    public Release getRelease() {
-        return release;
+    
+    public int getRuntime() {
+        return runtime;
     }
 
-    public void setRelease(Release release) {
-        this.release = release;
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
     }
 
     public Trailer getTrailer() {
