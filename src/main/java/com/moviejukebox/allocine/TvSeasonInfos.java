@@ -22,30 +22,82 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.jaxb.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
+import com.moviejukebox.allocine.model.Episode;
+import com.moviejukebox.allocine.model.Season;
+import java.util.Collections;
+import java.util.List;
 
 /**
- *  This is the TvSeason bean for the api.allocine.fr search
+ *  This is the Movie Search bean for the api.allocine.fr search
  *
  *  @author Yves.Blusseau
  */
-public class TvSeasonInfos extends Season {
+public class TvSeasonInfos extends AbstractJsonUnknownHandleMapping {
 
-    public TvSeasonInfos() {
-        setCode(-1); // Mark the object as invalid
+    private static final long serialVersionUID = 1357655581772310729L;
+    
+    @JsonProperty("season")
+    private Season season;
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
     public boolean isValid() {
-        return getCode() > -1 ? true : false;
+        if (season == null) {
+            return false;
+        }
+        return (season.getCode() > 0);
     }
 
     public boolean isNotValid() {
-        return getCode() > -1 ? false : true;
+        return !this.isValid();
     }
 
+    public int getCode() {
+        if (season == null) {
+            return -1;
+        }
+        return season.getCode();
+    }
+
+    public int getYearStart() {
+        if (season == null) {
+            return 0;
+        }
+        return season.getYearStart();
+    }
+
+    public int getYearEnd() {
+        if (season == null) {
+            return 0;
+        }
+        return season.getYearEnd();
+    }
+
+    public int getSeasonNumber() {
+        if (season == null) {
+            return -1;
+        }
+        return season.getSeasonNumber();
+    }
+
+    public List<Episode> getEpisodeList() {
+        if (season == null) {
+            return Collections.emptyList();
+        }
+        return season.getEpisodeList();
+    }
+    
     public Episode getEpisode(int numEpisode) {
         Episode episode = null;
-        for (Episode checkEpisode : getEpisodeList()) {
+        for (Episode checkEpisode : this.getEpisodeList()) {
             if (checkEpisode.getEpisodeNumberSeason() == numEpisode) {
                 episode = checkEpisode;
                 break;
@@ -53,5 +105,4 @@ public class TvSeasonInfos extends Season {
         }
         return episode;
     }
-
 }

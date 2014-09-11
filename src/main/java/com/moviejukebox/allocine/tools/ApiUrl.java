@@ -23,8 +23,6 @@
 package com.moviejukebox.allocine.tools;
 
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -62,36 +60,25 @@ public final class ApiUrl {
      * @param params
      * @return
      */
-    public URL generateUrl(final String method, final Map<String, String> params) {
-        // https://github.com/gromez/allocine-api/blob/master/PHP/allocine.class.php
-
-        StringBuilder url;
-
+    public String generateUrl(final String method, final Map<String, String> params) {
         String sed = buildSed();
         String paramUrl = buildParams(params);
 
-        url = new StringBuilder(secretKey);
-        url.append(paramUrl.substring(1));  // Don't add the "?" at the start of the params
-        url.append(PREFIX_SED);
-        url.append(sed);
-        byte[] sha1code = DigestUtils.sha1(url.toString());
-
+        StringBuilder key = new StringBuilder(secretKey);
+        key.append(paramUrl.substring(1));  // Don't add the "?" at the start of the params
+        key.append(PREFIX_SED);
+        key.append(sed);
+        byte[] sha1code = DigestUtils.sha1(key.toString());
         String sig = encoder(new String(Base64.encodeBase64(sha1code)));
 
-        url = new StringBuilder(API_URL);
+        StringBuilder url = new StringBuilder(API_URL);
         url.append(method);
         url.append(paramUrl);
         url.append(PREFIX_SED).append(sed);
         url.append(PREFIX_SIG).append(sig);
 
-        LOG.trace("URL: " + url.toString());
-
-        try {
-            return new URL(url.toString());
-        } catch (MalformedURLException ex) {
-            LOG.warn("Failed to convert '{}' to an URL, error: {}", url.toString(), ex.getMessage());
-            return null;
-        }
+        LOG.trace("URL: {}", url);
+        return url.toString();
     }
 
     /**

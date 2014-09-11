@@ -22,24 +22,57 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.jaxb.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
+import com.moviejukebox.allocine.model.Feed;
+import com.moviejukebox.allocine.model.Movie;
+import com.moviejukebox.allocine.model.TvSeries;
+import java.util.Collections;
+import java.util.List;
 
-/**
- *  This is the Movie Search bean for the api.allocine.fr search
- *
- *  @author Yves.Blusseau
- */
-public class Search extends Feed {
+public class Search extends AbstractJsonUnknownHandleMapping {
 
-    public Search() {
-        setTotalResults(-1); // Mark the movie as invalid
+    private static final long serialVersionUID = -9017972889712498870L;
+    
+    @JsonProperty("feed")
+    private Feed feed;
+
+    public Feed getFeed() {
+        return feed;
+    }
+
+    public void setFeed(Feed feed) {
+        this.feed = feed;
     }
 
     public boolean isValid() {
-        return getTotalResults() > -1 ? true : false;
+        if (feed == null) {
+            return false;
+        }
+        if (feed.getTotalResults() <= 0) {
+            return false;
+        }
+        return true;
     }
 
-    public boolean isNotValid() {
-        return getTotalResults() > -1 ? true : false;
+    public long getTotalResults() {
+        if (feed == null) {
+            return 0;
+        }
+        return feed.getTotalResults();
+    }
+    
+    public List<Movie> getMovies() {
+        if (feed == null) {
+            return Collections.emptyList();
+        }
+        return feed.getMovies();
+    }
+
+    public List<TvSeries> getTvSeries() {
+        if (feed == null) {
+            return Collections.emptyList();
+        }
+        return feed.getTvSeries();
     }
 }

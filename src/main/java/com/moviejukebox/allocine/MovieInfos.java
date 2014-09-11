@@ -22,165 +22,144 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.jaxb.*;
-import java.util.LinkedHashSet;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.moviejukebox.allocine.model.Certificate;
+import com.moviejukebox.allocine.model.Movie;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.w3c.dom.Element;
 
 /**
  *  This is the Movie Search bean for the api.allocine.fr search
  *
  *  @author Yves.Blusseau
  */
-public class MovieInfos extends Movie {
+public class MovieInfos extends AbstractBaseInfos {
 
-    private static final Pattern AGE_REGEXP             = Pattern.compile("\\s(\\d{1,2})\\san");
-    private Set<MoviePerson>     actors;
-    private Set<String>          writers;
-    private Set<String>          directors;
-    private Set<String>          posterURLS;
+    private static final long serialVersionUID = -7592718256970353295L;
+    private static final Pattern AGE_REGEXP = Pattern.compile("\\s(\\d{1,2})\\san");
 
-    // Constants
-    private static final int     ACTOR_ACTIVITY_CODE    = 8001;
-    private static final int     DIRECTOR_ACTIVITY_CODE = 8002;
-    private static final int     WRITER_ACTIVITY_CODE   = 8004;
-    private static final int     SCRIPT_ACTIVITY_CODE   = 8043;
+    @JsonProperty("movie")
+    private Movie movie;
 
-    private static final int     POSTER_MEDIA_CODE      = 31001;
+    public Movie getMovie() {
+        return movie;
+    }
 
-    public MovieInfos() {
-        setCode(-1); // Mark the object as invalid
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public boolean isValid() {
-        return getCode() > -1 ? true : false;
+        if (movie == null) {
+            return false;
+        }
+        return (movie.getCode() > 0);
     }
 
     public boolean isNotValid() {
-        return getCode() > -1 ? false : true;
+        return !this.isValid();
     }
 
-    public final String getSynopsis() {
-        String synopsis = "";
-        for (Object obj : getHtmlSynopsis()) {
-            String str = "";
-            if (obj instanceof String) {
-                str = (String) obj;
-            } else if (obj instanceof Element) {
-                Element element = (Element) obj;
-                str = element.getTextContent();
-            }
-            synopsis = synopsis.concat(str);
+    public int getCode() {
+        return this.getCode(movie);
+    }
+    
+    public String getTitle() {
+        return this.getTitle(movie);
+    }
+
+    public String getOriginalTitle() {
+        return this.getOriginalTitle(movie);
+    }
+
+    public int getProductionYear() {
+        if (movie == null) {
+            return -1;
         }
-        // Normalize the string (remove LF and collapse WhiteSpaces)
-        synopsis = synopsis.replaceAll("\\r+", "\n").replaceAll("\\n+", " ").replaceAll("\\s+", " ").trim();
-        return synopsis;
+        return movie.getProductionYear();
     }
 
-    public final int getRating() {
-        float note   = 0;
-        int   sum    = 0;
-        int   result = -1;
-
-        if (getStatistics() != null ) {
-            for ( RatingType rating : getStatistics().getRatingStats() ) {
-                int count = rating.getValue();
-                note += rating.getNote() * count;
-                sum  += count;
-            }
-            if (sum > 0) {
-                result = (int) ((note / sum) / 5.0 * 100);
-            }
+    public String getReleaseDate() {
+        if (movie == null) {
+            return null;
         }
-        return result;
+        if (movie.getRelease() == null) {
+            return null;
+        }
+        return movie.getRelease().getReleaseDate();
     }
 
-    public final String getCertification() {
+    public String getSynopsis() {
+        return this.getSynopsis(movie);
+    }
+
+    public String getSynopsisShort() {
+        return this.getSynopsisShort(movie);
+    }
+
+    public int getUserRating() {
+        return this.getUserRating(movie);
+    }
+
+    public int getPressRating() {
+        return this.getPressRating(movie);
+    }
+
+    public String getCertification() {
         String certification = "All"; // Default value
-        for (String certificate : getMovieCertificate()) {
-            Matcher match = AGE_REGEXP.matcher(certificate);
-            if (match.find()) {
-                certification=match.group(1);
-                break;
+        if (movie != null && movie.getMovieCertificate() != null) {
+            Certificate certificate = movie.getMovieCertificate().getCertificate();
+            if (certificate != null) {
+                Matcher match = AGE_REGEXP.matcher(certificate.getName());
+                if (match.find()) {
+                    certification=match.group(1);
+                }
             }
         }
         return certification;
     }
-
-    protected final void parseCasting() {
-        if (actors == null) {
-            actors = new LinkedHashSet<MoviePerson>();
-        }
-        if (writers == null) {
-            writers = new LinkedHashSet<String>();
-        }
-        if (directors == null) {
-            directors = new LinkedHashSet<String>();
-        }
-        LinkedHashSet<String> scripts = new LinkedHashSet<String>();
-
-        for (CastMember member : getCasting()) {
-            if (member.getActivity().getCode() == ACTOR_ACTIVITY_CODE) {
-                MoviePerson person = new MoviePerson();
-                person.setCode(member.getPerson().getCode());
-                person.setName(member.getPerson().getName());
-                person.setRole(member.getRole());
-                actors.add(person);
-            } else if (member.getActivity().getCode() == DIRECTOR_ACTIVITY_CODE) {
-                directors.add(member.getPerson().getName());
-            } else if (member.getActivity().getCode() == WRITER_ACTIVITY_CODE) {
-                writers.add(member.getPerson().getName());
-            } else if (member.getActivity().getCode() == SCRIPT_ACTIVITY_CODE) {
-                scripts.add(member.getPerson().getName());
-            }
-        }
-
-        // add scripts to writers
-        writers.addAll(scripts);
+    
+    public Set<String> getGenres() {
+        return this.getGenres(movie);
     }
 
-    public final Set<MoviePerson> getActors() {
+    public Set<String> getNationalities() {
+        return this.getNationalities(movie);
+    }
+
+    public String getDistributor() {
+        if (movie == null) {
+            return null;
+        }
+        if (movie.getRelease() != null && movie.getRelease().getDistributor() != null) {
+            return movie.getRelease().getDistributor().getName();
+        }
+        return null;
+    }
+
+    public Set<MoviePerson> getActors() {
         if (actors == null) {
-            parseCasting();
+            parseCasting(movie);
         }
         return actors;
     }
 
-    public final Set<String> getDirectors() {
+    public Set<MoviePerson> getDirectors() {
         if (directors == null) {
-            parseCasting();
+            parseCasting(movie);
         }
         return directors;
     }
 
-    public final Set<String> getWriters() {
+    public Set<MoviePerson> getWriters() {
         if (writers == null) {
-            parseCasting();
+            parseCasting(movie);
         }
         return writers;
     }
-
-    protected final void parseMediaList() {
-        if (posterURLS == null) {
-            posterURLS = new LinkedHashSet<String>();
-        }
-
-        for (Media media : getMediaList()) {
-            if (media.getType().getCode() == POSTER_MEDIA_CODE) {
-                posterURLS.add(media.getThumbnail().getHref());
-            }
-        }
-    }
-
-    public final Set<String> getPosterUrls() {
-        if (posterURLS == null) {
-            parseMediaList();
-            if (poster != null) {
-                posterURLS.add(poster.getHref());
-            }
-        }
-        return posterURLS;
+    
+    public Set<String> getPosterUrls() {
+        return this.getPosterUrls(movie);
     }
 }

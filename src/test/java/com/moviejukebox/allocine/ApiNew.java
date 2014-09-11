@@ -53,7 +53,7 @@ public class ApiNew {
         ids.put("27405", "Oblivion");
 
         LOG.info("**************************************************");
-        URL url;
+        String url;
         for (Map.Entry<String, String> entry : ids.entrySet()) {
             LOG.info("ID: '{}' Title '{}'", entry.getKey(), entry.getValue());
             LOG.info("Getting info for ID '{}'", entry.getKey());
@@ -103,7 +103,7 @@ public class ApiNew {
             apiUrl = new ApiUrl(mainPartnerKey, mainSecretKey);
         }
 
-        public URL get(String id) {
+        public String get(String id) {
             Map<String, String> params = new LinkedHashMap<String, String>();
             params.put("code", id);
             params.put("profile", "large");
@@ -114,7 +114,7 @@ public class ApiNew {
             return apiUrl.generateUrl(METHOD_MOVIE, params);
         }
 
-        public URL search(String query) {
+        public String search(String query) {
             Map<String, String> params = new LinkedHashMap<String, String>();
             params.put("q", query.toLowerCase());
             params.put("format", "json");

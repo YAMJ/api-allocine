@@ -20,28 +20,22 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
-/**
- *  This is the Person Search bean for the api.allocine.fr search
- *
- *  @author modmax
- */
-public class MoviePerson {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-    private long code;
-    private String name;
-    private String role;
-    private String photoURL;
-    private boolean isLeadActor = false;
+@JsonRootName("trailer")
+public class Trailer extends AbstractJsonUnknownHandleMapping {
     
-    public long getCode() {
-        return code;
-    }
-
-    public void setCode(long code) {
-        this.code = code;
-    }
+    private static final long serialVersionUID = 2260838566086403940L;
+    
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("code")
+    private long code;
+    @JsonProperty("href")
+    private String href;
 
     public String getName() {
         return name;
@@ -51,27 +45,19 @@ public class MoviePerson {
         this.name = name;
     }
 
-    public String getRole() {
-        return role;
+    public long getCode() {
+        return code;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setCode(long code) {
+        this.code = code;
     }
 
-    public String getPhotoURL() {
-        return photoURL;
+    public String getHref() {
+        return href;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
-    }
-
-    public boolean isLeadActor() {
-        return isLeadActor;
-    }
-
-    public void setLeadActor(boolean isLeadActor) {
-        this.isLeadActor = isLeadActor;
+    public void setHref(String href) {
+        this.href = href;
     }
 }

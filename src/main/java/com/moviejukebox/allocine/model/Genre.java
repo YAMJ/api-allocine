@@ -20,28 +20,18 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
-/**
- *  This is the Person Search bean for the api.allocine.fr search
- *
- *  @author modmax
- */
-public class MoviePerson {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-    private long code;
-    private String name;
-    private String role;
-    private String photoURL;
-    private boolean isLeadActor = false;
+@JsonRootName("genre")
+public class Genre extends AbstractJsonMapping {
+
+    private static final long serialVersionUID = 7383135567796765796L;
     
-    public long getCode() {
-        return code;
-    }
-
-    public void setCode(long code) {
-        this.code = code;
-    }
+    @JsonProperty("$")
+    private String name;
 
     public String getName() {
         return name;
@@ -49,29 +39,5 @@ public class MoviePerson {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getPhotoURL() {
-        return photoURL;
-    }
-
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
-    }
-
-    public boolean isLeadActor() {
-        return isLeadActor;
-    }
-
-    public void setLeadActor(boolean isLeadActor) {
-        this.isLeadActor = isLeadActor;
     }
 }

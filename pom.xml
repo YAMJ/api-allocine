@@ -69,9 +69,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <distribution.format>zip</distribution.format>
-        <!--NOTE: Do not change the jaxb version-->
-        <jaxb.version>2.2.4-1</jaxb.version>
-        <version.jackson>2.4.2</version.jackson>
+        <version.jackson>2.3.2</version.jackson>
         <version.slf4j>1.7.6</version.slf4j>
     </properties>
 
@@ -81,40 +79,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.3</version>
         </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
-        </dependency>
-        <!-- XML PARSING -->
-        <dependency>
-            <groupId>com.github.jaxb-xew-plugin</groupId>
-            <artifactId>jaxb-xew-plugin</artifactId>
-            <version>1.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>${jaxb.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>stax-api</artifactId>
-                    <groupId>javax.xml.stream</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>activation</artifactId>
-                    <groupId>javax.activation</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-xjc</artifactId>
-            <version>${jaxb.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- OTHER -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -148,6 +112,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${version.slf4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>${version.slf4j}</version>
+            <scope>test</scope>
         </dependency>
         <!--COMMON HTTP TOOLS-->
         <dependency>
@@ -276,19 +246,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>1.8</version>
-                <executions>
-                    <execution>
-                        <id>add-jaxb-generated-sources</id>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources/jaxb</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -316,42 +273,6 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
                 <executions>
-                    <execution>
-                        <id>jaxb</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <target>
-                                <mkdir dir="${project.build.directory}/generated-sources/jaxb/com/moviejukebox/allocine/jaxb" />
-                                <!-- classpath for JAXB @XmlElementWrapper Plugin (xew) -->
-                                <!--                                <path id="cp.plugin">
-                                    <fileset dir="${basedir}/lib/xjc-plugin" includes="*.jar" />
-                                </path>-->
-
-                                <!-- Ant task definition for the xjc tool -->
-                                <taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask" classpathref="maven.plugin.classpath">
-                                    <classpath>
-                                        <path refid="maven.compile.classpath" />
-                                        <!--<path refid="cp.plugin" />-->
-                                    </classpath>
-                                </taskdef>
-
-                                <xjc destdir="${project.build.directory}/generated-sources/jaxb" package="com.moviejukebox.allocine.jaxb" extension="Yes">
-                                    <!--<arg value="-debug" />-->
-                                    <!--<arg value="-verbose" />-->
-                                    <arg value="-Xxew" />
-                                    <!--<arg value="-summary ${project.build.directory}/allocine-xew-summary.txt" />-->
-                                    <!--<arg value="-instantiate lazy" />-->
-                                    <!--<arg value="-delete" />-->
-                                    <schema dir="${basedir}/src/main/schemas" includes="allocine.xsd" />
-                                    <!-- <binding dir="${etc}" includes="allocine.xjb" /> -->
-                                    <produces dir="${project.build.directory}/generated-sources/jaxb/com/moviejukebox/allocine/jaxb" includes="ObjectFactory.java" />
-                                </xjc>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
                     <execution>
                         <id>create-version-txt</id>
                         <phase>generate-resources</phase>
@@ -385,7 +306,6 @@
                     <target>1.6</target>
                     <failOnError>true</failOnError>
                     <verbose>true</verbose>
-                    <!-- excludes><exclude>**/*</exclude></excludes -->
                 </configuration>
             </plugin>
 

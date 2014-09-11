@@ -22,156 +22,152 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.jaxb.*;
-import java.util.LinkedHashSet;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.moviejukebox.allocine.model.Season;
+import com.moviejukebox.allocine.model.TvSeries;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
-import org.w3c.dom.Element;
 
 /**
  *  This is the TvSeries Search bean for the api.allocine.fr search
  *
  *  @author Yves.Blusseau
  */
-public class TvSeriesInfos extends Tvseries {
+public class TvSeriesInfos extends AbstractBaseInfos {
+    
+    private static final long serialVersionUID = -4486388552369054158L;
+    
+    @JsonProperty("tvseries")
+    private TvSeries tvSeries;
 
-    private Set<String>          actors;
-    private Set<String>          writers;
-    private Set<String>          directors;
-    private Set<String>          posterURLS;
+    public TvSeries getTvSeries() {
+        return tvSeries;
+    }
 
-    // Constants
-    private static final int     ACTOR_ACTIVITY_CODE    = 8001;
-    private static final int     DIRECTOR_ACTIVITY_CODE = 8002;
-    private static final int     WRITER_ACTIVITY_CODE   = 8004;
-    private static final int     SCRIPT_ACTIVITY_CODE   = 8043;
-
-    private static final int     POSTER_MEDIA_CODE      = 31001;
-
-    public TvSeriesInfos() {
-        setCode(-1); // Mark the object as invalid
+    public void setTvSeries(TvSeries tvSeries) {
+        this.tvSeries = tvSeries;
     }
 
     public boolean isValid() {
-        return getCode() > -1 ? true : false;
+        if (tvSeries == null) {
+            return false;
+        }
+        return (tvSeries.getCode() > 0);
     }
 
     public boolean isNotValid() {
-        return getCode() > -1 ? false : true;
+        return !this.isValid();
     }
 
-    public final String getSynopsis() {
-        String synopsis = "";
-        for (Object obj : getHtmlSynopsis()) {
-            String str = "";
-            if (obj instanceof String) {
-                str = (String) obj;
-            } else if (obj instanceof Element) {
-                Element element = (Element) obj;
-                str = element.getTextContent();
-            }
-            synopsis = synopsis.concat(str);
+    public int getCode() {
+        return this.getCode(tvSeries);
+    }
+    
+    public String getTitle() {
+        return this.getTitle(tvSeries);
+    }
+
+    public String getOriginalTitle() {
+        return this.getOriginalTitle(tvSeries);
+    }
+
+    public int getYearStart() {
+        if (tvSeries == null) {
+            return 0;
         }
-        // Normalize the string (remove LF and collapse WhiteSpaces)
-        synopsis = synopsis.replaceAll("\\r+", "\n").replaceAll("\\n+", " ").replaceAll("\\s+", " ").trim();
-        return synopsis;
+        return tvSeries.getYearStart();
     }
 
-    public final int getRating() {
-        float note   = 0;
-        int   sum    = 0;
-        int   result = -1;
-
-        if (getStatistics() != null ) {
-            for ( RatingType rating : getStatistics().getRatingStats() ) {
-                int count = rating.getValue();
-                note += rating.getNote() * count;
-                sum  += count;
-            }
-            if (sum > 0) {
-                result = (int) ((note / sum) / 5.0 * 100);
-            }
+    public int getYearEnd() {
+        if (tvSeries == null) {
+            return 0;
         }
-        return result;
+        return tvSeries.getYearEnd();
     }
 
-    protected final void parseCasting() {
+    public String getSynopsis() {
+        return this.getSynopsis(tvSeries);
+    }
+
+    public String getSynopsisShort() {
+        return this.getSynopsisShort(tvSeries);
+    }
+
+    public int getUserRating() {
+        return this.getUserRating(tvSeries);
+    }
+
+    public int getPressRating() {
+        return this.getPressRating(tvSeries);
+    }
+    
+    public Set<String> getGenres() {
+        return this.getGenres(tvSeries);
+    }
+
+    public Set<String> getNationalities() {
+        return this.getNationalities(tvSeries);
+    }
+
+    public String getOriginalChannel() {
+        if (tvSeries == null) {
+            return null;
+        }
+        if (tvSeries.getOriginalChannel() == null) {
+            return null;
+        }
+        if (tvSeries.getOriginalChannel().getChannel() == null) {
+            return null;
+        }
+        return tvSeries.getOriginalChannel().getChannel().getName();
+    }
+
+    public Set<MoviePerson> getActors() {
         if (actors == null) {
-            actors = new LinkedHashSet<String>();
-        }
-        if (writers == null) {
-            writers = new LinkedHashSet<String>();
-        }
-        if (directors == null) {
-            directors = new LinkedHashSet<String>();
-        }
-        LinkedHashSet<String> scripts = new LinkedHashSet<String>();
-
-        for (CastMember member : getCasting()) {
-            if (member.getActivity().getCode() == ACTOR_ACTIVITY_CODE) {
-                actors.add(member.getPerson().getName());
-            } else if (member.getActivity().getCode() == DIRECTOR_ACTIVITY_CODE) {
-                directors.add(member.getPerson().getName());
-            } else if (member.getActivity().getCode() == WRITER_ACTIVITY_CODE) {
-                writers.add(member.getPerson().getName());
-            } else if (member.getActivity().getCode() == SCRIPT_ACTIVITY_CODE) {
-                scripts.add(member.getPerson().getName());
-            }
-        }
-        // Add scripts to writers
-        writers.addAll(scripts);
-    }
-
-    public final Set<String> getActors() {
-        if (actors == null) {
-            parseCasting();
+            parseCasting(tvSeries);
         }
         return actors;
     }
 
-    public final Set<String> getDirectors() {
+    public Set<MoviePerson> getDirectors() {
         if (directors == null) {
-            parseCasting();
+            parseCasting(tvSeries);
         }
         return directors;
     }
 
-    public final Set<String> getWriters() {
+    public Set<MoviePerson> getWriters() {
         if (writers == null) {
-            parseCasting();
+            parseCasting(tvSeries);
         }
         return writers;
     }
-
-    protected final void parseMediaList() {
-        if (posterURLS == null) {
-            posterURLS = new LinkedHashSet<String>();
-        }
-
-        for (Media media : getMediaList()) {
-            if (media.getType().getCode() == POSTER_MEDIA_CODE) {
-                posterURLS.add(media.getThumbnail().getHref());
-            }
-        }
+    
+    public Set<String> getPosterUrls() {
+        return this.getPosterUrls(tvSeries);
     }
 
-    public final Set<String> getPosterUrls() {
-        if (posterURLS == null) {
-            parseMediaList();
+    public int getSeasonCount() {
+        if (tvSeries == null) {
+            return 0;
         }
-        return posterURLS;
+        return tvSeries.getSeasonCount();
+    }
+
+    public List<Season> getSeasonList() {
+        if (tvSeries == null) {
+            return Collections.emptyList();
+        }
+        return tvSeries.getSeasonList();
     }
 
     public final int getSeasonCode(int seasonNumber) {
-        for (Season season : getSeasonList()) {
+        for (Season season : this.getSeasonList()) {
             if (season.getSeasonNumber() == seasonNumber) {
                 return season.getCode();
             }
         }
         return -1;
-    }
-
-    @Override
-    public String toString() {
-        return "TvSeriesInfos{" + "actors=" + actors + ", writers=" + writers + ", directors=" + directors + ", posterURLS=" + posterURLS + '}';
     }
 }

@@ -45,7 +45,6 @@ public class ApiSimple {
     private static String mainPartnerKey = "100043982026";
     private static String mainSecretKey = "29d185d98c984a359e6e6f26a0474269";
     private static Map<String, String> ids = new LinkedHashMap<String, String>();
-    private static final String USER_AGENT = "Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)";
 
     public static void main(String[] args) throws IOException {
         SimpleAllocineApi api = new SimpleAllocineApi(mainPartnerKey, mainSecretKey);
