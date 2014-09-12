@@ -150,7 +150,7 @@ public class AllocineApiTest {
     @Test
     public void testGetPersonInfos() throws Exception {
         LOG.info("testGetPersonInfos");
-        PersonInfos personInfos = api.getPersonInfos("5711");
+        PersonInfos personInfos = api.getPersonInfos("41339");
         assertEquals(41339, personInfos.getCode());
         assertEquals("1976-08-02", personInfos.getBirthDate());
     }
