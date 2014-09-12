@@ -100,6 +100,27 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
         return person.getBirthPlace();
     }
 
+    public String getRealName() {
+        if (person == null) {
+            return null;
+        }
+        return person.getRealName();
+    }
+
+    public String getDeathDate() {
+        if (person == null) {
+            return null;
+        }
+        return person.getDeathDate();
+    }
+
+    public String getDeathPlace() {
+        if (person == null) {
+            return null;
+        }
+        return person.getDeathPlace();
+    }
+
     public String getPhotoURL() {
         if (person == null) {
             return null;
