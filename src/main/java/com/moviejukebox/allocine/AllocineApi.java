@@ -22,6 +22,8 @@
  */
 package com.moviejukebox.allocine;
 
+import java.nio.charset.Charset;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import com.moviejukebox.allocine.tools.WebBrowser;
@@ -66,8 +68,9 @@ public class AllocineApi {
         
     private final ApiUrl apiUrl;
     private final CommonHttpClient httpClient;
-    private ObjectMapper mapper = new ObjectMapper();
-
+    private ObjectMapper mapper;
+    private Charset charset;
+    
     /**
      * Create the API
      *
@@ -87,8 +90,10 @@ public class AllocineApi {
      * @param httpClient the http client to use instead internal web browser
      */
     public AllocineApi(String partnerKey, String secretKey, CommonHttpClient httpClient) {
-        apiUrl = new ApiUrl(partnerKey, secretKey);
+        this.apiUrl = new ApiUrl(partnerKey, secretKey);
         this.httpClient = httpClient;
+        this.mapper = new ObjectMapper();
+        this.charset = Charset.forName("UTF-8");
     }
 
     public final void setProxy(Proxy proxy, String username, String password) {
@@ -131,7 +136,7 @@ public class AllocineApi {
             HttpGet httpGet = new HttpGet(url.toURI());
             httpGet.addHeader("accept", "application/json");
             httpGet.setHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
-            return mapper.readValue(this.httpClient.requestContent(httpGet), object);
+            return mapper.readValue(this.httpClient.requestContent(httpGet, charset), object);
         }
     }
 
