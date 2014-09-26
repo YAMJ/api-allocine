@@ -30,7 +30,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @SuppressWarnings("serial")
-public abstract class AbstractBaseInfos extends AbstractJsonMapping {
+public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping {
     
     protected Set<MoviePerson> actors;
     protected Set<MoviePerson> writers;

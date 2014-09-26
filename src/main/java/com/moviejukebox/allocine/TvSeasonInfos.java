@@ -23,18 +23,18 @@
 package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
 import com.moviejukebox.allocine.model.Episode;
 import com.moviejukebox.allocine.model.Season;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  *  This is the Movie Search bean for the api.allocine.fr search
  *
  *  @author Yves.Blusseau
  */
-public class TvSeasonInfos extends AbstractJsonUnknownHandleMapping {
+public class TvSeasonInfos extends AbstractBaseInfos {
 
     private static final long serialVersionUID = 1357655581772310729L;
     
@@ -105,4 +105,26 @@ public class TvSeasonInfos extends AbstractJsonUnknownHandleMapping {
         }
         return episode;
     }
+
+    public Set<MoviePerson> getActors() {
+        if (actors == null) {
+            parseCasting(season);
+        }
+        return actors;
+    }
+
+    public Set<MoviePerson> getDirectors() {
+        if (directors == null) {
+            parseCasting(season);
+        }
+        return directors;
+    }
+
+    public Set<MoviePerson> getWriters() {
+        if (writers == null) {
+            parseCasting(season);
+        }
+        return writers;
+    }
 }
+

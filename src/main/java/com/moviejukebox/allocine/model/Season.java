@@ -28,12 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonRootName("season")
-public class Season extends AbstractJsonUnknownHandleMapping {
+public class Season extends AbstractBaseMapping {
 
     private static final long serialVersionUID = -9173083320025101754L;
     
-    @JsonProperty("code")
-    private int code;
     @JsonProperty("seasonNumber")
     private int seasonNumber;
     @JsonProperty("yearStart")
@@ -44,14 +42,6 @@ public class Season extends AbstractJsonUnknownHandleMapping {
     private int episodeCount;
     @JsonProperty("episode")
     private List<Episode> episodeList = new ArrayList<Episode>();
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public int getSeasonNumber() {
         return seasonNumber;

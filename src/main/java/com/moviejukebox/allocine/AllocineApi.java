@@ -22,13 +22,12 @@
  */
 package com.moviejukebox.allocine;
 
-import java.nio.charset.Charset;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.InputStream;
 import java.net.*;
+import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.http.client.methods.HttpGet;
@@ -52,6 +51,7 @@ public class AllocineApi {
     private static final String METHOD_MOVIE = "movie";
     private static final String METHOD_TVSERIES = "tvseries";
     private static final String METHOD_SEASON = "season";
+    private static final String METHOD_EPISODE = "episode";
     private static final String METHOD_PERSON = "person";
     // Filters
     private static final String FILTER_MOVIE = "movie";
@@ -274,5 +274,23 @@ public class AllocineApi {
             throw error;
         }
         return personInfos;
+    }
+
+    public EpisodeInfos getEpisodeInfos(String allocineId) throws Exception {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put(PARAM_PROFILE, "large");
+        params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
+        params.put(PARAM_CODE, allocineId);
+        params.put(PARAM_STRIPTAGS, "synopsis,synopsisshort");
+        String url = apiUrl.generateUrl(METHOD_EPISODE, params);
+
+        EpisodeInfos episodeInfos;
+        try {
+            episodeInfos = this.readJsonObject(new URL(url), EpisodeInfos.class);
+        } catch (MalformedURLException error) {
+            LOG.warn("Failed to convert '{}' to an URL, error: {}", url, error.getMessage());
+            throw error;
+        }
+        return episodeInfos;
     }
 }

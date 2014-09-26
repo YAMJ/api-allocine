@@ -130,12 +130,24 @@ public class AllocineApiTest {
     @Test
     public void testGetTvSeasonInfos() throws Exception {
         LOG.info("testGetTvSeasonInfos");
-        TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(20976);
-        assertEquals(20976, tvseasonInfos.getCode());
-        assertEquals(10, tvseasonInfos.getSeasonNumber());
-        assertEquals(2012, tvseasonInfos.getYearStart());
-        assertEquals(2013, tvseasonInfos.getYearEnd());
-        assertTrue(tvseasonInfos.getEpisodeList().size() > 19);
+        TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
+        assertEquals(22242, tvseasonInfos.getCode());
+        assertEquals(4, tvseasonInfos.getSeasonNumber());
+        assertEquals(2014, tvseasonInfos.getYearStart());
+        assertEquals(2014, tvseasonInfos.getYearEnd());
+        assertEquals(10, tvseasonInfos.getEpisodeList().size());
+        
+        /*
+        for (MoviePerson person : tvseasonInfos.getDirectors()) {
+            System.err.println("Director: " + person.getName());
+        }
+        for (MoviePerson person : tvseasonInfos.getWriters()) {
+            System.err.println("Writer: " + person.getName());
+        }
+        for (MoviePerson person : tvseasonInfos.getActors()) {
+            System.err.println("Actor ("+person.isLeadActor()+"): " + person.getName());
+        }
+        */
     }
    
     @Test
@@ -153,5 +165,24 @@ public class AllocineApiTest {
         PersonInfos personInfos = api.getPersonInfos("41339");
         assertEquals(41339, personInfos.getCode());
         assertEquals("1976-08-02", personInfos.getBirthDate());
+    }
+
+    @Test
+    public void testGetEpisodeInfos() throws Exception {
+        LOG.info("testGetEpisodeInfos");
+        EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");
+        assertEquals(493491, episodeInfos.getCode());
+
+        /*
+        for (MoviePerson person : episodeInfos.getDirectors()) {
+            System.err.println("Director: " + person.getName());
+        }
+        for (MoviePerson person : episodeInfos.getWriters()) {
+            System.err.println("Writer: " + person.getName());
+        }
+        for (MoviePerson person : episodeInfos.getActors()) {
+            System.err.println("Actor ("+person.isLeadActor()+"): " + person.getName());
+        }
+        */
     }
 }

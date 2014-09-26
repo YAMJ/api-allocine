@@ -24,59 +24,18 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.moviejukebox.allocine.tools.HtmlTools;
 
 @JsonRootName("episode")
-public class Episode extends AbstractJsonUnknownHandleMapping {
+public class Episode extends AbstractBaseMapping {
 
     private static final long serialVersionUID = 7597888938988246976L;
 
-    @JsonProperty("code")
-    private int code;
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("originalTitle")
-    private String originalTitle;
-    @JsonProperty("synopsis")
-    private String synopsis;
     @JsonProperty("originalBroadcastDate")
     private String originalBroadcastDate;
     @JsonProperty("episodeNumberSeries")
     private int episodeNumberSeries;
     @JsonProperty("episodeNumberSeason")
     private int episodeNumberSeason;
-    
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
-    public String getSynopsis() {
-        return HtmlTools.removeLineFeeds(HtmlTools.removeHtmlTags(synopsis));
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
 
     public String getOriginalBroadcastDate() {
         return originalBroadcastDate;
