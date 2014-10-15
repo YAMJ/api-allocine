@@ -22,11 +22,10 @@
  */
 package com.moviejukebox.allocine;
 
+import com.moviejukebox.allocine.model.Movie;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import com.moviejukebox.allocine.model.Movie;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -61,7 +60,7 @@ public class AllocineApiTest {
         assertTrue("No movies found!", search.getMovies().size() > 0);
         assertTrue("Movie not found in search", found);
     }
-    
+
     @Test
     public void testSearchMovies() throws Exception {
         LOG.info("testSearchMovieInfos");
@@ -88,7 +87,7 @@ public class AllocineApiTest {
         LOG.info("testGetMovieInfos");
         MovieInfos movieInfos = api.getMovieInfos("61282"); // AVATAR
         //MovieInfos movieInfos = api.getMovieInfos("25722"); // SHAFT
-        
+
         assertEquals(61282, movieInfos.getCode());
         assertEquals(9720, movieInfos.getRuntime());
         assertEquals("Avatar", movieInfos.getTitle());
@@ -109,7 +108,7 @@ public class AllocineApiTest {
     public void testGetTvSeriesInfos() throws Exception {
         LOG.info("testGetTvSeriesInfos");
         TvSeriesInfos tvseriesInfos = api.getTvSeriesInfos("132");
-        
+
         assertEquals(132, tvseriesInfos.getCode());
         assertEquals("Mon oncle Charlie", tvseriesInfos.getTitle());
         assertEquals("Two and a Half Men", tvseriesInfos.getOriginalTitle());
@@ -120,7 +119,7 @@ public class AllocineApiTest {
         assertEquals(1, tvseriesInfos.getGenres().size());
         assertEquals(1, tvseriesInfos.getNationalities().size());
         assertEquals(1, tvseriesInfos.getDirectors().size());
-        assertEquals(12, tvseriesInfos.getWriters().size());
+        assertTrue(tvseriesInfos.getWriters().size() >= 12);
         assertTrue(tvseriesInfos.getActors().size() >= 5);
         assertEquals(70, tvseriesInfos.getUserRating());
         assertEquals(12, tvseriesInfos.getSeasonCount());
@@ -136,20 +135,20 @@ public class AllocineApiTest {
         assertEquals(2014, tvseasonInfos.getYearStart());
         assertEquals(2014, tvseasonInfos.getYearEnd());
         assertEquals(10, tvseasonInfos.getEpisodeList().size());
-        
+
         /*
-        for (MoviePerson person : tvseasonInfos.getDirectors()) {
-            System.err.println("Director: " + person.getName());
-        }
-        for (MoviePerson person : tvseasonInfos.getWriters()) {
-            System.err.println("Writer: " + person.getName());
-        }
-        for (MoviePerson person : tvseasonInfos.getActors()) {
-            System.err.println("Actor ("+person.isLeadActor()+"): " + person.getName());
-        }
-        */
+         for (MoviePerson person : tvseasonInfos.getDirectors()) {
+         LOG.info("Director: " + person.getName());
+         }
+         for (MoviePerson person : tvseasonInfos.getWriters()) {
+         LOG.info("Writer: " + person.getName());
+         }
+         for (MoviePerson person : tvseasonInfos.getActors()) {
+         LOG.info("Actor ("+person.isLeadActor()+"): " + person.getName());
+         }
+         */
     }
-   
+
     @Test
     public void testCertification() throws Exception {
         LOG.info("testCertification");
@@ -174,15 +173,15 @@ public class AllocineApiTest {
         assertEquals(493491, episodeInfos.getCode());
 
         /*
-        for (MoviePerson person : episodeInfos.getDirectors()) {
-            System.err.println("Director: " + person.getName());
-        }
-        for (MoviePerson person : episodeInfos.getWriters()) {
-            System.err.println("Writer: " + person.getName());
-        }
-        for (MoviePerson person : episodeInfos.getActors()) {
-            System.err.println("Actor ("+person.isLeadActor()+"): " + person.getName());
-        }
-        */
+         for (MoviePerson person : episodeInfos.getDirectors()) {
+         LOG.info("Director: " + person.getName());
+         }
+         for (MoviePerson person : episodeInfos.getWriters()) {
+         LOG.info("Writer: " + person.getName());
+         }
+         for (MoviePerson person : episodeInfos.getActors()) {
+         LOG.info("Actor ("+person.isLeadActor()+"): " + person.getName());
+         }
+         */
     }
 }
