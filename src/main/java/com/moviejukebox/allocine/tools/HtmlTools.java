@@ -24,6 +24,10 @@ package com.moviejukebox.allocine.tools;
 
 public class HtmlTools {
 
+    private HtmlTools() {
+        throw new UnsupportedOperationException("Class cannot be initialised");
+    }
+
     public static String removeLineFeeds(String src) {
         if (src == null) {
             return null;
