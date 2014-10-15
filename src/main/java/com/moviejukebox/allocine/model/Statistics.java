@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Statistics extends AbstractJsonMapping {
 
     private static final long serialVersionUID = -228388571068687852L;
-    
+
     @JsonProperty("pressRating")
     private double pressRating;
     @JsonProperty("userRating")
@@ -61,5 +61,13 @@ public class Statistics extends AbstractJsonMapping {
 
     public void setRankTopMovie(long rankTopMovie) {
         this.rankTopMovie = rankTopMovie;
+    }
+
+    public long getVariationTopMovie() {
+        return variationTopMovie;
+    }
+
+    public void setVariationTopMovie(long variationTopMovie) {
+        this.variationTopMovie = variationTopMovie;
     }
 }
