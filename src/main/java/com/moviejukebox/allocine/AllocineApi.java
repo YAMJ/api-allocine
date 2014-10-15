@@ -26,7 +26,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.InputStream;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -65,12 +69,12 @@ public class AllocineApi {
     private static final String PARAM_CODE = "code";
     private static final String PARAM_STRIPTAGS = "striptags";
     private static final String PARAM_FORMAT_VALUE = "json";
-        
+
     private final ApiUrl apiUrl;
     private final CommonHttpClient httpClient;
     private ObjectMapper mapper;
     private Charset charset;
-    
+
     /**
      * Create the API
      *
@@ -86,7 +90,6 @@ public class AllocineApi {
      *
      * @param partnerKey The partner key for Allocine
      * @param secretKey The secret key for Allocine
-     * @param format The format of the returned data
      * @param httpClient the http client to use instead internal web browser
      */
     public AllocineApi(String partnerKey, String secretKey, CommonHttpClient httpClient) {
@@ -123,13 +126,17 @@ public class AllocineApi {
                 if (inputStream != null) {
                     try {
                         inputStream.close();
-                    } catch (Exception ignore) {}
+                    } catch (Exception ex) {
+                        LOG.trace("Failed to close input stream", ex);
+                    }
                 }
 
                 if (connection != null && (connection instanceof HttpURLConnection)) {
                     try {
                         ((HttpURLConnection) connection).disconnect();
-                    } catch (Exception ignore) {}
+                    } catch (Exception ex) {
+                        LOG.trace("Failed to close connection", ex);
+                    }
                 }
             }
         } else {
@@ -175,7 +182,7 @@ public class AllocineApi {
             LOG.warn("Failed to convert '{}' to an URL, error: {}", url, error.getMessage());
             throw error;
         }
-        
+
         return search;
     }
 
@@ -193,7 +200,7 @@ public class AllocineApi {
             LOG.warn("Failed to convert '{}' to an URL, error: {}", url, error.getMessage());
             throw error;
         }
-        
+
         return search;
     }
 
@@ -204,7 +211,7 @@ public class AllocineApi {
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         String url = apiUrl.generateUrl(METHOD_MOVIE, params);
-        
+
         MovieInfos movieInfos;
         try {
             movieInfos = this.readJsonObject(new URL(url), MovieInfos.class);
@@ -212,7 +219,7 @@ public class AllocineApi {
             LOG.warn("Failed to convert '{}' to an URL, error: {}", url, error.getMessage());
             throw error;
         }
-        
+
         return movieInfos;
     }
 
@@ -246,8 +253,8 @@ public class AllocineApi {
         params.put(PARAM_CODE, String.valueOf(seasonCode));
         params.put(PARAM_STRIPTAGS, "synopsis,synopsisshort");
         String url = apiUrl.generateUrl(METHOD_SEASON, params);
-        
-        TvSeasonInfos tvSeasonInfos; 
+
+        TvSeasonInfos tvSeasonInfos;
         try {
             tvSeasonInfos = this.readJsonObject(new URL(url), TvSeasonInfos.class);
         } catch (MalformedURLException error) {
