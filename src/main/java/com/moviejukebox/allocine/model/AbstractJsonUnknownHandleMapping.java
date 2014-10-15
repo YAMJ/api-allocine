@@ -31,19 +31,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractJsonUnknownHandleMapping extends AbstractJsonMapping {
 
     @JsonIgnore
-    private Logger log = null;
-
-    /**
-     * Return the current logger
-     *
-     * @return logger
-     */
-    private Logger getLogger() {
-        if (log == null) {
-            log = LoggerFactory.getLogger(this.getClass());
-        }
-        return log;
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractJsonUnknownHandleMapping.class);
 
     /**
      * Handle unknown properties
@@ -52,12 +40,13 @@ public abstract class AbstractJsonUnknownHandleMapping extends AbstractJsonMappi
      * @param value
      */
     @JsonAnySetter
+    @Override
     protected void handleUnknown(String key, Object value) {
-        if (getLogger().isTraceEnabled()) {
+        if (LOG.isTraceEnabled()) {
             StringBuilder unknown = new StringBuilder(this.getClass().getSimpleName());
             unknown.append(": Unknown property='").append(key);
             unknown.append("' value='").append(value).append("'");
-            getLogger().trace(unknown.toString());
+            LOG.trace(unknown.toString());
         }
     }
 }
