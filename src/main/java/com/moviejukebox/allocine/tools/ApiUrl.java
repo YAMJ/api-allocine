@@ -70,7 +70,13 @@ public final class ApiUrl {
         key.append(PREFIX_SED);
         key.append(sed);
         byte[] sha1code = DigestUtils.sha1(key.toString());
-        String sig = encoder(new String(Base64.encodeBase64(sha1code)));
+
+        String sig = "";
+        try {
+            sig = encoder(new String(Base64.encodeBase64(sha1code), URL_ENCODING));
+        } catch (UnsupportedEncodingException ex) {
+            LOG.warn("Failed to encode: " + ex.getMessage(), ex);
+        }
 
         StringBuilder url = new StringBuilder(API_URL);
         url.append(method);
