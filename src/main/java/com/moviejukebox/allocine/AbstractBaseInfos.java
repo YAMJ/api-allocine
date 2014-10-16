@@ -22,7 +22,12 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.model.*;
+import com.moviejukebox.allocine.model.AbstractBaseMapping;
+import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
+import com.moviejukebox.allocine.model.CastMember;
+import com.moviejukebox.allocine.model.Genre;
+import com.moviejukebox.allocine.model.Medium;
+import com.moviejukebox.allocine.model.Nationality;
 import com.moviejukebox.allocine.tools.HtmlTools;
 import java.util.Collections;
 import java.util.HashSet;
@@ -31,13 +36,16 @@ import java.util.Set;
 
 @SuppressWarnings("serial")
 public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping {
-    
+
+    private static final double PERCENT_OUT_OF_5 = 5.0;
+    private static final int PERCENT_OUT_OF_100 = 100;
+
     protected Set<MoviePerson> actors;
     protected Set<MoviePerson> writers;
     protected Set<MoviePerson> directors;
-    private Set<String>        genres;
-    private Set<String>        nationalities;
-    private Set<String>        posterURLS;
+    private Set<String> genres;
+    private Set<String> nationalities;
+    private Set<String> posterURLS;
 
     protected int getCode(AbstractBaseMapping base) {
         if (base == null) {
@@ -45,7 +53,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         }
         return base.getCode();
     }
-    
+
     protected String getTitle(AbstractBaseMapping base) {
         if (base == null) {
             return null;
@@ -76,28 +84,28 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
 
     protected int getUserRating(AbstractBaseMapping base) {
         if (base == null) {
-            return -1; 
+            return -1;
         }
         if (base.getStatistics() == null) {
             return -1;
         }
-        
+
         double userRating = base.getStatistics().getUserRating();
-        return (int) ((userRating / 5.0 ) * 100);
+        return (int) ((userRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
 
     protected int getPressRating(AbstractBaseMapping base) {
         if (base == null) {
-            return -1; 
+            return -1;
         }
         if (base.getStatistics() == null) {
             return -1;
         }
-        
+
         double pressRating = base.getStatistics().getPressRating();
-        return (int) ((pressRating / 5.0 ) * 100);
+        return (int) ((pressRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
-    
+
     protected Set<String> getGenres(AbstractBaseMapping base) {
         if (base == null) {
             return Collections.emptySet();
@@ -138,8 +146,8 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         if (directors == null) {
             directors = new LinkedHashSet<MoviePerson>();
         }
-    
-        if (base != null && base.getCastMember() != null) {    
+
+        if (base != null && base.getCastMember() != null) {
             for (CastMember member : base.getCastMember()) {
                 if (member.isActor()) {
                     MoviePerson person = new MoviePerson();
@@ -190,7 +198,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
             }
         }
     }
-    
+
     protected Set<String> getPosterUrls(AbstractBaseMapping base) {
         if (posterURLS == null) {
             parseMediaList(base);
