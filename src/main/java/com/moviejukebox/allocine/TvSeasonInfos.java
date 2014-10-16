@@ -30,14 +30,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *  This is the Movie Search bean for the api.allocine.fr search
+ * This is the Movie Search bean for the api.allocine.fr search
  *
- *  @author Yves.Blusseau
+ * @author Yves.Blusseau
  */
 public class TvSeasonInfos extends AbstractBaseInfos {
 
     private static final long serialVersionUID = 1357655581772310729L;
-    
+
     @JsonProperty("season")
     private Season season;
 
@@ -53,7 +53,7 @@ public class TvSeasonInfos extends AbstractBaseInfos {
         if (season == null) {
             return false;
         }
-        return (season.getCode() > 0);
+        return season.getCode() > 0;
     }
 
     public boolean isNotValid() {
@@ -94,7 +94,7 @@ public class TvSeasonInfos extends AbstractBaseInfos {
         }
         return season.getEpisodeList();
     }
-    
+
     public Episode getEpisode(int numEpisode) {
         Episode episode = null;
         for (Episode checkEpisode : this.getEpisodeList()) {
@@ -127,4 +127,3 @@ public class TvSeasonInfos extends AbstractBaseInfos {
         return writers;
     }
 }
-

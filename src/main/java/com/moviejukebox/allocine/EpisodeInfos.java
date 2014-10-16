@@ -22,10 +22,9 @@
  */
 package com.moviejukebox.allocine;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.moviejukebox.allocine.model.Episode;
+import java.util.Set;
 
 /**
  * This is the Episode Search bean for the api.allocine.fr search
@@ -51,7 +50,7 @@ public class EpisodeInfos extends AbstractBaseInfos {
         if (episode == null) {
             return false;
         }
-        return (episode.getCode() > 0);
+        return episode.getCode() > 0;
     }
 
     public boolean isNotValid() {
@@ -61,7 +60,7 @@ public class EpisodeInfos extends AbstractBaseInfos {
     public int getCode() {
         return this.getCode(episode);
     }
-    
+
     public String getTitle() {
         return this.getTitle(episode);
     }
@@ -69,7 +68,7 @@ public class EpisodeInfos extends AbstractBaseInfos {
     public String getOriginalTitle() {
         return this.getOriginalTitle(episode);
     }
-    
+
     public String getSynopsis() {
         if (episode == null) {
             return null;

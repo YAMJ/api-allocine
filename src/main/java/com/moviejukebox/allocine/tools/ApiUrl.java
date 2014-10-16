@@ -91,7 +91,7 @@ public final class ApiUrl {
         try {
             return URLEncoder.encode(toEncode, URL_ENCODING);
         } catch (UnsupportedEncodingException ex) {
-            LOG.warn("Failed to encode: " + ex.getMessage());
+            LOG.warn("Failed to encode: " + ex.getMessage(), ex);
             return "";
         }
     }

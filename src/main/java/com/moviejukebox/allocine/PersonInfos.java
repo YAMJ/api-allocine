@@ -51,7 +51,7 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
         if (person == null) {
             return false;
         }
-        return (person.getCode() > 0);
+        return person.getCode() > 0;
     }
 
     public boolean isNotValid() {

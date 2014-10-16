@@ -30,14 +30,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *  This is the TvSeries Search bean for the api.allocine.fr search
+ * This is the TvSeries Search bean for the api.allocine.fr search
  *
- *  @author Yves.Blusseau
+ * @author Yves.Blusseau
  */
 public class TvSeriesInfos extends AbstractBaseInfos {
-    
+
     private static final long serialVersionUID = -4486388552369054158L;
-    
+
     @JsonProperty("tvseries")
     private TvSeries tvSeries;
 
@@ -53,7 +53,7 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         if (tvSeries == null) {
             return false;
         }
-        return (tvSeries.getCode() > 0);
+        return tvSeries.getCode() > 0;
     }
 
     public boolean isNotValid() {
@@ -63,7 +63,7 @@ public class TvSeriesInfos extends AbstractBaseInfos {
     public int getCode() {
         return this.getCode(tvSeries);
     }
-    
+
     public String getTitle() {
         return this.getTitle(tvSeries);
     }
@@ -105,7 +105,7 @@ public class TvSeriesInfos extends AbstractBaseInfos {
     public int getPressRating() {
         return this.getPressRating(tvSeries);
     }
-    
+
     public Set<String> getGenres() {
         return this.getGenres(tvSeries);
     }
@@ -147,7 +147,7 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         }
         return writers;
     }
-    
+
     public Set<String> getPosterUrls() {
         return this.getPosterUrls(tvSeries);
     }

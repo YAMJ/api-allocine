@@ -30,9 +30,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *  This is the Movie Search bean for the api.allocine.fr search
+ * This is the Movie Search bean for the api.allocine.fr search
  *
- *  @author Yves.Blusseau
+ * @author Yves.Blusseau
  */
 public class MovieInfos extends AbstractBaseInfos {
 
@@ -54,7 +54,7 @@ public class MovieInfos extends AbstractBaseInfos {
         if (movie == null) {
             return false;
         }
-        return (movie.getCode() > 0);
+        return movie.getCode() > 0;
     }
 
     public boolean isNotValid() {
@@ -64,7 +64,7 @@ public class MovieInfos extends AbstractBaseInfos {
     public int getCode() {
         return this.getCode(movie);
     }
-    
+
     public String getTitle() {
         return this.getTitle(movie);
     }
@@ -86,7 +86,7 @@ public class MovieInfos extends AbstractBaseInfos {
         }
         return movie.getRuntime();
     }
-    
+
     public String getReleaseDate() {
         return this.getReleaseDate(movie);
     }
@@ -114,13 +114,13 @@ public class MovieInfos extends AbstractBaseInfos {
             if (certificate != null) {
                 Matcher match = AGE_REGEXP.matcher(certificate.getName());
                 if (match.find()) {
-                    certification=match.group(1);
+                    certification = match.group(1);
                 }
             }
         }
         return certification;
     }
-    
+
     public Set<String> getGenres() {
         return this.getGenres(movie);
     }
@@ -159,7 +159,7 @@ public class MovieInfos extends AbstractBaseInfos {
         }
         return writers;
     }
-    
+
     public Set<String> getPosterUrls() {
         return this.getPosterUrls(movie);
     }
