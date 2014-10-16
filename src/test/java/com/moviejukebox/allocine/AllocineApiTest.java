@@ -22,6 +22,12 @@
  */
 package com.moviejukebox.allocine;
 
+import com.moviejukebox.allocine.model.TvSeriesInfos;
+import com.moviejukebox.allocine.model.TvSeasonInfos;
+import com.moviejukebox.allocine.model.MovieInfos;
+import com.moviejukebox.allocine.model.EpisodeInfos;
+import com.moviejukebox.allocine.model.Search;
+import com.moviejukebox.allocine.model.PersonInfos;
 import com.moviejukebox.allocine.model.Movie;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

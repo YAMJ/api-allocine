@@ -20,14 +20,8 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
-import com.moviejukebox.allocine.model.AbstractBaseMapping;
-import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
-import com.moviejukebox.allocine.model.CastMember;
-import com.moviejukebox.allocine.model.Genre;
-import com.moviejukebox.allocine.model.Medium;
-import com.moviejukebox.allocine.model.Nationality;
 import com.moviejukebox.allocine.tools.HtmlTools;
 import java.util.Collections;
 import java.util.HashSet;

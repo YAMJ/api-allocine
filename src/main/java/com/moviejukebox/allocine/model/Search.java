@@ -20,17 +20,16 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moviejukebox.allocine.model.*;
 import java.util.Collections;
 import java.util.List;
 
 public class Search extends AbstractJsonUnknownHandleMapping {
 
     private static final long serialVersionUID = -9017972889712498870L;
-    
+
     @JsonProperty("feed")
     private Feed feed;
 
@@ -58,7 +57,7 @@ public class Search extends AbstractJsonUnknownHandleMapping {
         }
         return feed.getTotalResults();
     }
-    
+
     public List<Movie> getMovies() {
         if (feed == null) {
             return Collections.emptyList();

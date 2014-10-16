@@ -20,11 +20,9 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moviejukebox.allocine.model.Season;
-import com.moviejukebox.allocine.model.TvSeries;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;

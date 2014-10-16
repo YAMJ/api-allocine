@@ -20,37 +20,38 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moviejukebox.allocine.model.Episode;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 /**
- * This is the Episode Search bean for the api.allocine.fr search
+ * This is the Movie Search bean for the api.allocine.fr search
  *
- * @author modmax
+ * @author Yves.Blusseau
  */
-public class EpisodeInfos extends AbstractBaseInfos {
+public class TvSeasonInfos extends AbstractBaseInfos {
 
-    private static final long serialVersionUID = 7745674601738810957L;
+    private static final long serialVersionUID = 1357655581772310729L;
 
-    @JsonProperty("episode")
-    private Episode episode;
+    @JsonProperty("season")
+    private Season season;
 
-    public Episode getEpisode() {
-        return episode;
+    public Season getSeason() {
+        return season;
     }
 
-    public void setEpisode(Episode episode) {
-        this.episode = episode;
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
     public boolean isValid() {
-        if (episode == null) {
+        if (season == null) {
             return false;
         }
-        return episode.getCode() > 0;
+        return season.getCode() > 0;
     }
 
     public boolean isNotValid() {
@@ -58,69 +59,68 @@ public class EpisodeInfos extends AbstractBaseInfos {
     }
 
     public int getCode() {
-        return this.getCode(episode);
-    }
-
-    public String getTitle() {
-        return this.getTitle(episode);
-    }
-
-    public String getOriginalTitle() {
-        return this.getOriginalTitle(episode);
-    }
-
-    public String getSynopsis() {
-        if (episode == null) {
-            return null;
-        }
-        return episode.getSynopsis();
-    }
-
-    public String getSynopsisShort() {
-        if (episode == null) {
-            return null;
-        }
-        return episode.getSynopsisShort();
-    }
-
-    public String getOriginalBroadcastDate() {
-        if (episode == null) {
-            return null;
-        }
-        return episode.getOriginalBroadcastDate();
-    }
-
-    public int getEpisodeNumberSeries() {
-        if (episode == null) {
+        if (season == null) {
             return -1;
         }
-        return episode.getEpisodeNumberSeries();
+        return season.getCode();
     }
 
-    public int getEpisodeNumberSeason() {
-        if (episode == null) {
+    public int getYearStart() {
+        if (season == null) {
+            return 0;
+        }
+        return season.getYearStart();
+    }
+
+    public int getYearEnd() {
+        if (season == null) {
+            return 0;
+        }
+        return season.getYearEnd();
+    }
+
+    public int getSeasonNumber() {
+        if (season == null) {
             return -1;
         }
-        return episode.getEpisodeNumberSeason();
+        return season.getSeasonNumber();
+    }
+
+    public List<Episode> getEpisodeList() {
+        if (season == null) {
+            return Collections.emptyList();
+        }
+        return season.getEpisodeList();
+    }
+
+    public Episode getEpisode(int numEpisode) {
+        Episode episode = null;
+        for (Episode checkEpisode : this.getEpisodeList()) {
+            if (checkEpisode.getEpisodeNumberSeason() == numEpisode) {
+                episode = checkEpisode;
+                break;
+            }
+        }
+        return episode;
     }
 
     public Set<MoviePerson> getActors() {
         if (actors == null) {
-            parseCasting(episode);
+            parseCasting(season);
         }
         return actors;
     }
 
     public Set<MoviePerson> getDirectors() {
         if (directors == null) {
-            parseCasting(episode);
+            parseCasting(season);
         }
         return directors;
     }
 
     public Set<MoviePerson> getWriters() {
         if (writers == null) {
-            parseCasting(episode);
+            parseCasting(season);
         }
         return writers;
     }

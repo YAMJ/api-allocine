@@ -20,11 +20,9 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moviejukebox.allocine.model.AbstractJsonUnknownHandleMapping;
-import com.moviejukebox.allocine.model.Person;
 import com.moviejukebox.allocine.tools.HtmlTools;
 
 /**

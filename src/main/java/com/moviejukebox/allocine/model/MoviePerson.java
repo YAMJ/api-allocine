@@ -20,12 +20,12 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
 /**
- *  This is the Person Search bean for the api.allocine.fr search
+ * This is the Person Search bean for the api.allocine.fr search
  *
- *  @author modmax
+ * @author modmax
  */
 public class MoviePerson {
 
@@ -34,7 +34,7 @@ public class MoviePerson {
     private String role;
     private String photoURL;
     private boolean isLeadActor = false;
-    
+
     public long getCode() {
         return code;
     }

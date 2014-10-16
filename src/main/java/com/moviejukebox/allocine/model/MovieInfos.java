@@ -20,11 +20,9 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine;
+package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moviejukebox.allocine.model.Certificate;
-import com.moviejukebox.allocine.model.Movie;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
