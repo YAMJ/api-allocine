@@ -41,9 +41,10 @@ public class AllocineApiTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        // This must be the first statement in the setUpClass method
+        TestLogger.Configure();
         DefaultPoolingHttpClient httpClient = new DefaultPoolingHttpClient();
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
-        TestLogger.Configure();
     }
 
     @Test
