@@ -22,19 +22,21 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.model.MovieInfos;
-import com.moviejukebox.allocine.model.TvSeriesInfos;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.model.EpisodeInfos;
-import com.moviejukebox.allocine.model.TvSeasonInfos;
+import com.moviejukebox.allocine.model.MovieInfos;
 import com.moviejukebox.allocine.model.PersonInfos;
 import com.moviejukebox.allocine.model.Search;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.moviejukebox.allocine.model.TvSeasonInfos;
+import com.moviejukebox.allocine.model.TvSeriesInfos;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import com.moviejukebox.allocine.tools.WebBrowser;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -57,7 +59,7 @@ public class AllocineApi {
     private static final Logger LOG = LoggerFactory.getLogger(AllocineApi.class);
 
     // Constants
-    private static final String ERROR_FAILED_CONVERT_URL = "Failed to convert '{}' to an URL, error: {}";
+    private static final String ERROR_FAILED_TO_CONVERT_URL = "Failed to convert URL";
     private static final String LITERAL_LARGE = "large";
     private static final String LITERAL_SYNOPSIS = "synopsis,synopsisshort";
     // Methods
@@ -124,7 +126,7 @@ public class AllocineApi {
         }
     }
 
-    private <T> T readJsonObject(URL url, Class<T> object) throws Exception {
+    private <T> T readJsonObject(URL url, Class<T> object) throws AllocineException {
         if (httpClient == null) {
             URLConnection connection = null;
             InputStream inputStream = null;
@@ -132,6 +134,8 @@ public class AllocineApi {
                 connection = WebBrowser.openProxiedConnection(url);
                 inputStream = connection.getInputStream();
                 return mapper.readValue(inputStream, object);
+            } catch (IOException ex) {
+                throw new AllocineException(AllocineException.AllocineExceptionType.UNKNOWN_CAUSE, "Failed to read JSON object", url, ex);
             } finally {
                 if (inputStream != null) {
                     try {
@@ -150,14 +154,20 @@ public class AllocineApi {
                 }
             }
         } else {
-            HttpGet httpGet = new HttpGet(url.toURI());
-            httpGet.addHeader("accept", "application/json");
-            httpGet.setHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
-            return mapper.readValue(this.httpClient.requestContent(httpGet, charset), object);
+            try {
+                HttpGet httpGet = new HttpGet(url.toURI());
+                httpGet.addHeader("accept", "application/json");
+                httpGet.setHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
+                return mapper.readValue(this.httpClient.requestContent(httpGet, charset), object);
+            } catch (IOException ex) {
+                throw new AllocineException(AllocineException.AllocineExceptionType.MAPPING_FAILED, "Failed to convert JSON object", url, ex);
+            } catch (URISyntaxException ex) {
+                throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, "Failed to convert JSON object", url, ex);
+            }
         }
     }
 
-    public Search searchMovies(String query) throws Exception {
+    public Search searchMovies(String query) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
@@ -168,17 +178,13 @@ public class AllocineApi {
         Search search;
         try {
             search = this.readJsonObject(new URL(url), Search.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
-        } catch (Exception error) {
-            LOG.error("Failed search for tv series: " + query);
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return search;
     }
 
-    public Search searchTvSeries(String query) throws Exception {
+    public Search searchTvSeries(String query) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
@@ -188,15 +194,14 @@ public class AllocineApi {
         Search search;
         try {
             search = this.readJsonObject(new URL(url), Search.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return search;
     }
 
-    public Search searchPersons(String query) throws Exception {
+    public Search searchPersons(String query) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
@@ -206,15 +211,14 @@ public class AllocineApi {
         Search search;
         try {
             search = this.readJsonObject(new URL(url), Search.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return search;
     }
 
-    public MovieInfos getMovieInfos(String allocineId) throws Exception {
+    public MovieInfos getMovieInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_CODE, allocineId);
         params.put(PARAM_PROFILE, LITERAL_LARGE);
@@ -225,15 +229,14 @@ public class AllocineApi {
         MovieInfos movieInfos;
         try {
             movieInfos = this.readJsonObject(new URL(url), MovieInfos.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return movieInfos;
     }
 
-    public TvSeriesInfos getTvSeriesInfos(String allocineId) throws Exception {
+    public TvSeriesInfos getTvSeriesInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_MEDIAFMT, "mp4-lc");
@@ -246,15 +249,14 @@ public class AllocineApi {
         TvSeriesInfos tvSeriesInfo;
         try {
             tvSeriesInfo = this.readJsonObject(new URL(url), TvSeriesInfos.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return tvSeriesInfo;
     }
 
-    public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws Exception {
+    public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_MEDIAFMT, "mp4-lc");
@@ -267,15 +269,14 @@ public class AllocineApi {
         TvSeasonInfos tvSeasonInfos;
         try {
             tvSeasonInfos = this.readJsonObject(new URL(url), TvSeasonInfos.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return tvSeasonInfos;
     }
 
-    public PersonInfos getPersonInfos(String allocineId) throws Exception {
+    public PersonInfos getPersonInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
@@ -286,14 +287,13 @@ public class AllocineApi {
         PersonInfos personInfos;
         try {
             personInfos = this.readJsonObject(new URL(url), PersonInfos.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return personInfos;
     }
 
-    public EpisodeInfos getEpisodeInfos(String allocineId) throws Exception {
+    public EpisodeInfos getEpisodeInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
@@ -304,9 +304,8 @@ public class AllocineApi {
         EpisodeInfos episodeInfos;
         try {
             episodeInfos = this.readJsonObject(new URL(url), EpisodeInfos.class);
-        } catch (MalformedURLException error) {
-            LOG.warn(ERROR_FAILED_CONVERT_URL, url, error.getMessage());
-            throw error;
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return episodeInfos;
     }
