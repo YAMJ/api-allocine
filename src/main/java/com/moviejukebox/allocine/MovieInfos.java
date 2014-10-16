@@ -108,7 +108,8 @@ public class MovieInfos extends AbstractBaseInfos {
     }
 
     public String getCertification() {
-        String certification = "All"; // Default value
+        // Default value
+        String certification = "All";
         if (movie != null && movie.getMovieCertificate() != null) {
             Certificate certificate = movie.getMovieCertificate().getCertificate();
             if (certificate != null) {

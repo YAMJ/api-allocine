@@ -40,8 +40,8 @@ public final class ApiUrl {
     private static final String API_URL = "http://api.allocine.fr/rest/v3/";
     private static final String PARAM_PARTNER = "?partner=";
     // Keys
-    private String partnerKey;
-    private String secretKey;
+    private final String partnerKey;
+    private final String secretKey;
     // Constants
     private static final String URL_ENCODING = "UTF-8";
     private static final String DATE_FORMAT = "yyyyMMdd";
@@ -65,7 +65,8 @@ public final class ApiUrl {
         String paramUrl = buildParams(params);
 
         StringBuilder key = new StringBuilder(secretKey);
-        key.append(paramUrl.substring(1));  // Don't add the "?" at the start of the params
+        // Don't add the "?" at the start of the params
+        key.append(paramUrl.substring(1));
         key.append(PREFIX_SED);
         key.append(sed);
         byte[] sha1code = DigestUtils.sha1(key.toString());
