@@ -37,9 +37,11 @@ import java.util.Set;
 @SuppressWarnings("serial")
 public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping {
 
+    // Constants
     private static final double PERCENT_OUT_OF_5 = 5.0;
     private static final int PERCENT_OUT_OF_100 = 100;
 
+    // Data sets
     protected Set<MoviePerson> actors;
     protected Set<MoviePerson> writers;
     protected Set<MoviePerson> directors;
@@ -48,45 +50,27 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     private Set<String> posterURLS;
 
     protected int getCode(AbstractBaseMapping base) {
-        if (base == null) {
-            return -1;
-        }
-        return base.getCode();
+        return base == null ? -1 : base.getCode();
     }
 
     protected String getTitle(AbstractBaseMapping base) {
-        if (base == null) {
-            return null;
-        }
-        return base.getTitle();
+        return base == null ? null : base.getTitle();
     }
 
     protected String getOriginalTitle(AbstractBaseMapping base) {
-        if (base == null) {
-            return null;
-        }
-        return base.getOriginalTitle();
+        return base == null ? null : base.getOriginalTitle();
     }
 
     protected String getSynopsis(AbstractBaseMapping base) {
-        if (base == null) {
-            return null;
-        }
-        return HtmlTools.removeLineFeeds(base.getSynopsis());
+        return base == null ? null : HtmlTools.removeLineFeeds(base.getSynopsis());
     }
 
     protected String getSynopsisShort(AbstractBaseMapping base) {
-        if (base == null) {
-            return null;
-        }
-        return HtmlTools.removeLineFeeds(base.getSynopsisShort());
+        return base == null ? null : HtmlTools.removeLineFeeds(base.getSynopsisShort());
     }
 
     protected int getUserRating(AbstractBaseMapping base) {
-        if (base == null) {
-            return -1;
-        }
-        if (base.getStatistics() == null) {
+        if (base == null || base.getStatistics() == null) {
             return -1;
         }
 
@@ -95,10 +79,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     }
 
     protected int getPressRating(AbstractBaseMapping base) {
-        if (base == null) {
-            return -1;
-        }
-        if (base.getStatistics() == null) {
+        if (base == null || base.getStatistics() == null) {
             return -1;
         }
 
@@ -147,37 +128,66 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
             directors = new LinkedHashSet<MoviePerson>();
         }
 
-        if (base != null && base.getCastMember() != null) {
-            for (CastMember member : base.getCastMember()) {
-                if (member.isActor()) {
-                    MoviePerson person = new MoviePerson();
-                    person.setCode(member.getShortPerson().getCode());
-                    person.setName(member.getShortPerson().getName());
-                    person.setRole(member.getRole());
-                    person.setLeadActor(member.isLeadActor());
-                    if (member.getPicture() != null) {
-                        person.setPhotoURL(member.getPicture().getHref());
-                    }
-                    actors.add(person);
-                } else if (member.isDirector()) {
-                    MoviePerson person = new MoviePerson();
-                    person.setCode(member.getShortPerson().getCode());
-                    person.setName(member.getShortPerson().getName());
-                    if (member.getPicture() != null) {
-                        person.setPhotoURL(member.getPicture().getHref());
-                    }
-                    directors.add(person);
-                } else if (member.isWriter()) {
-                    MoviePerson person = new MoviePerson();
-                    person.setCode(member.getShortPerson().getCode());
-                    person.setName(member.getShortPerson().getName());
-                    if (member.getPicture() != null) {
-                        person.setPhotoURL(member.getPicture().getHref());
-                    }
-                    writers.add(person);
-                }
+        if (base == null || base.getCastMember() == null) {
+            return;
+        }
+
+        for (CastMember member : base.getCastMember()) {
+            if (member.isActor()) {
+                addActor(member);
+            } else if (member.isDirector()) {
+                addDirector(member);
+            } else if (member.isWriter()) {
+                addWriter(member);
             }
         }
+    }
+
+    /**
+     * Add an cast member to the actor list
+     *
+     * @param member
+     */
+    private void addActor(CastMember member) {
+        MoviePerson person = new MoviePerson();
+        person.setCode(member.getShortPerson().getCode());
+        person.setName(member.getShortPerson().getName());
+        person.setRole(member.getRole());
+        person.setLeadActor(member.isLeadActor());
+        if (member.getPicture() != null) {
+            person.setPhotoURL(member.getPicture().getHref());
+        }
+        actors.add(person);
+    }
+
+    /**
+     * Add an cast member to the writer list
+     *
+     * @param member
+     */
+    private void addWriter(CastMember member) {
+        MoviePerson person = new MoviePerson();
+        person.setCode(member.getShortPerson().getCode());
+        person.setName(member.getShortPerson().getName());
+        if (member.getPicture() != null) {
+            person.setPhotoURL(member.getPicture().getHref());
+        }
+        writers.add(person);
+    }
+
+    /**
+     * Add an cast member to the director list
+     *
+     * @param member
+     */
+    private void addDirector(CastMember member) {
+        MoviePerson person = new MoviePerson();
+        person.setCode(member.getShortPerson().getCode());
+        person.setName(member.getShortPerson().getName());
+        if (member.getPicture() != null) {
+            person.setPhotoURL(member.getPicture().getHref());
+        }
+        directors.add(person);
     }
 
     private void parseMediaList(AbstractBaseMapping base) {
