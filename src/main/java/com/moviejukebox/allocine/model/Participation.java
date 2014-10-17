@@ -25,49 +25,49 @@ package com.moviejukebox.allocine.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-@JsonRootName("release")
-public class Release extends AbstractJsonUnknownHandleMapping {
+@JsonRootName("participation")
+public class Participation extends AbstractJsonUnknownHandleMapping {
 
-    private static final long serialVersionUID = -1616200515264506685L;
+    private static final long serialVersionUID = 8804738778672146178L;
     
-    @JsonProperty("releaseDate")
-    private String releaseDate;
-    @JsonProperty("country")
-    private Country country;
-    @JsonProperty("distributor")
-    private Distributor distributor;
-    @JsonProperty("releaseState")
-    private ReleaseState releaseState;
-
-    public String getReleaseDate() {
-        return releaseDate;
+    @JsonProperty("movie")
+    private Movie movie;
+    @JsonProperty("tvseries")
+    private TvSeries tvSeries;
+    @JsonProperty("role")
+    private String role;
+    @JsonProperty("activity")
+    private Activity activity;
+    
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public Country getCountry() {
-        return country;
+    public TvSeries getTvSeries() {
+        return tvSeries;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setTvSeries(TvSeries tvSeries) {
+        this.tvSeries = tvSeries;
+    }
+    
+    public String getRole() {
+        return role;
     }
 
-    public Distributor getDistributor() {
-        return distributor;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public void setDistributor(Distributor distributor) {
-        this.distributor = distributor;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public ReleaseState getReleaseState() {
-        return releaseState;
-    }
-
-    public void setReleaseState(ReleaseState releaseState) {
-        this.releaseState = releaseState;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

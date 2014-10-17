@@ -25,14 +25,10 @@ package com.moviejukebox.allocine.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-@JsonRootName("activity")
-public class Activity extends AbstractJsonMapping {
+@JsonRootName("releaseState")
+public class ReleaseState extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 1739586583915230L;
-    private static final long ACTOR_ACTIVITY_CODE    = 8001;
-    private static final long DIRECTOR_ACTIVITY_CODE = 8002;
-    private static final long WRITER_ACTIVITY_CODE   = 8004;
-    private static final long SCRIPT_ACTIVITY_CODE   = 8043;
+    private static final long serialVersionUID = 1927500318213424040L;
     
     @JsonProperty("code")
     private long code;
@@ -42,28 +38,13 @@ public class Activity extends AbstractJsonMapping {
     public long getCode() {
         return code;
     }
-    
     public void setCode(long code) {
         this.code = code;
     }
-    
     public String getName() {
         return name;
     }
-    
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isActor() {
-        return (this.code == ACTOR_ACTIVITY_CODE); 
-    }
-
-    public boolean isDirector() {
-        return (this.code == DIRECTOR_ACTIVITY_CODE);
-    }
-
-    public boolean isWriter() {
-        return (this.code == WRITER_ACTIVITY_CODE || this.code == SCRIPT_ACTIVITY_CODE);
     }
 }

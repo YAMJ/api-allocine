@@ -22,16 +22,11 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.model.TvSeriesInfos;
-import com.moviejukebox.allocine.model.TvSeasonInfos;
-import com.moviejukebox.allocine.model.MovieInfos;
-import com.moviejukebox.allocine.model.EpisodeInfos;
-import com.moviejukebox.allocine.model.Search;
-import com.moviejukebox.allocine.model.PersonInfos;
-import com.moviejukebox.allocine.model.Movie;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import com.moviejukebox.allocine.model.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -173,6 +168,19 @@ public class AllocineApiTest {
         assertEquals("1976-08-02", personInfos.getBirthDate());
     }
 
+    @Test
+    public void testGetPersonFilmography() throws Exception {
+        LOG.info("testGetPersonInfos");
+        FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
+        for (Participance p : filmographyInfos.getParticipances()) {
+            if (p.isTvShow()) {
+                System.err.println("TV SHOW ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYearStart() + " - " + p.getYearEnd());
+            } else {
+                System.err.println("MOVIE ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYear() + " (" + p.getReleaseDate() + ")");
+            }
+        }
+    }
+    
     @Test
     public void testGetEpisodeInfos() throws Exception {
         LOG.info("testGetEpisodeInfos");

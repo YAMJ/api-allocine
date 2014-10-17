@@ -29,10 +29,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class CastMember extends AbstractJsonUnknownHandleMapping {
 
     private static final long serialVersionUID = 3303327060524088408L;
-    private static final long ACTOR_ACTIVITY_CODE = 8001;
-    private static final long DIRECTOR_ACTIVITY_CODE = 8002;
-    private static final long WRITER_ACTIVITY_CODE = 8004;
-    private static final long SCRIPT_ACTIVITY_CODE = 8043;
 
     @JsonProperty("person")
     private ShortPerson shortPerson;
@@ -87,22 +83,21 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
 
     public boolean isActor() {
         if (this.activity != null) {
-            return this.activity.getCode() == ACTOR_ACTIVITY_CODE;
+            return this.activity.isActor();
         }
         return false;
     }
 
     public boolean isDirector() {
         if (this.activity != null) {
-            return this.activity.getCode() == DIRECTOR_ACTIVITY_CODE;
+            return this.activity.isDirector();
         }
         return false;
     }
 
     public boolean isWriter() {
         if (this.activity != null) {
-            return this.activity.getCode() == WRITER_ACTIVITY_CODE
-                    || this.activity.getCode() == SCRIPT_ACTIVITY_CODE;
+            return this.activity.isWriter();
         }
         return false;
     }

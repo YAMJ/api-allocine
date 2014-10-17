@@ -23,22 +23,12 @@
 package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moviejukebox.allocine.model.EpisodeInfos;
-import com.moviejukebox.allocine.model.MovieInfos;
-import com.moviejukebox.allocine.model.PersonInfos;
-import com.moviejukebox.allocine.model.Search;
-import com.moviejukebox.allocine.model.TvSeasonInfos;
-import com.moviejukebox.allocine.model.TvSeriesInfos;
+import com.moviejukebox.allocine.model.*;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -69,6 +59,7 @@ public class AllocineApi {
     private static final String METHOD_SEASON = "season";
     private static final String METHOD_EPISODE = "episode";
     private static final String METHOD_PERSON = "person";
+    private static final String METHOD_FILMOGRAPHY = "filmography";
     // Filters
     private static final String FILTER_MOVIE = "movie";
     private static final String FILTER_TVSERIES = "tvseries";
@@ -293,6 +284,23 @@ public class AllocineApi {
         return personInfos;
     }
 
+    public FilmographyInfos getPersonFilmography(String allocineId) throws AllocineException {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put(PARAM_PROFILE, LITERAL_LARGE);
+        params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
+        params.put(PARAM_CODE, allocineId);
+        params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
+        String url = apiUrl.generateUrl(METHOD_FILMOGRAPHY, params);
+
+        FilmographyInfos filmographyInfos;
+        try {
+            filmographyInfos = this.readJsonObject(new URL(url), FilmographyInfos.class);
+        } catch (MalformedURLException ex) {
+            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+        }
+        return filmographyInfos;
+    }
+    
     public EpisodeInfos getEpisodeInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);

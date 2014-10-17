@@ -22,6 +22,9 @@
  */
 package com.moviejukebox.allocine.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -52,7 +55,9 @@ public class Person extends AbstractJsonUnknownHandleMapping {
     private String deathPlace;
     @JsonProperty("picture")
     private Picture picture;
-    
+    @JsonProperty("participation")
+    private List<Participation> participations = new ArrayList<Participation>();
+
     public int getCode() {
         return code;
     }
@@ -139,5 +144,13 @@ public class Person extends AbstractJsonUnknownHandleMapping {
 
     public void setPicture(Picture picture) {
         this.picture = picture;
+    }
+
+    public List<Participation> getParticipations() {
+        return participations;
+    }
+
+    public void setParticipations(List<Participation> participations) {
+        this.participations = participations;
     }
 }
