@@ -100,7 +100,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                     }
                     
                     Participance participance = new Participance((p.getTvSeries() != null));
-                    participance.setRole(participance.getRole());
+                    participance.setRole(p.getRole());
                     participance.setActor(p.getActivity().isActor());
                     participance.setDirector(p.getActivity().isDirector());
                     participance.setWriter(p.getActivity().isWriter());
