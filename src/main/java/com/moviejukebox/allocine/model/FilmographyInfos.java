@@ -125,6 +125,9 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                         participance.setYear(p.getMovie().getProductionYear());
                         if (p.getMovie().getRelease() != null) {
                             participance.setReleaseDate(p.getMovie().getRelease().getReleaseDate());
+                            if (p.getMovie().getRelease().getReleaseState() != null) {
+                                participance.setReleaseState(p.getMovie().getRelease().getReleaseState().getName());
+                            }
                         }
                     }
                     

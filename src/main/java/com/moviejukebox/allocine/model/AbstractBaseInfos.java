@@ -39,6 +39,10 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     protected Set<MoviePerson> actors;
     protected Set<MoviePerson> writers;
     protected Set<MoviePerson> directors;
+    protected Set<MoviePerson> camera;
+    protected Set<MoviePerson> producers;
+    protected Set<MoviePerson> crew;
+    
     private Set<String> genres;
     private Set<String> nationalities;
     private Set<String> posterURLS;
@@ -121,6 +125,15 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         if (directors == null) {
             directors = new LinkedHashSet<MoviePerson>();
         }
+        if (camera == null) {
+            camera = new LinkedHashSet<MoviePerson>();
+        }
+        if (producers == null) {
+            producers = new LinkedHashSet<MoviePerson>();
+        }
+        if (crew == null) {
+            crew = new LinkedHashSet<MoviePerson>();
+        }
 
         if (base == null || base.getCastMember() == null) {
             return;
@@ -130,9 +143,15 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
             if (member.isActor()) {
                 addActor(member);
             } else if (member.isDirector()) {
-                addDirector(member);
+                addMember(member, this.directors);
             } else if (member.isWriter()) {
-                addWriter(member);
+                addMember(member, this.writers);
+            } else if (member.isCamera()) {
+                addMember(member, this.camera);
+            } else if (member.isProducer()) {
+                addMember(member, this.producers);
+            } else if (member.isCrew()) {
+                addMember(member, this.crew);
             }
         }
     }
@@ -159,29 +178,14 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
      *
      * @param member
      */
-    private void addWriter(CastMember member) {
+    private void addMember(CastMember member, Set<MoviePerson> persons) {
         MoviePerson person = new MoviePerson();
         person.setCode(member.getShortPerson().getCode());
         person.setName(member.getShortPerson().getName());
         if (member.getPicture() != null) {
             person.setPhotoURL(member.getPicture().getHref());
         }
-        writers.add(person);
-    }
-
-    /**
-     * Add an cast member to the director list
-     *
-     * @param member
-     */
-    private void addDirector(CastMember member) {
-        MoviePerson person = new MoviePerson();
-        person.setCode(member.getShortPerson().getCode());
-        person.setName(member.getShortPerson().getName());
-        if (member.getPicture() != null) {
-            person.setPhotoURL(member.getPicture().getHref());
-        }
-        directors.add(person);
+        persons.add(person);
     }
 
     private void parseMediaList(AbstractBaseMapping base) {
@@ -218,5 +222,18 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
             return null;
         }
         return base.getRelease().getReleaseDate();
+    }
+
+    protected String getReleaseState(AbstractBaseMapping base) {
+        if (base == null) {
+            return null;
+        }
+        if (base.getRelease() == null) {
+            return null;
+        }
+        if (base.getRelease().getReleaseState() == null) {
+            return null;
+        }
+        return base.getRelease().getReleaseState().getName();
     }
 }

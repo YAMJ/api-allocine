@@ -124,4 +124,25 @@ public class TvSeasonInfos extends AbstractBaseInfos {
         }
         return writers;
     }
+
+    public Set<MoviePerson> getCamera() {
+        if (camera == null) {
+            parseCasting(season);
+        }
+        return camera;
+    }
+
+    public Set<MoviePerson> getProducers() {
+        if (producers == null) {
+            parseCasting(season);
+        }
+        return producers;
+    }
+
+    public Set<MoviePerson> getCrew() {
+        if (crew == null) {
+            parseCasting(season);
+        }
+        return crew;
+    }
 }

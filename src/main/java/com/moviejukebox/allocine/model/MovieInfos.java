@@ -89,6 +89,10 @@ public class MovieInfos extends AbstractBaseInfos {
         return this.getReleaseDate(movie);
     }
 
+    public String getReleaseState() {
+        return this.getReleaseState(movie);
+    }
+
     public String getSynopsis() {
         return this.getSynopsis(movie);
     }
@@ -159,6 +163,27 @@ public class MovieInfos extends AbstractBaseInfos {
         return writers;
     }
 
+    public Set<MoviePerson> getCamera() {
+        if (camera == null) {
+            parseCasting(movie);
+        }
+        return camera;
+    }
+
+    public Set<MoviePerson> getProducers() {
+        if (producers == null) {
+            parseCasting(movie);
+        }
+        return producers;
+    }
+
+    public Set<MoviePerson> getCrew() {
+        if (crew == null) {
+            parseCasting(movie);
+        }
+        return crew;
+    }
+    
     public Set<String> getPosterUrls() {
         return this.getPosterUrls(movie);
     }

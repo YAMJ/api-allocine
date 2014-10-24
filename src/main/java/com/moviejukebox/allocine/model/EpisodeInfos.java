@@ -123,4 +123,25 @@ public class EpisodeInfos extends AbstractBaseInfos {
         }
         return writers;
     }
+    
+    public Set<MoviePerson> getCamera() {
+        if (camera == null) {
+            parseCasting(episode);
+        }
+        return camera;
+    }
+
+    public Set<MoviePerson> getProducers() {
+        if (producers == null) {
+            parseCasting(episode);
+        }
+        return producers;
+    }
+
+    public Set<MoviePerson> getCrew() {
+        if (crew == null) {
+            parseCasting(episode);
+        }
+        return crew;
+    }
 }

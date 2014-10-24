@@ -101,4 +101,25 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
         }
         return false;
     }
+    
+    public boolean isCamera() {
+        if (this.activity != null) {
+            return this.activity.isCamera();
+        }
+        return false;
+    }
+
+    public boolean isProducer() {
+        if (this.activity != null) {
+            return this.activity.isProducer();
+        }
+        return false;
+    }
+
+    public boolean isCrew() {
+        if (this.activity != null) {
+            return this.activity.isCrew();
+        }
+        return false;
+    }
 }
