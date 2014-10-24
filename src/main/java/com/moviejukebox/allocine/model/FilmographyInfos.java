@@ -22,6 +22,8 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.moviejukebox.allocine.tools.HtmlTools;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,7 +126,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                         participance.setCode(p.getMovie().getCode());
                         participance.setTitle(p.getMovie().getTitle());
                         participance.setOriginalTitle(p.getMovie().getOriginalTitle());
-                        participance.setSynopsisShort(p.getMovie().getSynopsisShort());
+                        participance.setSynopsisShort(HtmlTools.removeLineFeeds(p.getMovie().getSynopsisShort()));
                         participance.setYear(p.getMovie().getProductionYear());
                         if (p.getMovie().getRelease() != null) {
                             participance.setReleaseDate(p.getMovie().getRelease().getReleaseDate());
