@@ -105,37 +105,26 @@ public class TvSeasonInfos extends AbstractBaseInfos {
     }
 
     public Set<MoviePerson> getActors() {
-        if (actors == null) {
-            parseCasting(season);
-        }
-        return actors;
+        return this.getActors(season);
     }
 
     public Set<MoviePerson> getDirectors() {
-        if (directors == null) {
-            parseCasting(season);
-        }
-        return directors;
+        return this.getDirectors(season);
     }
 
     public Set<MoviePerson> getWriters() {
-        if (writers == null) {
-            parseCasting(season);
-        }
-        return writers;
+        return this.getWriters(season);
     }
-
+    
     public Set<MoviePerson> getCamera() {
-        if (camera == null) {
-            parseCasting(season);
-        }
-        return camera;
+        return this.getCamera(season);
     }
 
     public Set<MoviePerson> getProducers() {
-        if (producers == null) {
-            parseCasting(season);
-        }
-        return producers;
+        return this.getProducers(season);
+    }
+    
+    public Set<String> getPosterUrls() {
+        return this.getPosterUrls(season);
     }
 }

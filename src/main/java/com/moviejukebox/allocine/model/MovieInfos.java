@@ -143,38 +143,23 @@ public class MovieInfos extends AbstractBaseInfos {
     }
 
     public Set<MoviePerson> getActors() {
-        if (actors == null) {
-            parseCasting(movie);
-        }
-        return actors;
+        return this.getActors(movie);
     }
 
     public Set<MoviePerson> getDirectors() {
-        if (directors == null) {
-            parseCasting(movie);
-        }
-        return directors;
+        return this.getDirectors(movie);
     }
 
     public Set<MoviePerson> getWriters() {
-        if (writers == null) {
-            parseCasting(movie);
-        }
-        return writers;
+        return this.getWriters(movie);
     }
-
+    
     public Set<MoviePerson> getCamera() {
-        if (camera == null) {
-            parseCasting(movie);
-        }
-        return camera;
+        return this.getCamera(movie);
     }
 
     public Set<MoviePerson> getProducers() {
-        if (producers == null) {
-            parseCasting(movie);
-        }
-        return producers;
+        return this.getProducers(movie);
     }
     
     public Set<String> getPosterUrls() {

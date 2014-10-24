@@ -35,13 +35,6 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     private static final double PERCENT_OUT_OF_5 = 5.0;
     private static final int PERCENT_OUT_OF_100 = 100;
 
-    // Data sets
-    protected Set<MoviePerson> actors;
-    protected Set<MoviePerson> writers;
-    protected Set<MoviePerson> directors;
-    protected Set<MoviePerson> camera;
-    protected Set<MoviePerson> producers;
-    
     private Set<String> genres;
     private Set<String> nationalities;
     private Set<String> posterURLS;
@@ -114,63 +107,79 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return nationalities;
     }
 
-    protected void parseCasting(AbstractBaseMapping base) {
-        if (actors == null) {
-            actors = new LinkedHashSet<MoviePerson>();
-        }
-        if (writers == null) {
-            writers = new LinkedHashSet<MoviePerson>();
-        }
-        if (directors == null) {
-            directors = new LinkedHashSet<MoviePerson>();
-        }
-        if (camera == null) {
-            camera = new LinkedHashSet<MoviePerson>();
-        }
-        if (producers == null) {
-            producers = new LinkedHashSet<MoviePerson>();
-        }
-
-        if (base == null || base.getCastMember() == null) {
-            return;
-        }
-
-        for (CastMember member : base.getCastMember()) {
-            if (member.isActor()) {
-                addActor(member);
-            } else if (member.isDirector()) {
-                addMember(member, this.directors);
-            } else if (member.isWriter()) {
-                addMember(member, this.writers);
-            } else if (member.isCamera()) {
-                addMember(member, this.camera);
-            } else if (member.isProducer()) {
-                addMember(member, this.producers);
+    protected Set<MoviePerson> getActors(AbstractBaseMapping base) {
+        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+        if (base != null && base.getCastMember() != null) {
+            for (CastMember member : base.getCastMember()) {
+                if (member.isActor()) {
+                    MoviePerson person = new MoviePerson();
+                    person.setCode(member.getShortPerson().getCode());
+                    person.setName(member.getShortPerson().getName());
+                    person.setRole(member.getRole());
+                    person.setLeadActor(member.isLeadActor());
+                    if (member.getPicture() != null) {
+                        person.setPhotoURL(member.getPicture().getHref());
+                    }
+                    set.add(person);
+                }
             }
         }
+        return set;
     }
 
-    /**
-     * Add an cast member to the actor list
-     *
-     * @param member
-     */
-    private void addActor(CastMember member) {
-        MoviePerson person = new MoviePerson();
-        person.setCode(member.getShortPerson().getCode());
-        person.setName(member.getShortPerson().getName());
-        person.setRole(member.getRole());
-        person.setLeadActor(member.isLeadActor());
-        if (member.getPicture() != null) {
-            person.setPhotoURL(member.getPicture().getHref());
+    protected Set<MoviePerson> getDirectors(AbstractBaseMapping base) {
+        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+        if (base != null && base.getCastMember() != null) {
+            for (CastMember member : base.getCastMember()) {
+                if (member.isDirector()) {
+                    addMember(member, set);
+                }
+            }
         }
-        actors.add(person);
+        return set;
+    }
+
+    protected Set<MoviePerson> getWriters(AbstractBaseMapping base) {
+        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+        if (base != null && base.getCastMember() != null) {
+            for (CastMember member : base.getCastMember()) {
+                if (member.isWriter()) {
+                    addMember(member, set);
+                }
+            }
+        }
+        return set;
+    }
+
+    protected Set<MoviePerson> getCamera(AbstractBaseMapping base) {
+        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+        if (base != null && base.getCastMember() != null) {
+            for (CastMember member : base.getCastMember()) {
+                if (member.isCamera()) {
+                    addMember(member, set);
+                }
+            }
+        }
+        return set;
+    }
+
+    protected Set<MoviePerson> getProducers(AbstractBaseMapping base) {
+        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+        if (base != null && base.getCastMember() != null) {
+            for (CastMember member : base.getCastMember()) {
+                if (member.isProducer()) {
+                    addMember(member, set);
+                }
+            }
+        }
+        return set;
     }
 
     /**
-     * Add an cast member to the writer list
+     * Add an cast member to a persons list
      *
      * @param member
+     * @param persons
      */
     private void addMember(CastMember member, Set<MoviePerson> persons) {
         MoviePerson person = new MoviePerson();
