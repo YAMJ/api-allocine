@@ -34,7 +34,6 @@ public class Participance {
     private boolean writer = false;
     private boolean camera = false;
     private boolean producer = false;
-    private boolean crew = false;
     
     // according to movie
     private int year = -1;
@@ -113,14 +112,6 @@ public class Participance {
 
     public void setProducer(boolean producer) {
         this.producer = producer;
-    }
-
-    public boolean isCrew() {
-        return crew;
-    }
-
-    public void setCrew(boolean crew) {
-        this.crew = crew;
     }
 
     public int getYear() {

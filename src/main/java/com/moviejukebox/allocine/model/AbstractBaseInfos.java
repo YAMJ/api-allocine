@@ -41,7 +41,6 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     protected Set<MoviePerson> directors;
     protected Set<MoviePerson> camera;
     protected Set<MoviePerson> producers;
-    protected Set<MoviePerson> crew;
     
     private Set<String> genres;
     private Set<String> nationalities;
@@ -131,9 +130,6 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         if (producers == null) {
             producers = new LinkedHashSet<MoviePerson>();
         }
-        if (crew == null) {
-            crew = new LinkedHashSet<MoviePerson>();
-        }
 
         if (base == null || base.getCastMember() == null) {
             return;
@@ -150,8 +146,6 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
                 addMember(member, this.camera);
             } else if (member.isProducer()) {
                 addMember(member, this.producers);
-            } else if (member.isCrew()) {
-                addMember(member, this.crew);
             }
         }
     }

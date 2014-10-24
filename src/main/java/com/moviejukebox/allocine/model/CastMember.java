@@ -115,11 +115,4 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
         }
         return false;
     }
-
-    public boolean isCrew() {
-        if (this.activity != null) {
-            return this.activity.isCrew();
-        }
-        return false;
-    }
 }

@@ -164,13 +164,6 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         }
         return producers;
     }
-
-    public Set<MoviePerson> getCrew() {
-        if (crew == null) {
-            parseCasting(tvSeries);
-        }
-        return crew;
-    }
     
     public Set<String> getPosterUrls() {
         return this.getPosterUrls(tvSeries);

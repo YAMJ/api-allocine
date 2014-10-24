@@ -82,6 +82,9 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                         // activity must be given
                         continue;
                     }
+                    if (!p.getActivity().isKnownActivity()) {
+                        // activity must be known
+                    }
                     if (p.getMovie() == null && p.getTvSeries() == null) {
                         // movie or TV series must be given
                         continue;
@@ -102,7 +105,6 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                     participance.setWriter(p.getActivity().isWriter());
                     participance.setCamera(p.getActivity().isCamera());
                     participance.setProducer(p.getActivity().isProducer());
-                    participance.setCrew(p.getActivity().isCrew());
 
                     if (p.getTvSeries() != null) {
                         participance.setCode(p.getTvSeries().getCode());

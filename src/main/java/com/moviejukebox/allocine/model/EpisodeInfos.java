@@ -137,11 +137,4 @@ public class EpisodeInfos extends AbstractBaseInfos {
         }
         return producers;
     }
-
-    public Set<MoviePerson> getCrew() {
-        if (crew == null) {
-            parseCasting(episode);
-        }
-        return crew;
-    }
 }

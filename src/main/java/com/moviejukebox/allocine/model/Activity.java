@@ -85,7 +85,7 @@ public class Activity extends AbstractJsonMapping {
                         || this.code == ASSOCIATE_PRODUCER_CODE);
     }
     
-    public boolean isCrew() {
-        return (!isActor() && !isDirector() && !isWriter() && !isCamera() && !isProducer());
+    public boolean isKnownActivity() {
+        return (isActor() || isDirector() || isWriter() || isCamera() || isProducer());
     }
 }
