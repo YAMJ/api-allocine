@@ -37,6 +37,8 @@ public class Activity extends AbstractJsonMapping {
     private static final long SCRIPT_CODE               = 8043;
     private static final long DELEGATE_PRODUCER_CODE    = 8061;
     private static final long EXECUTIVE_PRODUCER_CODE   = 8062;
+    private static final long COPRODUCER_CODE           = 8063;
+    private static final long ASSOCIATE_PRODUCER_CODE   = 8064;
     
     @JsonProperty("code")
     private long code;
@@ -76,7 +78,11 @@ public class Activity extends AbstractJsonMapping {
     }
 
     public boolean isProducer() {
-        return (this.code == PRODUCER_CODE || this.code == DELEGATE_PRODUCER_CODE || this.code == EXECUTIVE_PRODUCER_CODE);
+        return (this.code == PRODUCER_CODE
+                        || this.code == DELEGATE_PRODUCER_CODE
+                        || this.code == EXECUTIVE_PRODUCER_CODE
+                        || this.code == COPRODUCER_CODE
+                        || this.code == ASSOCIATE_PRODUCER_CODE);
     }
     
     public boolean isCrew() {
