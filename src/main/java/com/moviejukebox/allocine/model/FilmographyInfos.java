@@ -84,6 +84,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                     }
                     if (!p.getActivity().isKnownActivity()) {
                         // activity must be known
+                        continue;
                     }
                     if (p.getMovie() == null && p.getTvSeries() == null) {
                         // movie or TV series must be given
