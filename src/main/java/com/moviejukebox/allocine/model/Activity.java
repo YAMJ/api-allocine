@@ -29,10 +29,14 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Activity extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 1739586583915230L;
-    private static final long ACTOR_ACTIVITY_CODE    = 8001;
-    private static final long DIRECTOR_ACTIVITY_CODE = 8002;
-    private static final long WRITER_ACTIVITY_CODE   = 8004;
-    private static final long SCRIPT_ACTIVITY_CODE   = 8043;
+    private static final long ACTOR_CODE                = 8001;
+    private static final long DIRECTOR_CODE             = 8002;
+    private static final long WRITER_CODE               = 8004;
+    private static final long PRODUCER_CODE             = 8029;
+    private static final long CAMERA_CODE               = 8037;
+    private static final long SCRIPT_CODE               = 8043;
+    private static final long DELEGATE_PRODUCER_CODE    = 8061;
+    private static final long EXECUTIVE_PRODUCER_CODE   = 8062;
     
     @JsonProperty("code")
     private long code;
@@ -56,14 +60,26 @@ public class Activity extends AbstractJsonMapping {
     }
 
     public boolean isActor() {
-        return (this.code == ACTOR_ACTIVITY_CODE); 
+        return (this.code == ACTOR_CODE); 
     }
 
     public boolean isDirector() {
-        return (this.code == DIRECTOR_ACTIVITY_CODE);
+        return (this.code == DIRECTOR_CODE);
     }
 
     public boolean isWriter() {
-        return (this.code == WRITER_ACTIVITY_CODE || this.code == SCRIPT_ACTIVITY_CODE);
+        return (this.code == WRITER_CODE || this.code == SCRIPT_CODE);
+    }
+
+    public boolean isCamera() {
+        return (this.code == CAMERA_CODE);
+    }
+
+    public boolean isProducer() {
+        return (this.code == PRODUCER_CODE || this.code == DELEGATE_PRODUCER_CODE || this.code == EXECUTIVE_PRODUCER_CODE);
+    }
+    
+    public boolean isCrew() {
+        return (!isActor() && !isDirector() && !isWriter() && !isCamera() && !isProducer());
     }
 }

@@ -32,7 +32,10 @@ public class Participance {
     private boolean actor = false;
     private boolean director = false;
     private boolean writer = false;
-
+    private boolean camera = false;
+    private boolean producer = false;
+    private boolean crew = false;
+    
     // according to movie
     private int year = -1;
     // according to series
@@ -95,6 +98,30 @@ public class Participance {
         this.writer = writer;
     }
     
+    public boolean isCamera() {
+        return camera;
+    }
+
+    public void setCamera(boolean camera) {
+        this.camera = camera;
+    }
+
+    public boolean isProducer() {
+        return producer;
+    }
+
+    public void setProducer(boolean producer) {
+        this.producer = producer;
+    }
+
+    public boolean isCrew() {
+        return crew;
+    }
+
+    public void setCrew(boolean crew) {
+        this.crew = crew;
+    }
+
     public int getYear() {
         return year;
     }

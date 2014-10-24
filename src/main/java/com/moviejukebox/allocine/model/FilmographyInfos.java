@@ -82,10 +82,6 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                         // activity must be given
                         continue;
                     }
-                    if (!p.getActivity().isActor() && !p.getActivity().isDirector() && !p.getActivity().isWriter()) {
-                        // no valid activity
-                        continue;
-                    }
                     if (p.getMovie() == null && p.getTvSeries() == null) {
                         // movie or TV series must be given
                         continue;
@@ -104,6 +100,9 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                     participance.setActor(p.getActivity().isActor());
                     participance.setDirector(p.getActivity().isDirector());
                     participance.setWriter(p.getActivity().isWriter());
+                    participance.setCamera(p.getActivity().isCamera());
+                    participance.setProducer(p.getActivity().isProducer());
+                    participance.setCrew(p.getActivity().isCrew());
 
                     if (p.getTvSeries() != null) {
                         participance.setCode(p.getTvSeries().getCode());
