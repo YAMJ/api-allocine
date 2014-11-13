@@ -24,6 +24,7 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.moviejukebox.allocine.tools.HtmlTools;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This is the Person Search bean for the api.allocine.fr search
@@ -61,6 +62,36 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
             return -1;
         }
         return person.getCode();
+    }
+
+    public String getFullName() {
+        if (person == null || person.getPersonName() == null) {
+            return null;
+        }
+        
+        StringBuffer sb = new StringBuffer();
+        if (person.getPersonName().getGiven() != null) {
+            sb.append(person.getPersonName().getGiven());
+            sb.append(" ");
+        }
+        if (person.getPersonName().getFamily() != null) {
+            sb.append(person.getPersonName().getFamily());
+        }
+        return StringUtils.trimToNull(sb.toString());
+    }
+    
+    public String getFirstName() {
+        if (person == null || person.getPersonName() == null) {
+            return null;
+        }
+        return person.getPersonName().getGiven();
+    }
+
+    public String getLastName() {
+        if (person == null || person.getPersonName() == null) {
+            return null;
+        }
+        return person.getPersonName().getFamily();
     }
 
     public int getGender() {

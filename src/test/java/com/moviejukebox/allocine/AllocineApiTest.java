@@ -168,6 +168,8 @@ public class AllocineApiTest {
         PersonInfos personInfos = api.getPersonInfos("41339");
         assertEquals(41339, personInfos.getCode());
         assertEquals("1976-08-02", personInfos.getBirthDate());
+        assertEquals("Sam", personInfos.getFirstName());
+        assertEquals("Worthington", personInfos.getLastName());
     }
 
     @Test
