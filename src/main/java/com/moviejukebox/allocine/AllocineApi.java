@@ -180,6 +180,7 @@ public class AllocineApi {
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_TVSERIES);
+        params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
         Search search;
@@ -197,6 +198,7 @@ public class AllocineApi {
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_PERSON);
+        params.put(PARAM_STRIPTAGS, "biography,biographyshort");
         String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
         Search search;
@@ -215,6 +217,7 @@ public class AllocineApi {
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
+        params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         String url = apiUrl.generateUrl(METHOD_MOVIE, params);
 
         MovieInfos movieInfos;
