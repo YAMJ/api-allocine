@@ -128,22 +128,20 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
             return false;
         }
 
-        // movie or TV series must be given
-        if (p.getMovie() == null && p.getTvSeries() == null) {
-            return false;
-        }
-
-        // invalid production year
-        if (p.getMovie() != null && p.getMovie().getProductionYear() <= 0) {
-            return false;
+        // We have a movie, the production year must be valid
+        if (p.getMovie() != null) {
+            // valid if the production year is positive
+            return p.getMovie().getProductionYear() > 0;
         }
 
         // invalid start year
-        if (p.getTvSeries() != null && p.getTvSeries().getYearStart() <= 0) {
-            return false;
+        if (p.getTvSeries() != null) {
+            // valid if the year is positive
+            return p.getTvSeries().getYearStart() > 0;
         }
 
-        return true;
+        // The movie and tv series were null;
+        return false;
     }
 
     /**
