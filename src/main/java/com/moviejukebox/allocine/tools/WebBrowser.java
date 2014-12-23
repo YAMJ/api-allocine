@@ -23,7 +23,12 @@
 package com.moviejukebox.allocine.tools;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.SocketAddress;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.protocol.HTTP;
@@ -31,10 +36,11 @@ import org.yamj.api.common.http.UserAgentSelector;
 
 public final class WebBrowser {
 
-    private static Proxy proxy;
+    private static Proxy proxy = null;
     private static String proxyHost = null;
     private static int proxyPort = 0;
     private static String proxyEncodedPassword = null;
+    private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private WebBrowser() {
         throw new UnsupportedOperationException("Class cannot be initialised");
@@ -48,7 +54,7 @@ public final class WebBrowser {
      * @throws IOException
      */
     public static URLConnection openProxiedConnection(URL url) throws IOException {
-        if (proxy == null ) {
+        if (proxy == null) {
             // create the proxy object
             if (StringUtils.isBlank(proxyHost)) {
                 proxy = Proxy.NO_PROXY;
@@ -68,7 +74,6 @@ public final class WebBrowser {
         return connection;
     }
 
-    
     /**
      * Set the proxy
      *
@@ -103,7 +108,8 @@ public final class WebBrowser {
     public static void setProxyPassword(String proxyUsername, String proxyPassword) {
         if (proxyUsername != null && proxyPassword != null) {
             proxyEncodedPassword = proxyUsername + ":" + proxyPassword;
-            proxyEncodedPassword = "Basic " + new String(Base64.encodeBase64((proxyUsername + ":" + proxyPassword).getBytes()));
+            // Encode the password as UTF-8
+            proxyEncodedPassword = "Basic " + new String(Base64.encodeBase64((proxyUsername + ":" + proxyPassword).getBytes(UTF8)), UTF8);
         }
     }
 }
