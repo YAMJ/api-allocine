@@ -68,8 +68,8 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
         if (person == null || person.getPersonName() == null) {
             return null;
         }
-        
-        StringBuffer sb = new StringBuffer();
+
+        StringBuilder sb = new StringBuilder();
         if (person.getPersonName().getGiven() != null) {
             sb.append(person.getPersonName().getGiven());
             sb.append(" ");
@@ -79,7 +79,7 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
         }
         return StringUtils.trimToNull(sb.toString());
     }
-    
+
     public String getFirstName() {
         if (person == null || person.getPersonName() == null) {
             return null;
