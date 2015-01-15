@@ -28,18 +28,18 @@ public class HtmlTools {
         throw new UnsupportedOperationException("Class cannot be initialised");
     }
 
-    public static String removeLineFeeds(String src) {
+    public static String removeLineFeeds(final String src) {
         if (src == null) {
             return null;
         }
         return src.replaceAll("\\r+", "\n").replaceAll("\\n+", " ").replaceAll("\\s+", " ").trim();
     }
 
-    public static String removeHtmlTags(String src) {
+    public static String removeHtmlTags(final String src) {
         return replaceHtmlTags(src, "");
     }
 
-    public static String replaceHtmlTags(String src, String replacement) {
+    public static String replaceHtmlTags(final String src, final String replacement) {
         if (src == null) {
             return null;
         }

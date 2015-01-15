@@ -24,13 +24,7 @@ package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.AllocineException.AllocineExceptionType;
-import com.moviejukebox.allocine.model.EpisodeInfos;
-import com.moviejukebox.allocine.model.FilmographyInfos;
-import com.moviejukebox.allocine.model.MovieInfos;
-import com.moviejukebox.allocine.model.PersonInfos;
-import com.moviejukebox.allocine.model.Search;
-import com.moviejukebox.allocine.model.TvSeasonInfos;
-import com.moviejukebox.allocine.model.TvSeriesInfos;
+import com.moviejukebox.allocine.model.*;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -88,7 +82,7 @@ public class AllocineApi {
      * @param partnerKey The partner key for Allocine
      * @param secretKey The secret key for Allocine
      */
-    public AllocineApi(String partnerKey, String secretKey) {
+    public AllocineApi(final String partnerKey, final String secretKey) {
         this(partnerKey, secretKey, new DefaultPoolingHttpClient());
     }
 
@@ -99,7 +93,7 @@ public class AllocineApi {
      * @param secretKey The secret key for Allocine
      * @param httpClient the http client to use instead internal web browser
      */
-    public AllocineApi(String partnerKey, String secretKey, CommonHttpClient httpClient) {
+    public AllocineApi(final String partnerKey, final String secretKey, final CommonHttpClient httpClient) {
         this.apiUrl = new ApiUrl(partnerKey, secretKey);
         this.httpClient = httpClient;
         this.mapper = new ObjectMapper();
@@ -114,7 +108,7 @@ public class AllocineApi {
      * @param username
      * @param password
      */
-    public final void setProxy(String host, int port, String username, String password) {
+    public final void setProxy(final String host, final int port, final String username, final String password) {
         httpClient.setProxy(host, port, username, password);
     }
 
@@ -127,8 +121,8 @@ public class AllocineApi {
      * @return
      * @throws AllocineException
      */
-    private <T> T readJsonObject(URL url, Class<T> object) throws AllocineException {
-        String page = requestWebPage(url);
+    private <T> T readJsonObject(final URL url, final Class<T> object) throws AllocineException {
+        final String page = requestWebPage(url);
         if (StringUtils.isNotBlank(page)) {
             try {
                 return mapper.readValue(page, object);
@@ -146,13 +140,13 @@ public class AllocineApi {
      * @return
      * @throws AllocineException
      */
-    public Search searchMovies(String query) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+    public Search searchMovies(final String query) throws AllocineException {
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
-        String url = apiUrl.generateUrl(METHOD_SEARCH, params);
+        final String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
         Search search;
         try {
@@ -170,13 +164,13 @@ public class AllocineApi {
      * @return
      * @throws AllocineException
      */
-    public Search searchTvSeries(String query) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+    public Search searchTvSeries(final String query) throws AllocineException {
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_TVSERIES);
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
-        String url = apiUrl.generateUrl(METHOD_SEARCH, params);
+        final String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
         Search search;
         try {
@@ -195,13 +189,13 @@ public class AllocineApi {
      * @return
      * @throws AllocineException
      */
-    public Search searchPersons(String query) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+    public Search searchPersons(final String query) throws AllocineException {
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_PERSON);
         params.put(PARAM_STRIPTAGS, "biography,biographyshort");
-        String url = apiUrl.generateUrl(METHOD_SEARCH, params);
+        final String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
         Search search;
         try {
@@ -221,13 +215,13 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public MovieInfos getMovieInfos(String allocineId) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_CODE, allocineId);
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
-        String url = apiUrl.generateUrl(METHOD_MOVIE, params);
+        final String url = apiUrl.generateUrl(METHOD_MOVIE, params);
 
         MovieInfos movieInfos;
         try {
@@ -247,14 +241,14 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public TvSeriesInfos getTvSeriesInfos(String allocineId) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_MEDIAFMT, "mp4-lc");
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
-        String url = apiUrl.generateUrl(METHOD_TVSERIES, params);
+        final String url = apiUrl.generateUrl(METHOD_TVSERIES, params);
 
         TvSeriesInfos tvSeriesInfo;
         try {
@@ -274,14 +268,14 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_MEDIAFMT, "mp4-lc");
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, String.valueOf(seasonCode));
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
-        String url = apiUrl.generateUrl(METHOD_SEASON, params);
+        final String url = apiUrl.generateUrl(METHOD_SEASON, params);
 
         TvSeasonInfos tvSeasonInfos;
         try {
@@ -301,12 +295,12 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public PersonInfos getPersonInfos(String allocineId) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
         params.put(PARAM_STRIPTAGS, "biography,biographyshort");
-        String url = apiUrl.generateUrl(METHOD_PERSON, params);
+        final String url = apiUrl.generateUrl(METHOD_PERSON, params);
 
         PersonInfos personInfos;
         try {
@@ -325,12 +319,12 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public FilmographyInfos getPersonFilmography(String allocineId) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
-        String url = apiUrl.generateUrl(METHOD_FILMOGRAPHY, params);
+        final String url = apiUrl.generateUrl(METHOD_FILMOGRAPHY, params);
 
         FilmographyInfos filmographyInfos;
         try {
@@ -349,12 +343,12 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public EpisodeInfos getEpisodeInfos(String allocineId) throws AllocineException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
-        String url = apiUrl.generateUrl(METHOD_EPISODE, params);
+        final String url = apiUrl.generateUrl(METHOD_EPISODE, params);
 
         EpisodeInfos episodeInfos;
         try {
@@ -374,7 +368,7 @@ public class AllocineApi {
      */
     private String requestWebPage(URL url) throws AllocineException {
         try {
-            HttpGet httpGet = new HttpGet(url.toURI());
+            final HttpGet httpGet = new HttpGet(url.toURI());
             httpGet.addHeader("accept", "application/json");
             final DigestedResponse response = httpClient.requestContent(httpGet, charset);
 

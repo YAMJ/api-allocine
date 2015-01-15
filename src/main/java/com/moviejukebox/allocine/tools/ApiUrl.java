@@ -48,7 +48,7 @@ public final class ApiUrl {
     private static final String PREFIX_SED = "&sed=";
     private static final String PREFIX_SIG = "&sig=";
 
-    public ApiUrl(String partnerKey, String secretKey) {
+    public ApiUrl(final String partnerKey, final String secretKey) {
         this.partnerKey = partnerKey;
         this.secretKey = secretKey;
     }
@@ -61,15 +61,15 @@ public final class ApiUrl {
      * @return
      */
     public String generateUrl(final String method, final Map<String, String> params) {
-        String sed = buildSed();
-        String paramUrl = buildParams(params);
+        final String sed = buildSed();
+        final String paramUrl = buildParams(params);
 
-        StringBuilder key = new StringBuilder(secretKey);
+        final StringBuilder key = new StringBuilder(secretKey);
         // Don't add the "?" at the start of the params
         key.append(paramUrl.substring(1));
         key.append(PREFIX_SED);
         key.append(sed);
-        byte[] sha1code = DigestUtils.sha1(key.toString());
+        final byte[] sha1code = DigestUtils.sha1(key.toString());
 
         String sig = "";
         try {
@@ -78,7 +78,7 @@ public final class ApiUrl {
             LOG.warn("Failed to encode: " + ex.getMessage(), ex);
         }
 
-        StringBuilder url = new StringBuilder(API_URL);
+        final StringBuilder url = new StringBuilder(API_URL);
         url.append(method);
         url.append(paramUrl);
         url.append(PREFIX_SED).append(sed);
@@ -94,7 +94,7 @@ public final class ApiUrl {
      * @param toEncode
      * @return
      */
-    private String encoder(String toEncode) {
+    private String encoder(final String toEncode) {
         try {
             return URLEncoder.encode(toEncode, URL_ENCODING);
         } catch (UnsupportedEncodingException ex) {
@@ -109,7 +109,7 @@ public final class ApiUrl {
      * @return
      */
     private String buildSed() {
-        DateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        final DateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         return sdf.format(new Date());
     }
 
@@ -120,7 +120,7 @@ public final class ApiUrl {
      * @return
      */
     private String buildParams(final Map<String, String> params) {
-        StringBuilder paramUrl = new StringBuilder();
+        final StringBuilder paramUrl = new StringBuilder();
 
         // First add the partner key, this is the first parameter, so skip the prefix
         paramUrl.append(PARAM_PARTNER).append(partnerKey);

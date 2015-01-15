@@ -39,45 +39,45 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     private Set<String> nationalities;
     private Set<String> posterURLS;
 
-    protected int getCode(AbstractBaseMapping base) {
+    protected int getCode(final AbstractBaseMapping base) {
         return base == null ? -1 : base.getCode();
     }
 
-    protected String getTitle(AbstractBaseMapping base) {
+    protected String getTitle(final AbstractBaseMapping base) {
         return base == null ? null : base.getTitle();
     }
 
-    protected String getOriginalTitle(AbstractBaseMapping base) {
+    protected String getOriginalTitle(final AbstractBaseMapping base) {
         return base == null ? null : base.getOriginalTitle();
     }
 
-    protected String getSynopsis(AbstractBaseMapping base) {
+    protected String getSynopsis(final AbstractBaseMapping base) {
         return base == null ? null : HtmlTools.removeLineFeeds(base.getSynopsis());
     }
 
-    protected String getSynopsisShort(AbstractBaseMapping base) {
+    protected String getSynopsisShort(final AbstractBaseMapping base) {
         return base == null ? null : HtmlTools.removeLineFeeds(base.getSynopsisShort());
     }
 
-    protected int getUserRating(AbstractBaseMapping base) {
+    protected int getUserRating(final AbstractBaseMapping base) {
         if (base == null || base.getStatistics() == null) {
             return -1;
         }
 
-        double userRating = base.getStatistics().getUserRating();
+        final double userRating = base.getStatistics().getUserRating();
         return (int) ((userRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
 
-    protected int getPressRating(AbstractBaseMapping base) {
+    protected int getPressRating(final AbstractBaseMapping base) {
         if (base == null || base.getStatistics() == null) {
             return -1;
         }
 
-        double pressRating = base.getStatistics().getPressRating();
+        final double pressRating = base.getStatistics().getPressRating();
         return (int) ((pressRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
 
-    protected Set<String> getGenres(AbstractBaseMapping base) {
+    protected Set<String> getGenres(final AbstractBaseMapping base) {
         if (base == null) {
             return Collections.emptySet();
         }
@@ -92,7 +92,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return genres;
     }
 
-    protected Set<String> getNationalities(AbstractBaseMapping base) {
+    protected Set<String> getNationalities(final AbstractBaseMapping base) {
         if (base == null) {
             return Collections.emptySet();
         }
@@ -107,12 +107,12 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return nationalities;
     }
 
-    protected Set<MoviePerson> getActors(AbstractBaseMapping base) {
-        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+    protected Set<MoviePerson> getActors(final AbstractBaseMapping base) {
+        final Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
         if (base != null && base.getCastMember() != null) {
             for (CastMember member : base.getCastMember()) {
                 if (member.isActor()) {
-                    MoviePerson person = new MoviePerson();
+                    final MoviePerson person = new MoviePerson();
                     person.setCode(member.getShortPerson().getCode());
                     person.setName(member.getShortPerson().getName());
                     person.setRole(member.getRole());
@@ -127,8 +127,8 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return set;
     }
 
-    protected Set<MoviePerson> getDirectors(AbstractBaseMapping base) {
-        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+    protected Set<MoviePerson> getDirectors(final AbstractBaseMapping base) {
+        final Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
         if (base != null && base.getCastMember() != null) {
             for (CastMember member : base.getCastMember()) {
                 if (member.isDirector()) {
@@ -139,8 +139,8 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return set;
     }
 
-    protected Set<MoviePerson> getWriters(AbstractBaseMapping base) {
-        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+    protected Set<MoviePerson> getWriters(final AbstractBaseMapping base) {
+        final Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
         if (base != null && base.getCastMember() != null) {
             for (CastMember member : base.getCastMember()) {
                 if (member.isWriter()) {
@@ -151,8 +151,8 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return set;
     }
 
-    protected Set<MoviePerson> getCamera(AbstractBaseMapping base) {
-        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+    protected Set<MoviePerson> getCamera(final AbstractBaseMapping base) {
+        final Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
         if (base != null && base.getCastMember() != null) {
             for (CastMember member : base.getCastMember()) {
                 if (member.isCamera()) {
@@ -163,8 +163,8 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return set;
     }
 
-    protected Set<MoviePerson> getProducers(AbstractBaseMapping base) {
-        Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
+    protected Set<MoviePerson> getProducers(final AbstractBaseMapping base) {
+        final Set<MoviePerson> set = new LinkedHashSet<MoviePerson>();
         if (base != null && base.getCastMember() != null) {
             for (CastMember member : base.getCastMember()) {
                 if (member.isProducer()) {
@@ -181,8 +181,8 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
      * @param member
      * @param persons
      */
-    private void addMember(CastMember member, Set<MoviePerson> persons) {
-        MoviePerson person = new MoviePerson();
+    private void addMember(final CastMember member, final Set<MoviePerson> persons) {
+        final MoviePerson person = new MoviePerson();
         person.setCode(member.getShortPerson().getCode());
         person.setName(member.getShortPerson().getName());
         if (member.getPicture() != null) {
@@ -191,7 +191,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         persons.add(person);
     }
 
-    private void parseMediaList(AbstractBaseMapping base) {
+    private void parseMediaList(final AbstractBaseMapping base) {
         if (posterURLS == null) {
             posterURLS = new LinkedHashSet<String>();
         }
@@ -210,14 +210,14 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         }
     }
 
-    protected Set<String> getPosterUrls(AbstractBaseMapping base) {
+    protected Set<String> getPosterUrls(final AbstractBaseMapping base) {
         if (posterURLS == null) {
             parseMediaList(base);
         }
         return posterURLS;
     }
 
-    protected String getReleaseDate(AbstractBaseMapping base) {
+    protected String getReleaseDate(final AbstractBaseMapping base) {
         if (base == null) {
             return null;
         }
@@ -227,7 +227,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         return base.getRelease().getReleaseDate();
     }
 
-    protected String getReleaseState(AbstractBaseMapping base) {
+    protected String getReleaseState(final AbstractBaseMapping base) {
         if (base == null) {
             return null;
         }

@@ -44,14 +44,14 @@ public class AllocineApiTest {
     public static void setUpClass() throws Exception {
         // This must be the first statement in the setUpClass method
         TestLogger.Configure();
-        DefaultPoolingHttpClient httpClient = new DefaultPoolingHttpClient();
+        final DefaultPoolingHttpClient httpClient = new DefaultPoolingHttpClient();
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
     }
 
     @Test
     public void testAccentSearch() throws Exception {
         LOG.info("testAccentSearch");
-        Search search = api.searchMovies("Mémoires de nos pères");
+        final Search search = api.searchMovies("Mémoires de nos pères");
         boolean found = false;
         for (Movie movie : search.getMovies()) {
             if (movie.getCode() == 60580) {
@@ -66,28 +66,28 @@ public class AllocineApiTest {
     @Test
     public void testSearchMovies() throws Exception {
         LOG.info("testSearchMovieInfos");
-        Search search = api.searchMovies("avatar");
+        final Search search = api.searchMovies("avatar");
         assertEquals(10, search.getMovies().size());
     }
 
     @Test
     public void testSearchTvseriesInfos() throws Exception {
         LOG.info("testSearchTvseriesInfos");
-        Search search = api.searchTvSeries("glee");
+        final Search search = api.searchTvSeries("glee");
         assertEquals(1, search.getTvSeries().size());
     }
 
     @Test
     public void testSearchPersons() throws Exception {
         LOG.info("testSearchPersons");
-        Search search = api.searchPersons("Sam Worthington");
+        final Search search = api.searchPersons("Sam Worthington");
         assertEquals(1, search.getPersons().size());
     }
 
     @Test
     public void testGetMovieInfos() throws Exception {
         LOG.info("testGetMovieInfos");
-        MovieInfos movieInfos = api.getMovieInfos("61282");
+        final MovieInfos movieInfos = api.getMovieInfos("61282");
         // 61282 - Avatar
         // 45322 - Underworld
         // 25722 - SHAFT
@@ -111,7 +111,7 @@ public class AllocineApiTest {
     @Test
     public void testGetTvSeriesInfos() throws Exception {
         LOG.info("testGetTvSeriesInfos");
-        TvSeriesInfos tvseriesInfos = api.getTvSeriesInfos("132");
+        final TvSeriesInfos tvseriesInfos = api.getTvSeriesInfos("132");
 
         assertEquals(132, tvseriesInfos.getCode());
         assertEquals("Mon oncle Charlie", tvseriesInfos.getTitle());
@@ -133,7 +133,7 @@ public class AllocineApiTest {
     @Test
     public void testGetTvSeasonInfos() throws Exception {
         LOG.info("testGetTvSeasonInfos");
-        TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
+        final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
         assertEquals(22242, tvseasonInfos.getCode());
         assertEquals(4, tvseasonInfos.getSeasonNumber());
         assertEquals(2014, tvseasonInfos.getYearStart());
@@ -165,7 +165,7 @@ public class AllocineApiTest {
     @Test
     public void testGetPersonInfos() throws Exception {
         LOG.info("testGetPersonInfos");
-        PersonInfos personInfos = api.getPersonInfos("41339");
+        final PersonInfos personInfos = api.getPersonInfos("41339");
         assertEquals(41339, personInfos.getCode());
         assertEquals("1976-08-02", personInfos.getBirthDate());
         assertEquals("Sam", personInfos.getFirstName());
@@ -175,7 +175,7 @@ public class AllocineApiTest {
     @Test
     public void testGetPersonFilmography() throws Exception {
         LOG.info("testGetPersonInfos");
-        FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
+        final FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
         for (Participance p : filmographyInfos.getParticipances()) {
             if (p.isTvShow()) {
                 System.err.println("TV SHOW ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYearStart() + " - " + p.getYearEnd());
@@ -188,7 +188,7 @@ public class AllocineApiTest {
     @Test
     public void testGetEpisodeInfos() throws Exception {
         LOG.info("testGetEpisodeInfos");
-        EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");
+        final EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");
         assertEquals(493491, episodeInfos.getCode());
 
         /*
