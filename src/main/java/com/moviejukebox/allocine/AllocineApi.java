@@ -23,30 +23,34 @@
 package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moviejukebox.allocine.model.*;
+import com.moviejukebox.allocine.AllocineException.AllocineExceptionType;
+import com.moviejukebox.allocine.model.EpisodeInfos;
+import com.moviejukebox.allocine.model.FilmographyInfos;
+import com.moviejukebox.allocine.model.MovieInfos;
+import com.moviejukebox.allocine.model.PersonInfos;
+import com.moviejukebox.allocine.model.Search;
+import com.moviejukebox.allocine.model.TvSeasonInfos;
+import com.moviejukebox.allocine.model.TvSeriesInfos;
 import com.moviejukebox.allocine.tools.ApiUrl;
-import com.moviejukebox.allocine.tools.WebBrowser;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.protocol.HTTP;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yamj.api.common.http.CommonHttpClient;
-import org.yamj.api.common.http.UserAgentSelector;
+import org.yamj.api.common.http.DefaultPoolingHttpClient;
+import org.yamj.api.common.http.DigestedResponse;
 
 /**
- * Abstract implementation for Allocine API; common methods for XML and JSON.
+ * Implementation for Allocine API
  *
  * @author modmax
  */
 public class AllocineApi {
-
-    private static final Logger LOG = LoggerFactory.getLogger(AllocineApi.class);
 
     // Constants
     private static final String ERROR_FAILED_TO_CONVERT_URL = "Failed to convert URL";
@@ -85,7 +89,7 @@ public class AllocineApi {
      * @param secretKey The secret key for Allocine
      */
     public AllocineApi(String partnerKey, String secretKey) {
-        this(partnerKey, secretKey, null);
+        this(partnerKey, secretKey, new DefaultPoolingHttpClient());
     }
 
     /**
@@ -102,62 +106,46 @@ public class AllocineApi {
         this.charset = Charset.forName("UTF-8");
     }
 
-    public final void setProxy(Proxy proxy, String username, String password) {
-        if (httpClient == null) {
-            WebBrowser.setProxy(proxy);
-            WebBrowser.setProxyPassword(username, password);
-        }
-    }
-
+    /**
+     * Set the proxy information
+     *
+     * @param host
+     * @param port
+     * @param username
+     * @param password
+     */
     public final void setProxy(String host, int port, String username, String password) {
-        if (httpClient == null) {
-            WebBrowser.setProxyHost(host);
-            WebBrowser.setProxyPort(port);
-            WebBrowser.setProxyPassword(username, password);
-        }
+        httpClient.setProxy(host, port, username, password);
     }
 
+    /**
+     * Get the information for a URL and process into an object
+     *
+     * @param <T>
+     * @param url
+     * @param object
+     * @return
+     * @throws AllocineException
+     */
     private <T> T readJsonObject(URL url, Class<T> object) throws AllocineException {
-        if (httpClient == null) {
-            URLConnection connection = null;
-            InputStream inputStream = null;
+        String page = requestWebPage(url);
+        if (StringUtils.isNotBlank(page)) {
             try {
-                connection = WebBrowser.openProxiedConnection(url);
-                inputStream = connection.getInputStream();
-                return mapper.readValue(inputStream, object);
+                return mapper.readValue(page, object);
             } catch (IOException ex) {
-                throw new AllocineException(AllocineException.AllocineExceptionType.UNKNOWN_CAUSE, "Failed to read JSON object", url, ex);
-            } finally {
-                if (inputStream != null) {
-                    try {
-                        inputStream.close();
-                    } catch (Exception ex) {
-                        LOG.trace("Failed to close input stream", ex);
-                    }
-                }
-
-                if (connection != null && (connection instanceof HttpURLConnection)) {
-                    try {
-                        ((HttpURLConnection) connection).disconnect();
-                    } catch (Exception ex) {
-                        LOG.trace("Failed to close connection", ex);
-                    }
-                }
-            }
-        } else {
-            try {
-                HttpGet httpGet = new HttpGet(url.toURI());
-                httpGet.addHeader("accept", "application/json");
-                httpGet.setHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
-                return mapper.readValue(this.httpClient.requestContent(httpGet, charset), object);
-            } catch (IOException ex) {
-                throw new AllocineException(AllocineException.AllocineExceptionType.MAPPING_FAILED, "Failed to convert JSON object", url, ex);
-            } catch (URISyntaxException ex) {
-                throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, "Failed to convert JSON object", url, ex);
+                throw new AllocineException(AllocineExceptionType.MAPPING_FAILED, "Failed to read JSON object", url, ex);
             }
         }
+        throw new AllocineException(AllocineExceptionType.MAPPING_FAILED, "Failed to read JSON object", url);
     }
 
+    /**
+     * Search for a movie
+     *
+     * @param query
+     * @return
+     * @throws AllocineException
+     */
     public Search searchMovies(String query) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
@@ -175,6 +163,13 @@ public class AllocineApi {
         return search;
     }
 
+    /**
+     * Search for a TV Series
+     *
+     * @param query
+     * @return
+     * @throws AllocineException
+     */
     public Search searchTvSeries(String query) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
@@ -193,6 +188,13 @@ public class AllocineApi {
         return search;
     }
 
+    /**
+     * Search for a person
+     *
+     * @param query
+     * @return
+     * @throws AllocineException
+     */
     public Search searchPersons(String query) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("q", query);
@@ -211,6 +213,13 @@ public class AllocineApi {
         return search;
     }
 
+    /**
+     * Get Movie information
+     *
+     * @param allocineId
+     * @return
+     * @throws AllocineException
+     */
     public MovieInfos getMovieInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_CODE, allocineId);
@@ -230,6 +239,13 @@ public class AllocineApi {
         return movieInfos;
     }
 
+    /**
+     * Get TV Series information
+     *
+     * @param allocineId
+     * @return
+     * @throws AllocineException
+     */
     public TvSeriesInfos getTvSeriesInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
@@ -250,6 +266,13 @@ public class AllocineApi {
         return tvSeriesInfo;
     }
 
+    /**
+     * Get TV Season information
+     *
+     * @param seasonCode
+     * @return
+     * @throws AllocineException
+     */
     public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
@@ -270,6 +293,13 @@ public class AllocineApi {
         return tvSeasonInfos;
     }
 
+    /**
+     * Get information on the person
+     *
+     * @param allocineId
+     * @return
+     * @throws AllocineException
+     */
     public PersonInfos getPersonInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
@@ -287,6 +317,13 @@ public class AllocineApi {
         return personInfos;
     }
 
+    /**
+     * Get filmography information
+     *
+     * @param allocineId
+     * @return
+     * @throws AllocineException
+     */
     public FilmographyInfos getPersonFilmography(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
@@ -303,7 +340,14 @@ public class AllocineApi {
         }
         return filmographyInfos;
     }
-    
+
+    /**
+     * Get episode information
+     *
+     * @param allocineId
+     * @return
+     * @throws AllocineException
+     */
     public EpisodeInfos getEpisodeInfos(String allocineId) throws AllocineException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
@@ -319,5 +363,32 @@ public class AllocineApi {
             throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return episodeInfos;
+    }
+
+    /**
+     * Download the URL into a String
+     *
+     * @param url
+     * @return
+     * @throws AllocineException
+     */
+    private String requestWebPage(URL url) throws AllocineException {
+        try {
+            HttpGet httpGet = new HttpGet(url.toURI());
+            httpGet.addHeader("accept", "application/json");
+            final DigestedResponse response = httpClient.requestContent(httpGet, charset);
+
+            if (response.getStatusCode() >= 500) {
+                throw new AllocineException(AllocineExceptionType.HTTP_503_ERROR, response.getContent(), url);
+            } else if (response.getStatusCode() >= 300) {
+                throw new AllocineException(AllocineExceptionType.HTTP_404_ERROR, response.getContent(), url);
+            }
+
+            return response.getContent();
+        } catch (URISyntaxException ex) {
+            throw new AllocineException(AllocineExceptionType.INVALID_URL, "Invalid URL", url, ex);
+        } catch (IOException ex) {
+            throw new AllocineException(AllocineExceptionType.CONNECTION_ERROR, "Error retrieving URL", url, ex);
+        }
     }
 }
