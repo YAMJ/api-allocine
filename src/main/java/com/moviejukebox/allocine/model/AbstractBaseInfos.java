@@ -38,6 +38,15 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     private Set<String> genres;
     private Set<String> nationalities;
     private Set<String> posterURLS;
+    private int responseStatusCode = 0;
+    
+    public int getResponseStatusCode() {
+        return responseStatusCode;
+    }
+
+    public void setResponseStatusCode(int responseStatusCode) {
+        this.responseStatusCode = responseStatusCode;
+    }
 
     protected int getCode(final AbstractBaseMapping base) {
         return base == null ? -1 : base.getCode();

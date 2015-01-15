@@ -41,7 +41,8 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
     private Person person;
 
     private List<Participance> participances;
-
+    private int responseStatusCode = 0;
+    
     public Person getPerson() {
         return person;
     }
@@ -81,6 +82,14 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
         return participances;
     }
 
+    public int getResponseStatusCode() {
+        return responseStatusCode;
+    }
+
+    public void setResponseStatusCode(int responseStatusCode) {
+        this.responseStatusCode = responseStatusCode;
+    }
+    
     /**
      * Process the participances from the main person
      *

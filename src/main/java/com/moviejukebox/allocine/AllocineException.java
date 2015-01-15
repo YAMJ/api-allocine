@@ -69,35 +69,48 @@ public class AllocineException extends Exception {
 
     private final AllocineExceptionType exceptionType;
     private final String response;
+    private final int responseCode;
     private final String url;
 
+    public AllocineException(final AllocineExceptionType exceptionType, final String response, final URL url) {
+        this(exceptionType, response, 0, url.toExternalForm());
+    }
+
+    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final URL url) {
+        this(exceptionType, response, responseCode, url.toExternalForm());
+    }
+
     public AllocineException(final AllocineExceptionType exceptionType, final String response, final String url) {
+        this(exceptionType, response, 0, url);
+    }
+    
+    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final String url) {
         super();
         this.exceptionType = exceptionType;
         this.response = response;
-        this.url = url;
-    }
-
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final URL url) {
-      super();
-      this.exceptionType = exceptionType;
-      this.response = response;
-      this.url = url.toExternalForm();
-  }
-
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final String url, final Throwable cause) {
-        super(cause);
-        this.exceptionType = exceptionType;
-        this.response = response;
+        this.responseCode = responseCode;
         this.url = url;
     }
 
     public AllocineException(final AllocineExceptionType exceptionType, final String response, final URL url, final Throwable cause) {
-      super(cause);
-      this.exceptionType = exceptionType;
-      this.response = response;
-      this.url = url.toExternalForm();
-  }
+        this(exceptionType, response, 0, url.toExternalForm(), cause);
+    }
+
+    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final URL url, final Throwable cause) {
+        this(exceptionType, response, responseCode, url.toExternalForm(), cause);
+    }
+
+    public AllocineException(final AllocineExceptionType exceptionType, final String response, final String url, final Throwable cause) {
+        this(exceptionType, response, 0, url, cause);
+    }
+
+    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final String url, final Throwable cause) {
+        super(cause);
+        this.exceptionType = exceptionType;
+        this.response = response;
+        this.responseCode = responseCode;
+        this.url = url;
+    }
 
     public AllocineExceptionType getExceptionType() {
         return exceptionType;
@@ -107,7 +120,11 @@ public class AllocineException extends Exception {
         return response;
     }
 
-    public String getUrl(){
-      return url;
+    public int getResponseCode() {
+        return responseCode;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

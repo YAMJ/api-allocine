@@ -38,6 +38,8 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("person")
     private Person person;
 
+    private int responseStatusCode = 0;
+
     public Person getPerson() {
         return person;
     }
@@ -46,6 +48,14 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
         this.person = person;
     }
 
+    public int getResponseStatusCode() {
+        return responseStatusCode;
+    }
+
+    public void setResponseStatusCode(int responseStatusCode) {
+        this.responseStatusCode = responseStatusCode;
+    }
+    
     public boolean isValid() {
         if (person == null) {
             return false;

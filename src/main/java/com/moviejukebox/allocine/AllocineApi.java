@@ -377,9 +377,9 @@ public class AllocineApi {
             final DigestedResponse response = httpClient.requestContent(httpGet, charset);
 
             if (response.getStatusCode() >= 500) {
-                throw new AllocineException(AllocineExceptionType.HTTP_503_ERROR, response.getContent(), url);
+                throw new AllocineException(AllocineExceptionType.HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
             } else if (response.getStatusCode() >= 300) {
-                throw new AllocineException(AllocineExceptionType.HTTP_404_ERROR, response.getContent(), url);
+                throw new AllocineException(AllocineExceptionType.HTTP_404_ERROR, response.getContent(), response.getStatusCode(), url);
             }
 
             return response.getContent();
