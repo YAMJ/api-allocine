@@ -35,9 +35,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.protocol.HTTP;
 import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
 import org.yamj.api.common.http.DigestedResponse;
+import org.yamj.api.common.http.UserAgentSelector;
 
 /**
  * Implementation for Allocine API
@@ -370,6 +372,8 @@ public class AllocineApi {
         try {
             final HttpGet httpGet = new HttpGet(url.toURI());
             httpGet.addHeader("accept", "application/json");
+            httpGet.addHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
+
             final DigestedResponse response = httpClient.requestContent(httpGet, charset);
 
             if (response.getStatusCode() >= 500) {
