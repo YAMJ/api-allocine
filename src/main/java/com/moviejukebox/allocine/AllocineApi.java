@@ -85,7 +85,10 @@ public class AllocineApi {
      * @param secretKey The secret key for Allocine
      */
     public AllocineApi(final String partnerKey, final String secretKey) {
-        this(partnerKey, secretKey, new DefaultPoolingHttpClient());
+        this.apiUrl = new ApiUrl(partnerKey, secretKey);
+        this.httpClient = new DefaultPoolingHttpClient();
+        this.mapper = new ObjectMapper();
+        this.charset = Charset.forName("UTF-8");
     }
 
     /**

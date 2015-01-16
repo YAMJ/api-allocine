@@ -100,7 +100,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
 
         if (person.getParticipations() != null) {
             for (Participation p : person.getParticipations()) {
-                if (!validateParticipation(p)) {
+                if (!validParticipation(p)) {
                     continue;
                 }
 
@@ -131,9 +131,9 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
      * @param p
      * @return
      */
-    private boolean validateParticipation(Participation p) {
+    private boolean validParticipation(Participation p) {
         // activity must be given & known
-        if (p.getActivity() == null && !p.getActivity().isKnownActivity()) {
+        if (p.getActivity() == null || !p.getActivity().isKnownActivity()) {
             return false;
         }
 
@@ -149,7 +149,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
             return p.getTvSeries().getYearStart() > 0;
         }
 
-        // The movie and tv series were null;
+        // The movie and TV series were null
         return false;
     }
 

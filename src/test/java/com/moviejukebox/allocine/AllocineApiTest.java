@@ -27,6 +27,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.moviejukebox.allocine.model.*;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -36,18 +37,26 @@ import org.yamj.api.common.http.DefaultPoolingHttpClient;
 public class AllocineApiTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(AllocineApiTest.class);
-    private static AllocineApi api;
     private static final String PARTNER_KEY = "100043982026";
     private static final String SECRET_KEY = "29d185d98c984a359e6e6f26a0474269";
 
+    private static AllocineApi api;
+    private static DefaultPoolingHttpClient httpClient;
+
     @BeforeClass
-    public static void setUpClass() throws Exception {
+    public static void beforeClass() throws Exception {
         // This must be the first statement in the setUpClass method
         TestLogger.Configure();
-        final DefaultPoolingHttpClient httpClient = new DefaultPoolingHttpClient();
+        httpClient = new DefaultPoolingHttpClient();
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
     }
 
+    @AfterClass
+    @SuppressWarnings("deprecation")
+    public static void afterClass() throws Exception {
+        httpClient.close();
+    }
+    
     @Test
     public void testAccentSearch() throws Exception {
         LOG.info("testAccentSearch");
