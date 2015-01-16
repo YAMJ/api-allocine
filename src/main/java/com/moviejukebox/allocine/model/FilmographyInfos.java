@@ -40,7 +40,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("person")
     private Person person;
 
-    private List<Participance> participances;
+    private List<Participance> participances = null;
     private int responseStatusCode = 0;
     
     public Person getPerson() {
@@ -55,7 +55,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
         if (person == null) {
             return false;
         }
-        return (person.getCode() > 0);
+        return person.getCode() > 0;
     }
 
     public boolean isNotValid() {
@@ -74,7 +74,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
             return Collections.emptyList();
         }
 
-        // Populate the Participances
+        // populate the participances
         if (participances == null) {
             this.participances = processParticipance();
         }
@@ -104,7 +104,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
                     continue;
                 }
 
-                Participance participance = new Participance((p.getTvSeries() != null));
+                Participance participance = new Participance(p.getTvSeries() != null);
                 participance.setRole(p.getRole());
                 participance.setActor(p.getActivity().isActor());
                 participance.setDirector(p.getActivity().isDirector());

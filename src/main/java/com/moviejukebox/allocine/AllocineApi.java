@@ -52,6 +52,8 @@ public class AllocineApi {
     private static final String ERROR_FAILED_TO_CONVERT_URL = "Failed to convert URL";
     private static final String LITERAL_LARGE = "large";
     private static final String LITERAL_SYNOPSIS = "synopsis,synopsisshort";
+    private static final int HTTP_STATUS_300 = 300;
+    private static final int HTTP_STATUS_500 = 500;
     // Methods
     private static final String METHOD_SEARCH = "search";
     private static final String METHOD_MOVIE = "movie";
@@ -379,9 +381,9 @@ public class AllocineApi {
 
             final DigestedResponse response = httpClient.requestContent(httpGet, charset);
 
-            if (response.getStatusCode() >= 500) {
+            if (response.getStatusCode() >= HTTP_STATUS_500) {
                 throw new AllocineException(AllocineExceptionType.HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
-            } else if (response.getStatusCode() >= 300) {
+            } else if (response.getStatusCode() >= HTTP_STATUS_300) {
                 throw new AllocineException(AllocineExceptionType.HTTP_404_ERROR, response.getContent(), response.getStatusCode(), url);
             }
 

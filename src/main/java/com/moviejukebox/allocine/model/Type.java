@@ -31,13 +31,13 @@ public class Type extends AbstractJsonMapping {
     private static final long serialVersionUID = -6009619152789104957L;
     
     @JsonProperty("code")
-    private long code;
+    private int code;
 
-    public long getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(long code) {
+    public void setCode(int code) {
         this.code = code;
     }
 }

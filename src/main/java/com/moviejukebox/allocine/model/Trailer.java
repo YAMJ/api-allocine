@@ -33,7 +33,7 @@ public class Trailer extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("name")
     private String name;
     @JsonProperty("code")
-    private long code;
+    private int code;
     @JsonProperty("href")
     private String href;
 
@@ -45,11 +45,11 @@ public class Trailer extends AbstractJsonUnknownHandleMapping {
         this.name = name;
     }
 
-    public long getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(long code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

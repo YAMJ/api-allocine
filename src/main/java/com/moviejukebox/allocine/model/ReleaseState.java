@@ -31,14 +31,14 @@ public class ReleaseState extends AbstractJsonMapping {
     private static final long serialVersionUID = 1927500318213424040L;
     
     @JsonProperty("code")
-    private long code;
+    private int code;
     @JsonProperty("$")
     private String name;
     
-    public long getCode() {
+    public int getCode() {
         return code;
     }
-    public void setCode(long code) {
+    public void setCode(int code) {
         this.code = code;
     }
     public String getName() {

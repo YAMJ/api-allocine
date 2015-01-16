@@ -31,15 +31,15 @@ public class Certificate extends AbstractJsonMapping {
     private static final long serialVersionUID = 7383135567796765796L;
     
     @JsonProperty("code")
-    private long code;
+    private int code;
     @JsonProperty("$")
     private String name;
 
-    public long getCode() {
+    public int getCode() {
         return code;
     }
     
-    public void setCode(long code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

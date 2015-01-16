@@ -52,7 +52,7 @@ public class Activity extends AbstractJsonMapping {
     private String name;
     private Job job = Job.UNKNOWN;
 
-    public long getCode() {
+    public int getCode() {
         return code;
     }
 

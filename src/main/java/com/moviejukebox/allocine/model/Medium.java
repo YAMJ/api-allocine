@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Medium extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 4649776514511001593L;
-    private static final long POSTER_MEDIA_CODE = 31001;
+    private static final int POSTER_MEDIA_CODE = 31001;
 
     @JsonProperty("type")
     private Type type;
