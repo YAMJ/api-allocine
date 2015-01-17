@@ -23,7 +23,6 @@
 package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moviejukebox.allocine.AllocineException.AllocineExceptionType;
 import com.moviejukebox.allocine.model.*;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import java.io.IOException;
@@ -77,8 +76,8 @@ public class AllocineApi {
 
     private final ApiUrl apiUrl;
     private final CommonHttpClient httpClient;
-    private ObjectMapper mapper;
-    private Charset charset;
+    private final ObjectMapper mapper;
+    private final Charset charset;
 
     /**
      * Create the API
@@ -134,10 +133,10 @@ public class AllocineApi {
             try {
                 return mapper.readValue(page, object);
             } catch (IOException ex) {
-                throw new AllocineException(AllocineExceptionType.MAPPING_FAILED, "Failed to read JSON object", url, ex);
+                throw new AllocineException(ApiExceptionType.MAPPING_FAILED, "Failed to read JSON object", url, ex);
             }
         }
-        throw new AllocineException(AllocineExceptionType.MAPPING_FAILED, "Failed to read JSON object", url);
+        throw new AllocineException(ApiExceptionType.MAPPING_FAILED, "Failed to read JSON object", url);
     }
 
     /**
@@ -159,7 +158,7 @@ public class AllocineApi {
         try {
             search = this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return search;
     }
@@ -183,7 +182,7 @@ public class AllocineApi {
         try {
             search = this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return search;
@@ -208,7 +207,7 @@ public class AllocineApi {
         try {
             search = this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return search;
@@ -234,7 +233,7 @@ public class AllocineApi {
         try {
             movieInfos = this.readJsonObject(new URL(url), MovieInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return movieInfos;
@@ -261,7 +260,7 @@ public class AllocineApi {
         try {
             tvSeriesInfo = this.readJsonObject(new URL(url), TvSeriesInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return tvSeriesInfo;
@@ -288,7 +287,7 @@ public class AllocineApi {
         try {
             tvSeasonInfos = this.readJsonObject(new URL(url), TvSeasonInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
 
         return tvSeasonInfos;
@@ -313,7 +312,7 @@ public class AllocineApi {
         try {
             personInfos = this.readJsonObject(new URL(url), PersonInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return personInfos;
     }
@@ -337,7 +336,7 @@ public class AllocineApi {
         try {
             filmographyInfos = this.readJsonObject(new URL(url), FilmographyInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return filmographyInfos;
     }
@@ -361,7 +360,7 @@ public class AllocineApi {
         try {
             episodeInfos = this.readJsonObject(new URL(url), EpisodeInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(AllocineException.AllocineExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
         return episodeInfos;
     }
@@ -382,16 +381,16 @@ public class AllocineApi {
             final DigestedResponse response = httpClient.requestContent(httpGet, charset);
 
             if (response.getStatusCode() >= HTTP_STATUS_500) {
-                throw new AllocineException(AllocineExceptionType.HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
+                throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
             } else if (response.getStatusCode() >= HTTP_STATUS_300) {
-                throw new AllocineException(AllocineExceptionType.HTTP_404_ERROR, response.getContent(), response.getStatusCode(), url);
+                throw new AllocineException(ApiExceptionType.HTTP_404_ERROR, response.getContent(), response.getStatusCode(), url);
             }
 
             return response.getContent();
         } catch (URISyntaxException ex) {
-            throw new AllocineException(AllocineExceptionType.INVALID_URL, "Invalid URL", url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
         } catch (IOException ex) {
-            throw new AllocineException(AllocineExceptionType.CONNECTION_ERROR, "Error retrieving URL", url, ex);
+            throw new AllocineException(ApiExceptionType.CONNECTION_ERROR, "Error retrieving URL", url, ex);
         }
     }
 }

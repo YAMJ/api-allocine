@@ -28,63 +28,24 @@ public class AllocineException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    public enum AllocineExceptionType {
-        /*
-         * Unknown error occured
-         */
-        UNKNOWN_CAUSE,
-        /*
-         * URL is invalid
-         */
-        INVALID_URL,
-        /*
-         * Page not found
-         */
-        HTTP_404_ERROR,
-        /*
-         * The movie id was not found
-         */
-        MOVIE_ID_NOT_FOUND,
-        /*
-         * Mapping failed from target to internal onbjects
-         */
-        MAPPING_FAILED,
-        /*
-         * Error connecting to the service
-         */
-        CONNECTION_ERROR,
-        /*
-         * Image was invalid
-         */
-        INVALID_IMAGE,
-        /*
-         * Autorisation rejected
-         */
-        AUTHORISATION_FAILURE,
-        /*
-         * Service Unavailable, usually temporary
-         */
-        HTTP_503_ERROR;
-    }
-
-    private final AllocineExceptionType exceptionType;
+    private final ApiExceptionType exceptionType;
     private final String response;
     private final int responseCode;
     private final String url;
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final URL url) {
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final URL url) {
         this(exceptionType, response, 0, url.toExternalForm());
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final URL url) {
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final int responseCode, final URL url) {
         this(exceptionType, response, responseCode, url.toExternalForm());
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final String url) {
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final String url) {
         this(exceptionType, response, 0, url);
     }
-    
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final String url) {
+
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final int responseCode, final String url) {
         super();
         this.exceptionType = exceptionType;
         this.response = response;
@@ -92,19 +53,19 @@ public class AllocineException extends Exception {
         this.url = url;
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final URL url, final Throwable cause) {
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final URL url, final Throwable cause) {
         this(exceptionType, response, 0, url.toExternalForm(), cause);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final URL url, final Throwable cause) {
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final int responseCode, final URL url, final Throwable cause) {
         this(exceptionType, response, responseCode, url.toExternalForm(), cause);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final String url, final Throwable cause) {
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final String url, final Throwable cause) {
         this(exceptionType, response, 0, url, cause);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final String url, final Throwable cause) {
+    public AllocineException(final ApiExceptionType exceptionType, final String response, final int responseCode, final String url, final Throwable cause) {
         super(cause);
         this.exceptionType = exceptionType;
         this.response = response;
@@ -112,7 +73,7 @@ public class AllocineException extends Exception {
         this.url = url;
     }
 
-    public AllocineExceptionType getExceptionType() {
+    public ApiExceptionType getExceptionType() {
         return exceptionType;
     }
 
