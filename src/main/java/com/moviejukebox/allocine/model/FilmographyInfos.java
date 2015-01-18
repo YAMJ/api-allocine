@@ -33,7 +33,9 @@ import java.util.List;
  *
  * @author modmax
  */
-public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
+public class FilmographyInfos
+    extends AbstractJsonUnknownHandleMapping
+    implements IResponseStatus {
 
     private static final long serialVersionUID = 1122195565082374882L;
 
@@ -82,6 +84,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
         return participances;
     }
 
+    @Override
     public int getResponseStatusCode() {
         return responseStatusCode;
     }

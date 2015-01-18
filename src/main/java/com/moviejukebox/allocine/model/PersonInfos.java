@@ -31,8 +31,10 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author modmax
  */
-public class PersonInfos extends AbstractJsonUnknownHandleMapping {
-
+public class PersonInfos
+    extends AbstractJsonUnknownHandleMapping
+    implements IResponseStatus {
+    
     private static final long serialVersionUID = 7745674601738810957L;
 
     @JsonProperty("person")
@@ -48,6 +50,7 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
         this.person = person;
     }
 
+    @Override
     public int getResponseStatusCode() {
         return responseStatusCode;
     }
