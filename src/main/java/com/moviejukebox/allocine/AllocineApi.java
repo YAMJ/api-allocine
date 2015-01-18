@@ -35,6 +35,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.protocol.HTTP;
+import org.yamj.api.common.exception.ApiExceptionType;
 import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
 import org.yamj.api.common.http.DigestedResponse;
@@ -97,7 +98,7 @@ public class AllocineApi {
      *
      * @param partnerKey The partner key for Allocine
      * @param secretKey The secret key for Allocine
-     * @param httpClient the http client to use instead internal web browser
+     * @param httpClient the HTTP client to use instead internal web browser
      */
     public AllocineApi(final String partnerKey, final String secretKey, final CommonHttpClient httpClient) {
         this.apiUrl = new ApiUrl(partnerKey, secretKey);
