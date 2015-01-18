@@ -23,108 +23,44 @@
 package com.moviejukebox.allocine;
 
 import java.net.URL;
+import org.yamj.api.common.exception.ApiException;
+import org.yamj.api.common.exception.ApiExceptionType;
 
-public class AllocineException extends Exception {
+public class AllocineException extends ApiException {
 
-    private static final long serialVersionUID = 1L;
-
-    public enum AllocineExceptionType {
-        /*
-         * Unknown error occured
-         */
-        UNKNOWN_CAUSE,
-        /*
-         * URL is invalid
-         */
-        INVALID_URL,
-        /*
-         * Page not found
-         */
-        HTTP_404_ERROR,
-        /*
-         * The movie id was not found
-         */
-        MOVIE_ID_NOT_FOUND,
-        /*
-         * Mapping failed from target to internal onbjects
-         */
-        MAPPING_FAILED,
-        /*
-         * Error connecting to the service
-         */
-        CONNECTION_ERROR,
-        /*
-         * Image was invalid
-         */
-        INVALID_IMAGE,
-        /*
-         * Autorisation rejected
-         */
-        AUTHORISATION_FAILURE,
-        /*
-         * Service Unavailable, usually temporary
-         */
-        HTTP_503_ERROR;
+    public AllocineException(ApiExceptionType exceptionType, String response) {
+        super(exceptionType, response);
     }
 
-    private final AllocineExceptionType exceptionType;
-    private final String response;
-    private final int responseCode;
-    private final String url;
-
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final URL url) {
-        this(exceptionType, response, 0, url.toExternalForm());
+    public AllocineException(ApiExceptionType exceptionType, String response, URL url) {
+        super(exceptionType, response, url);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final URL url) {
-        this(exceptionType, response, responseCode, url.toExternalForm());
+    public AllocineException(ApiExceptionType exceptionType, String response, int responseCode, URL url) {
+        super(exceptionType, response, responseCode, url);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final String url) {
-        this(exceptionType, response, 0, url);
-    }
-    
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final String url) {
-        super();
-        this.exceptionType = exceptionType;
-        this.response = response;
-        this.responseCode = responseCode;
-        this.url = url;
+    public AllocineException(ApiExceptionType exceptionType, String response, String url) {
+        super(exceptionType, response, url);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final URL url, final Throwable cause) {
-        this(exceptionType, response, 0, url.toExternalForm(), cause);
+    public AllocineException(ApiExceptionType exceptionType, String response, int responseCode, String url) {
+        super(exceptionType, response, responseCode, url);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final URL url, final Throwable cause) {
-        this(exceptionType, response, responseCode, url.toExternalForm(), cause);
+    public AllocineException(ApiExceptionType exceptionType, String response, URL url, Throwable cause) {
+        super(exceptionType, response, url, cause);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final String url, final Throwable cause) {
-        this(exceptionType, response, 0, url, cause);
+    public AllocineException(ApiExceptionType exceptionType, String response, int responseCode, URL url, Throwable cause) {
+        super(exceptionType, response, responseCode, url, cause);
     }
 
-    public AllocineException(final AllocineExceptionType exceptionType, final String response, final int responseCode, final String url, final Throwable cause) {
-        super(cause);
-        this.exceptionType = exceptionType;
-        this.response = response;
-        this.responseCode = responseCode;
-        this.url = url;
+    public AllocineException(ApiExceptionType exceptionType, String response, String url, Throwable cause) {
+        super(exceptionType, response, url, cause);
     }
 
-    public AllocineExceptionType getExceptionType() {
-        return exceptionType;
-    }
-
-    public String getResponse() {
-        return response;
-    }
-
-    public int getResponseCode() {
-        return responseCode;
-    }
-
-    public String getUrl() {
-        return url;
+    public AllocineException(ApiExceptionType exceptionType, String response, int responseCode, String url, Throwable cause) {
+        super(exceptionType, response, responseCode, url, cause);
     }
 }
