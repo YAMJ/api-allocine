@@ -29,9 +29,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @SuppressWarnings("serial")
-public abstract class AbstractBaseInfos 
-    extends AbstractJsonUnknownHandleMapping
-    implements IResponseStatus {
+public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping {
 
     // Constants
     private static final double PERCENT_OUT_OF_5 = 5.0;
@@ -40,16 +38,6 @@ public abstract class AbstractBaseInfos
     private Set<String> genres;
     private Set<String> nationalities;
     private Set<String> posterURLS;
-    private int responseStatusCode = 0;
-
-    @Override
-    public int getResponseStatusCode() {
-        return responseStatusCode;
-    }
-
-    public void setResponseStatusCode(int responseStatusCode) {
-        this.responseStatusCode = responseStatusCode;
-    }
 
     protected int getCode(final AbstractBaseMapping base) {
         return base == null ? -1 : base.getCode();

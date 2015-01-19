@@ -31,16 +31,12 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author modmax
  */
-public class PersonInfos
-    extends AbstractJsonUnknownHandleMapping
-    implements IResponseStatus {
+public class PersonInfos extends AbstractJsonUnknownHandleMapping {
     
     private static final long serialVersionUID = 7745674601738810957L;
 
     @JsonProperty("person")
     private Person person;
-
-    private int responseStatusCode = 0;
 
     public Person getPerson() {
         return person;
@@ -48,15 +44,6 @@ public class PersonInfos
 
     public void setPerson(Person person) {
         this.person = person;
-    }
-
-    @Override
-    public int getResponseStatusCode() {
-        return responseStatusCode;
-    }
-
-    public void setResponseStatusCode(int responseStatusCode) {
-        this.responseStatusCode = responseStatusCode;
     }
     
     public boolean isValid() {
