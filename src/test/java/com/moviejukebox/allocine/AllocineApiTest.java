@@ -116,7 +116,7 @@ public class AllocineApiTest {
         assertEquals(42, movieInfos.getActors().size());
         assertEquals(85, movieInfos.getUserRating());
         
-        for (FestivalAward award : movieInfos.getAwards()) {
+        for (FestivalAward award : movieInfos.getFestivalAwards()) {
             LOG.trace("Award: " + award.getName());
         }
     }
@@ -141,6 +141,10 @@ public class AllocineApiTest {
         assertEquals(70, tvseriesInfos.getUserRating());
         assertEquals(12, tvseriesInfos.getSeasonCount());
         assertEquals(12, tvseriesInfos.getSeasonList().size());
+    
+        for (FestivalAward award : tvseriesInfos.getFestivalAwards()) {
+            LOG.trace("Award: " + award.getName());
+        }
     }
 
     @Test
@@ -176,22 +180,26 @@ public class AllocineApiTest {
     @Test
     public void testGetPersonInfos() throws Exception {
         LOG.info("testGetPersonInfos");
-        final PersonInfos personInfos = api.getPersonInfos("41339");
-        assertEquals(41339, personInfos.getCode());
-        assertEquals("1976-08-02", personInfos.getBirthDate());
-        assertEquals("Sam", personInfos.getFirstName());
-        assertEquals("Worthington", personInfos.getLastName());
+        final PersonInfos personInfos = api.getPersonInfos("8504");
+        assertEquals(8504, personInfos.getCode());
+        assertEquals("1954-12-28", personInfos.getBirthDate());
+        assertEquals("Denzel", personInfos.getFirstName());
+        assertEquals("Washington", personInfos.getLastName());
+
+        for (FestivalAward award : personInfos.getFestivalAwards()) {
+            LOG.trace("Award: " + award.getName());
+        }
     }
 
     @Test
     public void testGetPersonFilmography() throws Exception {
-        LOG.info("testGetPersonInfos");
+        LOG.info("testGetPersonFilmography");
         final FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
         for (Participance p : filmographyInfos.getParticipances()) {
             if (p.isTvShow()) {
-                System.err.println("TV SHOW ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYearStart() + " - " + p.getYearEnd());
+                LOG.trace("TV SHOW ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYearStart() + " - " + p.getYearEnd());
             } else {
-                System.err.println("MOVIE ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYear() + " (" + p.getReleaseDate() + ")");
+                LOG.trace("MOVIE ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYear() + " (" + p.getReleaseDate() + ")");
             }
         }
     }
@@ -202,16 +210,14 @@ public class AllocineApiTest {
         final EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");
         assertEquals(493491, episodeInfos.getCode());
 
-        /*
          for (MoviePerson person : episodeInfos.getDirectors()) {
-         LOG.info("Director: " + person.getName());
+             LOG.trace("Director: " + person.getName());
          }
          for (MoviePerson person : episodeInfos.getWriters()) {
-         LOG.info("Writer: " + person.getName());
+             LOG.trace("Writer: " + person.getName());
          }
          for (MoviePerson person : episodeInfos.getActors()) {
-         LOG.info("Actor ("+person.isLeadActor()+"): " + person.getName());
+             LOG.trace("Actor ("+person.isLeadActor()+"): " + person.getName());
          }
-         */
     }
 }

@@ -24,6 +24,8 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.moviejukebox.allocine.tools.HtmlTools;
+import java.util.Collections;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -158,5 +160,12 @@ public class PersonInfos extends AbstractJsonUnknownHandleMapping {
             return null;
         }
         return person.getPicture().getHref();
+    }
+
+    public List<FestivalAward> getFestivalAwards() {
+        if (person != null) {
+            return person.getFestivalAwards();
+        }
+        return Collections.emptyList();
     }
 }

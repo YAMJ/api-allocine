@@ -175,4 +175,11 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         }
         return -1;
     }
+
+    public List<FestivalAward> getFestivalAwards() {
+        if (tvSeries != null) {
+            return tvSeries.getFestivalAwards();
+        }
+        return Collections.emptyList();
+    }
 }

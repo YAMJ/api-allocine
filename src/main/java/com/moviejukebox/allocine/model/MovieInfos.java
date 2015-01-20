@@ -168,8 +168,8 @@ public class MovieInfos extends AbstractBaseInfos {
         return this.getPosterUrls(movie);
     }
     
-    public List<FestivalAward> getAwards() {
-        if (movie != null && movie.getFestivalAwards() != null)  {
+    public List<FestivalAward> getFestivalAwards() {
+        if (movie != null)  {
             return movie.getFestivalAwards();
         }
         return Collections.emptyList();

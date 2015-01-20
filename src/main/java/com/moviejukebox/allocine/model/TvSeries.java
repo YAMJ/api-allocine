@@ -42,7 +42,9 @@ public class TvSeries extends AbstractBaseMapping {
     private int seasonCount;
     @JsonProperty("season")
     private List<Season> seasonList = new ArrayList<Season>();
-    
+    @JsonProperty("festivalAward")
+    private List<FestivalAward> festivalAwards = new ArrayList<FestivalAward>();
+
     public int getYearStart() {
         return yearStart;
     }
@@ -81,5 +83,13 @@ public class TvSeries extends AbstractBaseMapping {
 
     public void setSeasonList(List<Season> seasonList) {
         this.seasonList = seasonList;
+    }
+
+    public List<FestivalAward> getFestivalAwards() {
+        return festivalAwards;
+    }
+
+    public void setFestivalAwards(List<FestivalAward> festivalAwards) {
+        this.festivalAwards = festivalAwards;
     }
 }
