@@ -24,6 +24,8 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonRootName("movie")
 public class Movie extends AbstractBaseMapping {
@@ -38,7 +40,9 @@ public class Movie extends AbstractBaseMapping {
     private Trailer trailer;
     @JsonProperty("movieCertificate")
     private MovieCertificate movieCertificate;
- 
+    @JsonProperty("festivalAward")
+    private List<FestivalAward> festivalAwards = new ArrayList<FestivalAward>();
+
     public int getProductionYear() {
         return productionYear;
     }
@@ -69,5 +73,13 @@ public class Movie extends AbstractBaseMapping {
 
     public void setMovieCertificate(MovieCertificate movieCertificate) {
         this.movieCertificate = movieCertificate;
+    }
+
+    public List<FestivalAward> getFestivalAwards() {
+        return festivalAwards;
+    }
+
+    public void setFestivalAwards(List<FestivalAward> festivalAwards) {
+        this.festivalAwards = festivalAwards;
     }
 }

@@ -115,6 +115,10 @@ public class AllocineApiTest {
         assertEquals(1, movieInfos.getWriters().size());
         assertEquals(42, movieInfos.getActors().size());
         assertEquals(85, movieInfos.getUserRating());
+        
+        for (FestivalAward award : movieInfos.getAwards()) {
+            LOG.trace("Award: " + award.getName());
+        }
     }
 
     @Test
@@ -149,17 +153,15 @@ public class AllocineApiTest {
         assertEquals(2014, tvseasonInfos.getYearEnd());
         assertEquals(10, tvseasonInfos.getEpisodeList().size());
 
-        /*
          for (MoviePerson person : tvseasonInfos.getDirectors()) {
-         LOG.info("Director: " + person.getName());
+             LOG.trace("Director: " + person.getName());
          }
          for (MoviePerson person : tvseasonInfos.getWriters()) {
-         LOG.info("Writer: " + person.getName());
+             LOG.info("Writer: " + person.getName());
          }
          for (MoviePerson person : tvseasonInfos.getActors()) {
-         LOG.info("Actor ("+person.isLeadActor()+"): " + person.getName());
+             LOG.trace("Actor ("+person.isLeadActor()+"): " + person.getName());
          }
-         */
     }
 
     @Test

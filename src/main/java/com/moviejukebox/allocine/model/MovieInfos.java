@@ -23,6 +23,8 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -164,5 +166,12 @@ public class MovieInfos extends AbstractBaseInfos {
     
     public Set<String> getPosterUrls() {
         return this.getPosterUrls(movie);
+    }
+    
+    public List<FestivalAward> getAwards() {
+        if (movie != null && movie.getFestivalAwards() != null)  {
+            return movie.getFestivalAwards();
+        }
+        return Collections.emptyList();
     }
 }
