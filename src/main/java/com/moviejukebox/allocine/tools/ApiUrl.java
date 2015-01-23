@@ -76,7 +76,7 @@ public final class ApiUrl {
         try {
             sig = encoder(new String(Base64.encodeBase64(sha1code), URL_ENCODING));
         } catch (UnsupportedEncodingException ex) {
-            LOG.warn("Failed to encode: " + ex.getMessage(), ex);
+            LOG.warn("Failed to encode: {}", ex.getMessage(), ex);
         }
 
         final StringBuilder url = new StringBuilder(API_URL);
@@ -99,7 +99,7 @@ public final class ApiUrl {
         try {
             return URLEncoder.encode(toEncode, URL_ENCODING);
         } catch (UnsupportedEncodingException ex) {
-            LOG.warn("Failed to encode: " + ex.getMessage(), ex);
+            LOG.warn("Failed to encode: {}", ex.getMessage(), ex);
             return "";
         }
     }
