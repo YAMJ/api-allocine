@@ -27,18 +27,20 @@ import com.moviejukebox.allocine.model.*;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.protocol.HTTP;
 import org.yamj.api.common.exception.ApiExceptionType;
-import org.yamj.api.common.http.CommonHttpClient;
-import org.yamj.api.common.http.DefaultPoolingHttpClient;
 import org.yamj.api.common.http.DigestedResponse;
+import org.yamj.api.common.http.DigestedResponseReader;
 import org.yamj.api.common.http.UserAgentSelector;
 
 /**
@@ -76,7 +78,7 @@ public class AllocineApi {
     private static final String PARAM_FORMAT_VALUE = "json";
 
     private final ApiUrl apiUrl;
-    private final CommonHttpClient httpClient;
+    private final HttpClient httpClient;
     private final ObjectMapper mapper;
     private final Charset charset;
 
@@ -85,38 +87,13 @@ public class AllocineApi {
      *
      * @param partnerKey The partner key for Allocine
      * @param secretKey The secret key for Allocine
+     * @param httpClient the HTTP client to use for requesting web pages
      */
-    public AllocineApi(final String partnerKey, final String secretKey) {
-        this.apiUrl = new ApiUrl(partnerKey, secretKey);
-        this.httpClient = new DefaultPoolingHttpClient();
-        this.mapper = new ObjectMapper();
-        this.charset = Charset.forName("UTF-8");
-    }
-
-    /**
-     * Create the API
-     *
-     * @param partnerKey The partner key for Allocine
-     * @param secretKey The secret key for Allocine
-     * @param httpClient the HTTP client to use instead internal web browser
-     */
-    public AllocineApi(final String partnerKey, final String secretKey, final CommonHttpClient httpClient) {
+    public AllocineApi(final String partnerKey, final String secretKey, final HttpClient httpClient) {
         this.apiUrl = new ApiUrl(partnerKey, secretKey);
         this.httpClient = httpClient;
         this.mapper = new ObjectMapper();
         this.charset = Charset.forName("UTF-8");
-    }
-
-    /**
-     * Set the proxy information
-     *
-     * @param host
-     * @param port
-     * @param username
-     * @param password
-     */
-    public final void setProxy(final String host, final int port, final String username, final String password) {
-        httpClient.setProxy(host, port, username, password);
     }
 
     /**
@@ -374,12 +351,18 @@ public class AllocineApi {
      * @throws AllocineException
      */
     private String requestWebPage(URL url) throws AllocineException {
+        final HttpGet httpGet;
         try {
-            final HttpGet httpGet = new HttpGet(url.toURI());
+          httpGet = new HttpGet(url.toURI());
+        } catch (URISyntaxException ex) {
+          throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
+        }
+        
+        try {
             httpGet.addHeader("accept", "application/json");
             httpGet.addHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
 
-            final DigestedResponse response = httpClient.requestContent(httpGet, charset);
+            final DigestedResponse response = DigestedResponseReader.readContent(httpClient.execute(httpGet), charset);
 
             if (response.getStatusCode() >= HTTP_STATUS_500) {
                 throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
@@ -388,9 +371,14 @@ public class AllocineApi {
             }
 
             return response.getContent();
-        } catch (URISyntaxException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
+        } catch (ConnectTimeoutException ex) {
+            httpGet.releaseConnection();
+            throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, "Connection timeout", 503, url, ex);
+        } catch (SocketTimeoutException ex) {
+            httpGet.releaseConnection();
+            throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, "Connection timeout", 503, url, ex);
         } catch (IOException ex) {
+            httpGet.releaseConnection();
             throw new AllocineException(ApiExceptionType.CONNECTION_ERROR, "Error retrieving URL", url, ex);
         }
     }

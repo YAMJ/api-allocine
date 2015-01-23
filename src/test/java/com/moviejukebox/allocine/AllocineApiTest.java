@@ -27,12 +27,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.moviejukebox.allocine.model.*;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
 public class AllocineApiTest {
 
@@ -41,18 +42,17 @@ public class AllocineApiTest {
     private static final String SECRET_KEY = "29d185d98c984a359e6e6f26a0474269";
 
     private static AllocineApi api;
-    private static DefaultPoolingHttpClient httpClient;
+    private static CloseableHttpClient httpClient;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        // This must be the first statement in the setUpClass method
+    public static void beforeClass() {
+        // This must be the first statement in the beforeClass method
         TestLogger.Configure();
-        httpClient = new DefaultPoolingHttpClient();
+        httpClient = HttpClients.createDefault();
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
     }
 
     @AfterClass
-    @SuppressWarnings("deprecation")
     public static void afterClass() throws Exception {
         httpClient.close();
     }
