@@ -22,14 +22,23 @@
  */
 package com.moviejukebox.allocine;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import com.moviejukebox.allocine.model.*;
+import com.moviejukebox.allocine.model.EpisodeInfos;
+import com.moviejukebox.allocine.model.FestivalAward;
+import com.moviejukebox.allocine.model.FilmographyInfos;
+import com.moviejukebox.allocine.model.Movie;
+import com.moviejukebox.allocine.model.MovieInfos;
+import com.moviejukebox.allocine.model.MoviePerson;
+import com.moviejukebox.allocine.model.Participance;
+import com.moviejukebox.allocine.model.PersonInfos;
+import com.moviejukebox.allocine.model.Search;
+import com.moviejukebox.allocine.model.TvSeasonInfos;
+import com.moviejukebox.allocine.model.TvSeriesInfos;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -45,7 +54,7 @@ public class AllocineApiTest {
     private static CloseableHttpClient httpClient;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass() throws AllocineException {
         // This must be the first statement in the beforeClass method
         TestLogger.Configure();
         httpClient = HttpClients.createDefault();
@@ -56,7 +65,7 @@ public class AllocineApiTest {
     public static void afterClass() throws Exception {
         httpClient.close();
     }
-    
+
     @Test
     public void testAccentSearch() throws Exception {
         LOG.info("testAccentSearch");
@@ -100,7 +109,7 @@ public class AllocineApiTest {
         // 61282 - Avatar
         // 45322 - Underworld
         // 25722 - SHAFT
-        
+
         assertEquals(61282, movieInfos.getCode());
         assertEquals(9720, movieInfos.getRuntime());
         assertEquals("Avatar", movieInfos.getTitle());
@@ -115,7 +124,7 @@ public class AllocineApiTest {
         assertEquals(1, movieInfos.getWriters().size());
         assertEquals(42, movieInfos.getActors().size());
         assertEquals(85, movieInfos.getUserRating());
-        
+
         for (FestivalAward award : movieInfos.getFestivalAwards()) {
             LOG.trace("Award: " + award.getName());
         }
@@ -141,7 +150,7 @@ public class AllocineApiTest {
         assertEquals(70, tvseriesInfos.getUserRating());
         assertEquals(12, tvseriesInfos.getSeasonCount());
         assertEquals(12, tvseriesInfos.getSeasonList().size());
-    
+
         for (FestivalAward award : tvseriesInfos.getFestivalAwards()) {
             LOG.trace("Award: " + award.getName());
         }
@@ -203,7 +212,7 @@ public class AllocineApiTest {
             }
         }
     }
-    
+
     @Test
     public void testGetEpisodeInfos() throws Exception {
         LOG.info("testGetEpisodeInfos");
