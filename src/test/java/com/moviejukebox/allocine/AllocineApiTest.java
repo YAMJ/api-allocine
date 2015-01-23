@@ -126,7 +126,7 @@ public class AllocineApiTest {
         assertEquals(85, movieInfos.getUserRating());
 
         for (FestivalAward award : movieInfos.getFestivalAwards()) {
-            LOG.trace("Award: " + award.getName());
+            LOG.trace("Award: {}", award.getName());
         }
     }
 
@@ -152,7 +152,7 @@ public class AllocineApiTest {
         assertEquals(12, tvseriesInfos.getSeasonList().size());
 
         for (FestivalAward award : tvseriesInfos.getFestivalAwards()) {
-            LOG.trace("Award: " + award.getName());
+            LOG.trace("Award: {}", award.getName());
         }
     }
 
@@ -166,15 +166,15 @@ public class AllocineApiTest {
         assertEquals(2014, tvseasonInfos.getYearEnd());
         assertEquals(10, tvseasonInfos.getEpisodeList().size());
 
-         for (MoviePerson person : tvseasonInfos.getDirectors()) {
-             LOG.trace("Director: " + person.getName());
-         }
-         for (MoviePerson person : tvseasonInfos.getWriters()) {
-             LOG.info("Writer: " + person.getName());
-         }
-         for (MoviePerson person : tvseasonInfos.getActors()) {
-             LOG.trace("Actor ("+person.isLeadActor()+"): " + person.getName());
-         }
+        for (MoviePerson person : tvseasonInfos.getDirectors()) {
+            LOG.trace("Director: {}", person.getName());
+        }
+        for (MoviePerson person : tvseasonInfos.getWriters()) {
+            LOG.info("Writer: {}", person.getName());
+        }
+        for (MoviePerson person : tvseasonInfos.getActors()) {
+            LOG.trace("Actor ({}): {}", person.isLeadActor(), person.getName());
+        }
     }
 
     @Test
@@ -196,7 +196,7 @@ public class AllocineApiTest {
         assertEquals("Washington", personInfos.getLastName());
 
         for (FestivalAward award : personInfos.getFestivalAwards()) {
-            LOG.trace("Award: " + award.getName());
+            LOG.trace("Award: {}", award.getName());
         }
     }
 
@@ -206,9 +206,9 @@ public class AllocineApiTest {
         final FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
         for (Participance p : filmographyInfos.getParticipances()) {
             if (p.isTvShow()) {
-                LOG.trace("TV SHOW ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYearStart() + " - " + p.getYearEnd());
+                LOG.trace("TV SHOW ({}) {}: {} - {}", p.getCode(), p.getTitle(), p.getYearStart(), p.getYearEnd());
             } else {
-                LOG.trace("MOVIE ("+ p.getCode() + ") " + p.getTitle() + ": " + p.getYear() + " (" + p.getReleaseDate() + ")");
+                LOG.trace("MOVIE ({}) {}: {} ({})", p.getCode(), p.getTitle(), p.getYear(), p.getReleaseDate());
             }
         }
     }
@@ -219,14 +219,14 @@ public class AllocineApiTest {
         final EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");
         assertEquals(493491, episodeInfos.getCode());
 
-         for (MoviePerson person : episodeInfos.getDirectors()) {
-             LOG.trace("Director: " + person.getName());
-         }
-         for (MoviePerson person : episodeInfos.getWriters()) {
-             LOG.trace("Writer: " + person.getName());
-         }
-         for (MoviePerson person : episodeInfos.getActors()) {
-             LOG.trace("Actor ("+person.isLeadActor()+"): " + person.getName());
-         }
+        for (MoviePerson person : episodeInfos.getDirectors()) {
+            LOG.trace("Director: {}", person.getName());
+        }
+        for (MoviePerson person : episodeInfos.getWriters()) {
+            LOG.trace("Writer: {}", person.getName());
+        }
+        for (MoviePerson person : episodeInfos.getActors()) {
+            LOG.trace("Actor ({}): {}", person.isLeadActor(), person.getName());
+        }
     }
 }
