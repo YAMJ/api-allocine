@@ -41,15 +41,15 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
     @JsonProperty("synopsisShort")
     private String synopsisShort;
     @JsonProperty("nationality")
-    private List<Nationality> nationality = new ArrayList<Nationality>();
+    private List<Nationality> nationality = new ArrayList<>();
     @JsonProperty("genre")
-    private List<Genre> genre = new ArrayList<Genre>();
+    private List<Genre> genre = new ArrayList<>();
     @JsonProperty("castMember")
-    private List<CastMember> castMember = new ArrayList<CastMember>();
+    private List<CastMember> castMember = new ArrayList<>();
     @JsonProperty("statistics")
     private Statistics statistics;
     @JsonProperty("media")
-    private List<Medium> media = new ArrayList<Medium>();
+    private List<Medium> media = new ArrayList<>();
     @JsonProperty("poster")
     private Poster poster;
     @JsonProperty("release")

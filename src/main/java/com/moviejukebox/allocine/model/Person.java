@@ -55,9 +55,9 @@ public class Person extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("picture")
     private Picture picture;
     @JsonProperty("participation")
-    private List<Participation> participations = new ArrayList<Participation>();
+    private List<Participation> participations = new ArrayList<>();
     @JsonProperty("festivalAward")
-    private List<FestivalAward> festivalAwards = new ArrayList<FestivalAward>();
+    private List<FestivalAward> festivalAwards = new ArrayList<>();
 
     public int getCode() {
         return code;

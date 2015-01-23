@@ -35,11 +35,11 @@ public class Feed extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("totalResults")
     private long totalResults = -1;
     @JsonProperty("movie")
-    private List<Movie> movies = new ArrayList<Movie>();
+    private List<Movie> movies = new ArrayList<>();
     @JsonProperty("tvseries")
-    private List<TvSeries> tvseries = new ArrayList<TvSeries>();
+    private List<TvSeries> tvseries = new ArrayList<>();
     @JsonProperty("person")
-    private List<ShortPerson> persons = new ArrayList<ShortPerson>();
+    private List<ShortPerson> persons = new ArrayList<>();
 
     public long getTotalResults() {
         return totalResults;

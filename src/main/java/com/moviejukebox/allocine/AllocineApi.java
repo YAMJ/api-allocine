@@ -125,7 +125,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public Search searchMovies(final String query) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_MOVIE);
@@ -149,7 +149,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public Search searchTvSeries(final String query) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_TVSERIES);
@@ -174,7 +174,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public Search searchPersons(final String query) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put("q", query);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_FILTER, FILTER_PERSON);
@@ -199,7 +199,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public MovieInfos getMovieInfos(String allocineId) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put(PARAM_CODE, allocineId);
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FILTER, FILTER_MOVIE);
@@ -225,7 +225,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public TvSeriesInfos getTvSeriesInfos(String allocineId) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_MEDIAFMT, "mp4-lc");
         params.put(PARAM_FILTER, FILTER_MOVIE);
@@ -252,7 +252,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_MEDIAFMT, "mp4-lc");
         params.put(PARAM_FILTER, FILTER_MOVIE);
@@ -279,7 +279,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public PersonInfos getPersonInfos(String allocineId) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
@@ -303,7 +303,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public FilmographyInfos getPersonFilmography(String allocineId) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);
@@ -327,7 +327,7 @@ public class AllocineApi {
      * @throws AllocineException
      */
     public EpisodeInfos getEpisodeInfos(String allocineId) throws AllocineException {
-        final Map<String, String> params = new LinkedHashMap<String, String>();
+        final Map<String, String> params = new LinkedHashMap<>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
         params.put(PARAM_CODE, allocineId);

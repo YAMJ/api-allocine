@@ -41,7 +41,7 @@ public class Movie extends AbstractBaseMapping {
     @JsonProperty("movieCertificate")
     private MovieCertificate movieCertificate;
     @JsonProperty("festivalAward")
-    private List<FestivalAward> festivalAwards = new ArrayList<FestivalAward>();
+    private List<FestivalAward> festivalAwards = new ArrayList<>();
 
     public int getProductionYear() {
         return productionYear;

@@ -87,7 +87,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
      * @return
      */
     private List<Participance> processParticipance() {
-        List<Participance> newParticipances = new ArrayList<Participance>();
+        List<Participance> newParticipances = new ArrayList<>();
 
         if (person.getParticipations() != null) {
             for (Participation p : person.getParticipations()) {

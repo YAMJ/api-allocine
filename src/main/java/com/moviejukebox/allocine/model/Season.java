@@ -41,7 +41,7 @@ public class Season extends AbstractBaseMapping {
     @JsonProperty("episodeCount")
     private int episodeCount;
     @JsonProperty("episode")
-    private List<Episode> episodeList = new ArrayList<Episode>();
+    private List<Episode> episodeList = new ArrayList<>();
 
     public int getSeasonNumber() {
         return seasonNumber;
