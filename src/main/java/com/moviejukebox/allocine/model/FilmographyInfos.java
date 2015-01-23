@@ -122,7 +122,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
      * @param p
      * @return
      */
-    private boolean validParticipation(Participation p) {
+    private static boolean validParticipation(Participation p) {
         // activity must be given & known
         if (p.getActivity() == null || !p.getActivity().isKnownActivity()) {
             return false;
@@ -150,7 +150,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
      * @param participance
      * @param p
      */
-    private void processTV(Participance participance, Participation p) {
+    private static void processTV(Participance participance, Participation p) {
         participance.setCode(p.getTvSeries().getCode());
         participance.setTitle(p.getTvSeries().getTitle());
         participance.setOriginalTitle(p.getTvSeries().getOriginalTitle());
@@ -172,7 +172,7 @@ public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
      * @param participance
      * @param p
      */
-    private void processMovie(Participance participance, Participation p) {
+    private static void processMovie(Participance participance, Participation p) {
         participance.setCode(p.getMovie().getCode());
         participance.setTitle(p.getMovie().getTitle());
         participance.setOriginalTitle(p.getMovie().getOriginalTitle());

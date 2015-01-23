@@ -39,12 +39,13 @@ public final class ApiUrl {
     // Base API URL
     private static final String API_URL = "http://api.allocine.fr/rest/v3/";
     private static final String PARAM_PARTNER = "?partner=";
+    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyyMMdd");
+
     // Keys
     private final String partnerKey;
     private final String secretKey;
     // Constants
     private static final String URL_ENCODING = "UTF-8";
-    private static final String DATE_FORMAT = "yyyyMMdd";
     private static final String PREFIX_SED = "&sed=";
     private static final String PREFIX_SIG = "&sig=";
 
@@ -94,7 +95,7 @@ public final class ApiUrl {
      * @param toEncode
      * @return
      */
-    private String encoder(final String toEncode) {
+    private static String encoder(final String toEncode) {
         try {
             return URLEncoder.encode(toEncode, URL_ENCODING);
         } catch (UnsupportedEncodingException ex) {
@@ -108,9 +109,8 @@ public final class ApiUrl {
      *
      * @return
      */
-    private String buildSed() {
-        final DateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-        return sdf.format(new Date());
+    private static String buildSed() {
+        return DATE_FORMATTER.format(new Date());
     }
 
     /**

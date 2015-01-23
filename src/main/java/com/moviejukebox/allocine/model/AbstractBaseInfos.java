@@ -181,7 +181,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
      * @param member
      * @param persons
      */
-    private void addMember(final CastMember member, final Set<MoviePerson> persons) {
+    private static void addMember(final CastMember member, final Set<MoviePerson> persons) {
         final MoviePerson person = new MoviePerson();
         person.setCode(member.getShortPerson().getCode());
         person.setName(member.getShortPerson().getName());
