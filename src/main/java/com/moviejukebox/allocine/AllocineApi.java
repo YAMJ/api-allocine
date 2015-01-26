@@ -23,17 +23,10 @@
 package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moviejukebox.allocine.model.EpisodeInfos;
-import com.moviejukebox.allocine.model.FilmographyInfos;
-import com.moviejukebox.allocine.model.MovieInfos;
-import com.moviejukebox.allocine.model.PersonInfos;
-import com.moviejukebox.allocine.model.Search;
-import com.moviejukebox.allocine.model.TvSeasonInfos;
-import com.moviejukebox.allocine.model.TvSeriesInfos;
+import com.moviejukebox.allocine.model.*;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -42,7 +35,6 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.protocol.HTTP;
 import org.yamj.api.common.exception.ApiExceptionType;
 import org.yamj.api.common.http.DigestedResponse;
@@ -362,18 +354,12 @@ public class AllocineApi {
      * @throws AllocineException
      */
     private String requestWebPage(URL url) throws AllocineException {
-        final HttpGet httpGet;
         try {
-            httpGet = new HttpGet(url.toURI());
-        } catch (URISyntaxException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
-        }
-
-        try {
+            final HttpGet httpGet = new HttpGet(url.toURI());
             httpGet.addHeader("accept", "application/json");
             httpGet.addHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
 
-            final DigestedResponse response = DigestedResponseReader.readContent(httpClient.execute(httpGet), charset);
+            final DigestedResponse response = DigestedResponseReader.requestContent(httpClient, httpGet, charset);
 
             if (response.getStatusCode() >= HTTP_STATUS_500) {
                 throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
@@ -382,11 +368,9 @@ public class AllocineApi {
             }
 
             return response.getContent();
-        } catch (ConnectTimeoutException | SocketTimeoutException ex) {
-            httpGet.releaseConnection();
-            throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, "Connection timeout", 503, url, ex);
+        } catch (URISyntaxException ex) {
+          throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
         } catch (IOException ex) {
-            httpGet.releaseConnection();
             throw new AllocineException(ApiExceptionType.CONNECTION_ERROR, "Error retrieving URL", url, ex);
         }
     }
