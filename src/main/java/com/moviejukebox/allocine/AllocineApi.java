@@ -353,9 +353,9 @@ public class AllocineApi {
     private String requestWebPage(URL url) throws AllocineException {
         final HttpGet httpGet;
         try {
-          httpGet = new HttpGet(url.toURI());
+            httpGet = new HttpGet(url.toURI());
         } catch (URISyntaxException ex) {
-          throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
         }
         
         try {
@@ -371,10 +371,7 @@ public class AllocineApi {
             }
 
             return response.getContent();
-        } catch (ConnectTimeoutException ex) {
-            httpGet.releaseConnection();
-            throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, "Connection timeout", 503, url, ex);
-        } catch (SocketTimeoutException ex) {
+        } catch (ConnectTimeoutException | SocketTimeoutException ex) {
             httpGet.releaseConnection();
             throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, "Connection timeout", 503, url, ex);
         } catch (IOException ex) {
