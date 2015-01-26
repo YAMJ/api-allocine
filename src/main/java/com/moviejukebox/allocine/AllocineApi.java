@@ -23,7 +23,13 @@
 package com.moviejukebox.allocine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moviejukebox.allocine.model.*;
+import com.moviejukebox.allocine.model.EpisodeInfos;
+import com.moviejukebox.allocine.model.FilmographyInfos;
+import com.moviejukebox.allocine.model.MovieInfos;
+import com.moviejukebox.allocine.model.PersonInfos;
+import com.moviejukebox.allocine.model.Search;
+import com.moviejukebox.allocine.model.TvSeasonInfos;
+import com.moviejukebox.allocine.model.TvSeriesInfos;
 import com.moviejukebox.allocine.tools.ApiUrl;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -88,8 +94,13 @@ public class AllocineApi {
      * @param partnerKey The partner key for Allocine
      * @param secretKey The secret key for Allocine
      * @param httpClient the HTTP client to use for requesting web pages
+     * @throws com.moviejukebox.allocine.AllocineException
      */
-    public AllocineApi(final String partnerKey, final String secretKey, final HttpClient httpClient) {
+    public AllocineApi(final String partnerKey, final String secretKey, final HttpClient httpClient) throws AllocineException {
+        if (StringUtils.isBlank(partnerKey) || StringUtils.isBlank(secretKey)) {
+            throw new AllocineException(ApiExceptionType.AUTH_FAILURE, "Must provide a Partner and Sercret key");
+        }
+
         this.apiUrl = new ApiUrl(partnerKey, secretKey);
         this.httpClient = httpClient;
         this.mapper = new ObjectMapper();
@@ -357,7 +368,7 @@ public class AllocineApi {
         } catch (URISyntaxException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
         }
-        
+
         try {
             httpGet.addHeader("accept", "application/json");
             httpGet.addHeader(HTTP.USER_AGENT, UserAgentSelector.randomUserAgent());
