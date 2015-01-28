@@ -24,6 +24,7 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import org.apache.commons.lang3.StringUtils;
 
 @JsonRootName("festivalAward")
 public class FestivalAward extends AbstractJsonUnknownHandleMapping {
@@ -59,5 +60,16 @@ public class FestivalAward extends AbstractJsonUnknownHandleMapping {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFestival() {
+        return (parentFestival == null ? null : parentFestival.getName());
+    }
+    
+    public int getYear() {
+        if (parentEdition != null && StringUtils.isNumeric(parentEdition.getName())) {
+            return Integer.parseInt(parentEdition.getName());
+        }
+        return -1;
     }
 }
