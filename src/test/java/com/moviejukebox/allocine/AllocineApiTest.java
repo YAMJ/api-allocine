@@ -33,7 +33,7 @@ import com.moviejukebox.allocine.model.PersonInfos;
 import com.moviejukebox.allocine.model.Search;
 import com.moviejukebox.allocine.model.TvSeasonInfos;
 import com.moviejukebox.allocine.model.TvSeriesInfos;
-import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -51,7 +51,7 @@ public class AllocineApiTest {
     private static final String SECRET_KEY = "29d185d98c984a359e6e6f26a0474269";
 
     private static AllocineApi api;
-    private static CloseableHttpClient httpClient;
+    private static HttpClient httpClient;
 
     @BeforeClass
     public static void beforeClass() throws AllocineException {
@@ -63,7 +63,6 @@ public class AllocineApiTest {
 
     @AfterClass
     public static void afterClass() throws Exception {
-        httpClient.close();
     }
 
     @Test
