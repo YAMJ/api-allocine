@@ -22,23 +22,13 @@
  */
 package com.moviejukebox.allocine;
 
-import com.moviejukebox.allocine.model.EpisodeInfos;
-import com.moviejukebox.allocine.model.FestivalAward;
-import com.moviejukebox.allocine.model.FilmographyInfos;
-import com.moviejukebox.allocine.model.Movie;
-import com.moviejukebox.allocine.model.MovieInfos;
-import com.moviejukebox.allocine.model.MoviePerson;
-import com.moviejukebox.allocine.model.Participance;
-import com.moviejukebox.allocine.model.PersonInfos;
-import com.moviejukebox.allocine.model.Search;
-import com.moviejukebox.allocine.model.TvSeasonInfos;
-import com.moviejukebox.allocine.model.TvSeriesInfos;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import com.moviejukebox.allocine.model.*;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -59,10 +49,6 @@ public class AllocineApiTest {
         TestLogger.Configure();
         httpClient = HttpClients.createDefault();
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
     }
 
     @Test
