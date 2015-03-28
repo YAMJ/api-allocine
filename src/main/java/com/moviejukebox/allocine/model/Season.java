@@ -31,7 +31,7 @@ import java.util.List;
 public class Season extends AbstractBaseMapping {
 
     private static final long serialVersionUID = -9173083320025101754L;
-    
+
     @JsonProperty("seasonNumber")
     private int seasonNumber;
     @JsonProperty("yearStart")
@@ -42,6 +42,14 @@ public class Season extends AbstractBaseMapping {
     private int episodeCount;
     @JsonProperty("episode")
     private List<Episode> episodeList = new ArrayList<>();
+    @JsonProperty("link")
+    private List<Link> link;
+    @JsonProperty("productionStatus")
+    private CodeName productionStatus;
+    @JsonProperty("hasLocalBroadcast")
+    private boolean localBroadcast;
+    @JsonProperty("trailerEmbed")
+    private String trailerEmbed;
 
     public int getSeasonNumber() {
         return seasonNumber;
@@ -66,7 +74,7 @@ public class Season extends AbstractBaseMapping {
     public void setYearEnd(int yearEnd) {
         this.yearEnd = yearEnd;
     }
-    
+
     public int getEpisodeCount() {
         return episodeCount;
     }
@@ -81,5 +89,37 @@ public class Season extends AbstractBaseMapping {
 
     public void setEpisodeList(List<Episode> episodeList) {
         this.episodeList = episodeList;
+    }
+
+    public List<Link> getLink() {
+        return link;
+    }
+
+    public void setLink(List<Link> link) {
+        this.link = link;
+    }
+
+    public CodeName getProductionStatus() {
+        return productionStatus;
+    }
+
+    public void setProductionStatus(CodeName productionStatus) {
+        this.productionStatus = productionStatus;
+    }
+
+    public boolean isLocalBroadcast() {
+        return localBroadcast;
+    }
+
+    public void setLocalBroadcast(boolean localBroadcast) {
+        this.localBroadcast = localBroadcast;
+    }
+
+    public String getTrailerEmbed() {
+        return trailerEmbed;
+    }
+
+    public void setTrailerEmbed(String trailerEmbed) {
+        this.trailerEmbed = trailerEmbed;
     }
 }

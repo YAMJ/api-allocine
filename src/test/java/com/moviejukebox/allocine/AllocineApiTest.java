@@ -51,7 +51,7 @@ public class AllocineApiTest {
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
     }
 
-    @Test
+//    @Test
     public void testAccentSearch() throws Exception {
         LOG.info("testAccentSearch");
         final Search search = api.searchMovies("Mémoires de nos pères");
@@ -66,7 +66,7 @@ public class AllocineApiTest {
         assertTrue("Movie not found in search", found);
     }
 
-    @Test
+//    @Test
     public void testSearchMovies() throws Exception {
         LOG.info("testSearchMovieInfos");
         final Search search = api.searchMovies("avatar");
@@ -80,14 +80,14 @@ public class AllocineApiTest {
         assertEquals(1, search.getTvSeries().size());
     }
 
-    @Test
+//    @Test
     public void testSearchPersons() throws Exception {
         LOG.info("testSearchPersons");
         final Search search = api.searchPersons("Sam Worthington");
         assertEquals(1, search.getPersons().size());
     }
 
-    @Test
+//    @Test
     public void testGetMovieInfos() throws Exception {
         LOG.info("testGetMovieInfos");
         final MovieInfos movieInfos = api.getMovieInfos("61282");
@@ -115,7 +115,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+//    @Test
     public void testGetTvSeriesInfos() throws Exception {
         LOG.info("testGetTvSeriesInfos");
         final TvSeriesInfos tvseriesInfos = api.getTvSeriesInfos("132");
@@ -185,7 +185,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+//    @Test
     public void testGetPersonFilmography() throws Exception {
         LOG.info("testGetPersonFilmography");
         final FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
@@ -198,7 +198,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+//    @Test
     public void testGetEpisodeInfos() throws Exception {
         LOG.info("testGetEpisodeInfos");
         final EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");

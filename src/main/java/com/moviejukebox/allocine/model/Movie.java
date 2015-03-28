@@ -56,8 +56,6 @@ public class Movie extends AbstractBaseMapping {
     private boolean vod;
     @JsonProperty("hasBluRay")
     private boolean bluray;
-    @JsonProperty("hasDVD")
-    private boolean dvd;
     @JsonProperty("hasShowtime")
     private boolean showtime;
     @JsonProperty("dvdReleaseDate")
@@ -66,24 +64,10 @@ public class Movie extends AbstractBaseMapping {
     private String bluRayReleaseDate;
     @JsonProperty("keywords")
     private String keywords;
-    @JsonProperty("castingShort")
-    private CastingShort castingShort;
-    @JsonProperty("news")
-    private List<News> news;
-    @JsonProperty("link")
-    private List<Link> links;
-    @JsonProperty("feature")
-    private List<News> features;
-    @JsonProperty("trivia")
-    private List<Trivia> trivia;
-    @JsonProperty("tag")
-    private List<CodeName> tags;
     @JsonProperty("boxOffice")
     private List<BoxOffice> boxOffice;
-    @JsonProperty("helpfulPositiveReview")
-    private List<Review> helpfulPositiveReview;
-    @JsonProperty("helpfulNegativeReview")
-    private List<Review> helpfulNegativeReview;
+    @JsonProperty("formatList")
+    private FormatList formatList;
 
     public int getProductionYear() {
         return productionYear;
@@ -173,14 +157,6 @@ public class Movie extends AbstractBaseMapping {
         this.bluray = bluray;
     }
 
-    public boolean isDvd() {
-        return dvd;
-    }
-
-    public void setDvd(boolean dvd) {
-        this.dvd = dvd;
-    }
-
     public boolean isShowtime() {
         return showtime;
     }
@@ -221,76 +197,12 @@ public class Movie extends AbstractBaseMapping {
         this.keywords = keywords;
     }
 
-    public CastingShort getCastingShort() {
-        return castingShort;
-    }
-
-    public void setCastingShort(CastingShort castingShort) {
-        this.castingShort = castingShort;
-    }
-
-    public List<News> getNews() {
-        return news;
-    }
-
-    public void setNews(List<News> news) {
-        this.news = news;
-    }
-
-    public List<Link> getLinks() {
-        return links;
-    }
-
-    public void setLinks(List<Link> links) {
-        this.links = links;
-    }
-
-    public List<News> getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(List<News> features) {
-        this.features = features;
-    }
-
-    public List<Trivia> getTrivia() {
-        return trivia;
-    }
-
-    public void setTrivia(List<Trivia> trivia) {
-        this.trivia = trivia;
-    }
-
-    public List<CodeName> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<CodeName> tags) {
-        this.tags = tags;
-    }
-
     public List<BoxOffice> getBoxOffice() {
         return boxOffice;
     }
 
     public void setBoxOffice(List<BoxOffice> boxOffice) {
         this.boxOffice = boxOffice;
-    }
-
-    public List<Review> getHelpfulPositiveReview() {
-        return helpfulPositiveReview;
-    }
-
-    public void setHelpfulPositiveReview(List<Review> helpfulPositiveReview) {
-        this.helpfulPositiveReview = helpfulPositiveReview;
-    }
-
-    public List<Review> getHelpfulNegativeReview() {
-        return helpfulNegativeReview;
-    }
-
-    public void setHelpfulNegativeReview(List<Review> helpfulNegativeReview) {
-        this.helpfulNegativeReview = helpfulNegativeReview;
     }
 
 }

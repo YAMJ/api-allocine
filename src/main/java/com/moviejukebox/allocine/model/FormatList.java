@@ -22,47 +22,40 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-@JsonRootName("castingShort")
-public class CastingShort {
+public class FormatList extends AbstractJsonUnknownHandleMapping {
 
-    private List<String> directors;
-    private List<String> actors;
-    private List<String> creators;
+    @JsonProperty("productionFormat")
+    private List<CodeName> productionFormat;
+    @JsonProperty("projectionFormat")
+    private List<CodeName> projectionFormat;
+    @JsonProperty("soundFormat")
+    private List<CodeName> soundFormat;
 
-    private List<String> asList(String source) {
-        return Arrays.asList(source.split(","));
+    public List<CodeName> getProductionFormat() {
+        return productionFormat;
     }
 
-    public List<String> getDirectors() {
-        return directors;
+    public void setProductionFormat(List<CodeName> productionFormat) {
+        this.productionFormat = productionFormat;
     }
 
-    @JsonSetter("directors")
-    public void setDirectors(String directors) {
-        this.directors = asList(directors);
+    public List<CodeName> getProjectionFormat() {
+        return projectionFormat;
     }
 
-    public List<String> getActors() {
-        return actors;
+    public void setProjectionFormat(List<CodeName> projectionFormat) {
+        this.projectionFormat = projectionFormat;
     }
 
-    @JsonSetter("actors")
-    public void setActors(String actors) {
-        this.actors = asList(actors);
+    public List<CodeName> getSoundFormat() {
+        return soundFormat;
     }
 
-    public List<String> getCreators() {
-        return creators;
-    }
-
-    @JsonSetter("creators")
-    public void setCreators(String creators) {
-        this.creators = asList(creators);
+    public void setSoundFormat(List<CodeName> soundFormat) {
+        this.soundFormat = soundFormat;
     }
 
 }

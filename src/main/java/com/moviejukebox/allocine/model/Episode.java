@@ -24,6 +24,7 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.List;
 
 @JsonRootName("episode")
 public class Episode extends AbstractBaseMapping {
@@ -36,6 +37,20 @@ public class Episode extends AbstractBaseMapping {
     private int episodeNumberSeries;
     @JsonProperty("episodeNumberSeason")
     private int episodeNumberSeason;
+    @JsonProperty("parentSeries")
+    private CodeName parentSeries;
+    @JsonProperty("parentSeason")
+    private CodeName parentSeason;
+    @JsonProperty("picture")
+    private Picture picture;
+    @JsonProperty("trailer")
+    private Trailer trailer;
+    @JsonProperty("trailerEmbed")
+    private String trailerEmbed;
+    @JsonProperty("broadcast")
+    private List<Broadcast> broadcast;
+    @JsonProperty("link")
+    private List<Link> link;
 
     public String getOriginalBroadcastDate() {
         return originalBroadcastDate;
@@ -59,5 +74,61 @@ public class Episode extends AbstractBaseMapping {
 
     public void setEpisodeNumberSeason(int episodeNumberSeason) {
         this.episodeNumberSeason = episodeNumberSeason;
+    }
+
+    public CodeName getParentSeries() {
+        return parentSeries;
+    }
+
+    public void setParentSeries(CodeName parentSeries) {
+        this.parentSeries = parentSeries;
+    }
+
+    public CodeName getParentSeason() {
+        return parentSeason;
+    }
+
+    public void setParentSeason(CodeName parentSeason) {
+        this.parentSeason = parentSeason;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
+    public Trailer getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(Trailer trailer) {
+        this.trailer = trailer;
+    }
+
+    public String getTrailerEmbed() {
+        return trailerEmbed;
+    }
+
+    public void setTrailerEmbed(String trailerEmbed) {
+        this.trailerEmbed = trailerEmbed;
+    }
+
+    public List<Broadcast> getBroadcast() {
+        return broadcast;
+    }
+
+    public void setBroadcast(List<Broadcast> broadcast) {
+        this.broadcast = broadcast;
+    }
+
+    public List<Link> getLink() {
+        return link;
+    }
+
+    public void setLink(List<Link> link) {
+        this.link = link;
     }
 }

@@ -22,47 +22,20 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import java.util.Arrays;
-import java.util.List;
 
-@JsonRootName("castingShort")
-public class CastingShort {
+@JsonRootName("broadcast")
+public class NextBroadcast extends AbstractJsonUnknownHandleMapping {
 
-    private List<String> directors;
-    private List<String> actors;
-    private List<String> creators;
+    @JsonProperty("broadcast")
+    private Broadcast broadcast;
 
-    private List<String> asList(String source) {
-        return Arrays.asList(source.split(","));
+    public Broadcast getBroadcast() {
+        return broadcast;
     }
 
-    public List<String> getDirectors() {
-        return directors;
+    public void setBroadcast(Broadcast broadcast) {
+        this.broadcast = broadcast;
     }
-
-    @JsonSetter("directors")
-    public void setDirectors(String directors) {
-        this.directors = asList(directors);
-    }
-
-    public List<String> getActors() {
-        return actors;
-    }
-
-    @JsonSetter("actors")
-    public void setActors(String actors) {
-        this.actors = asList(actors);
-    }
-
-    public List<String> getCreators() {
-        return creators;
-    }
-
-    @JsonSetter("creators")
-    public void setCreators(String creators) {
-        this.creators = asList(creators);
-    }
-
 }

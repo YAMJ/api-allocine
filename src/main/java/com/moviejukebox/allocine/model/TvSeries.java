@@ -24,6 +24,7 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ import java.util.List;
 public class TvSeries extends AbstractBaseMapping {
 
     private static final long serialVersionUID = 6553404486681341006L;
-    
+
     @JsonProperty("yearStart")
     private int yearStart;
     @JsonProperty("yearEnd")
@@ -44,6 +45,23 @@ public class TvSeries extends AbstractBaseMapping {
     private List<Season> seasonList = new ArrayList<>();
     @JsonProperty("festivalAward")
     private List<FestivalAward> festivalAwards = new ArrayList<>();
+    @JsonProperty("seriesType")
+    private CodeName seriesType;
+    @JsonProperty("keywords")
+    private String keywords;
+    private String originalBroadcast;
+    @JsonProperty("formatTime")
+    private int formatTime;
+    @JsonProperty("productionStatus")
+    private CodeName productionStatus;
+    @JsonProperty("broadcast")
+    private List<Broadcast> broadcast;
+    @JsonProperty("lastSeasonNumber")
+    private int lastSeasonNumber;
+    @JsonProperty("episodeCount")
+    private int episodeCount;
+    @JsonProperty("topBanner")
+    private Picture topBanner;
 
     public int getYearStart() {
         return yearStart;
@@ -92,4 +110,70 @@ public class TvSeries extends AbstractBaseMapping {
     public void setFestivalAwards(List<FestivalAward> festivalAwards) {
         this.festivalAwards = festivalAwards;
     }
+
+    public CodeName getSeriesType() {
+        return seriesType;
+    }
+
+    public void setSeriesType(CodeName seriesType) {
+        this.seriesType = seriesType;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
+    public String getOriginalBroadcast() {
+        return originalBroadcast;
+    }
+
+    @JsonSetter("originalBroadcast")
+    public void setOriginalBroadcast(AllocineDate originalBroadcast) {
+        this.originalBroadcast = originalBroadcast.getDateStart();
+    }
+
+    public int getFormatTime() {
+        return formatTime;
+    }
+
+    public void setFormatTime(int formatTime) {
+        this.formatTime = formatTime;
+    }
+
+    public CodeName getProductionStatus() {
+        return productionStatus;
+    }
+
+    public void setProductionStatus(CodeName productionStatus) {
+        this.productionStatus = productionStatus;
+    }
+
+    public List<Broadcast> getBroadcast() {
+        return broadcast;
+    }
+
+    public void setBroadcast(List<Broadcast> broadcast) {
+        this.broadcast = broadcast;
+    }
+
+    public int getLastSeasonNumber() {
+        return lastSeasonNumber;
+    }
+
+    public void setLastSeasonNumber(int lastSeasonNumber) {
+        this.lastSeasonNumber = lastSeasonNumber;
+    }
+
+    public int getEpisodeCount() {
+        return episodeCount;
+    }
+
+    public void setEpisodeCount(int episodeCount) {
+        this.episodeCount = episodeCount;
+    }
+
 }

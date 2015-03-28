@@ -23,9 +23,9 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @SuppressWarnings("serial")
 public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMapping {
@@ -54,6 +54,27 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
     private Poster poster;
     @JsonProperty("release")
     private Release release;
+    @JsonProperty("hasDVD")
+    private boolean dvd;
+    @JsonProperty("castingShort")
+    private CastingShort castingShort;
+    @JsonProperty("news")
+    private List<News> news;
+    @JsonProperty("link")
+    private List<Link> links;
+    @JsonProperty("tag")
+    private List<CodeName> tags;
+    @JsonProperty("helpfulPositiveReview")
+    private List<Review> helpfulPositiveReview;
+    @JsonProperty("helpfulNegativeReview")
+    private List<Review> helpfulNegativeReview;
+    @JsonProperty("feature")
+    private List<News> features;
+    @JsonProperty("trivia")
+    private List<Trivia> trivia;
+    @JsonProperty("hasBroadcast")
+    private boolean hasBroadcast;
+    private Broadcast nextBroadcast;
 
     public int getCode() {
         return code;
@@ -150,4 +171,94 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
     public void setRelease(Release release) {
         this.release = release;
     }
+
+    public boolean isDvd() {
+        return dvd;
+    }
+
+    public void setDvd(boolean dvd) {
+        this.dvd = dvd;
+    }
+
+    public CastingShort getCastingShort() {
+        return castingShort;
+    }
+
+    public void setCastingShort(CastingShort castingShort) {
+        this.castingShort = castingShort;
+    }
+
+    public List<News> getNews() {
+        return news;
+    }
+
+    public void setNews(List<News> news) {
+        this.news = news;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public List<CodeName> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<CodeName> tags) {
+        this.tags = tags;
+    }
+
+    public List<Review> getHelpfulPositiveReview() {
+        return helpfulPositiveReview;
+    }
+
+    public void setHelpfulPositiveReview(List<Review> helpfulPositiveReview) {
+        this.helpfulPositiveReview = helpfulPositiveReview;
+    }
+
+    public List<Review> getHelpfulNegativeReview() {
+        return helpfulNegativeReview;
+    }
+
+    public void setHelpfulNegativeReview(List<Review> helpfulNegativeReview) {
+        this.helpfulNegativeReview = helpfulNegativeReview;
+    }
+
+    public List<News> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(List<News> features) {
+        this.features = features;
+    }
+
+    public List<Trivia> getTrivia() {
+        return trivia;
+    }
+
+    public void setTrivia(List<Trivia> trivia) {
+        this.trivia = trivia;
+    }
+
+    public boolean isBroadcast() {
+        return hasBroadcast;
+    }
+
+    public void setHasBroadcast(boolean hasBroadcast) {
+        this.hasBroadcast = hasBroadcast;
+    }
+
+    public Broadcast getNextBroadcast() {
+        return nextBroadcast;
+    }
+
+    @JsonSetter("nextBroadcast")
+    public void setNextBroadcast(NextBroadcast nextBroadcast) {
+        this.nextBroadcast = nextBroadcast.getBroadcast();
+    }
+
 }
