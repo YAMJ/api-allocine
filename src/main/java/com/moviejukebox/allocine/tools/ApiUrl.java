@@ -24,7 +24,6 @@ package com.moviejukebox.allocine.tools;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -39,7 +38,7 @@ public final class ApiUrl {
     // Base API URL
     private static final String API_URL = "http://api.allocine.fr/rest/v3/";
     private static final String PARAM_PARTNER = "?partner=";
-    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyyMMdd");
+    private static final String DATE_FORMAT = "yyyyMMdd";
 
     // Keys
     private final String partnerKey;
@@ -110,7 +109,7 @@ public final class ApiUrl {
      * @return
      */
     private static String buildSed() {
-        return DATE_FORMATTER.format(new Date());
+        return new SimpleDateFormat(DATE_FORMAT).format(new Date());
     }
 
     /**
