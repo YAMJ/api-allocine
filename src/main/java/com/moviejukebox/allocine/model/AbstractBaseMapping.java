@@ -41,9 +41,9 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
     @JsonProperty("synopsisShort")
     private String synopsisShort;
     @JsonProperty("nationality")
-    private List<Nationality> nationality = new ArrayList<>();
+    private List<CodeName> nationality = new ArrayList<>();
     @JsonProperty("genre")
-    private List<Genre> genre = new ArrayList<>();
+    private List<CodeName> genre = new ArrayList<>();
     @JsonProperty("castMember")
     private List<CastMember> castMember = new ArrayList<>();
     @JsonProperty("statistics")
@@ -95,19 +95,19 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
         this.synopsisShort = synopsisShort;
     }
 
-    public List<Nationality> getNationality() {
+    public List<CodeName> getNationality() {
         return nationality;
     }
 
-    public void setNationality(List<Nationality> nationality) {
+    public void setNationality(List<CodeName> nationality) {
         this.nationality = nationality;
     }
 
-    public List<Genre> getGenre() {
+    public List<CodeName> getGenre() {
         return genre;
     }
 
-    public void setGenre(List<Genre> genre) {
+    public void setGenre(List<CodeName> genre) {
         this.genre = genre;
     }
 

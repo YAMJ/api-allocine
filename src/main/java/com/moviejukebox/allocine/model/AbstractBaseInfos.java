@@ -84,7 +84,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         if (genres == null) {
             genres = new HashSet<>();
             if (base.getGenre() != null) {
-                for (Genre genre : base.getGenre()) {
+                for (CodeName genre : base.getGenre()) {
                     genres.add(genre.getName());
                 }
             }
@@ -99,7 +99,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         if (nationalities == null) {
             nationalities = new HashSet<>();
             if (base.getNationality() != null) {
-                for (Nationality nationality : base.getNationality()) {
+                for (CodeName nationality : base.getNationality()) {
                     nationalities.add(nationality.getName());
                 }
             }

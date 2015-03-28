@@ -29,15 +29,15 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Release extends AbstractJsonUnknownHandleMapping {
 
     private static final long serialVersionUID = -1616200515264506685L;
-    
+
     @JsonProperty("releaseDate")
     private String releaseDate;
     @JsonProperty("country")
-    private Country country;
+    private CodeName country;
     @JsonProperty("distributor")
-    private Distributor distributor;
+    private CodeName distributor;
     @JsonProperty("releaseState")
-    private ReleaseState releaseState;
+    private CodeName releaseState;
 
     public String getReleaseDate() {
         return releaseDate;
@@ -47,27 +47,27 @@ public class Release extends AbstractJsonUnknownHandleMapping {
         this.releaseDate = releaseDate;
     }
 
-    public Country getCountry() {
+    public CodeName getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(CodeName country) {
         this.country = country;
     }
 
-    public Distributor getDistributor() {
+    public CodeName getDistributor() {
         return distributor;
     }
 
-    public void setDistributor(Distributor distributor) {
+    public void setDistributor(CodeName distributor) {
         this.distributor = distributor;
     }
 
-    public ReleaseState getReleaseState() {
+    public CodeName getReleaseState() {
         return releaseState;
     }
 
-    public void setReleaseState(ReleaseState releaseState) {
+    public void setReleaseState(CodeName releaseState) {
         this.releaseState = releaseState;
     }
 }

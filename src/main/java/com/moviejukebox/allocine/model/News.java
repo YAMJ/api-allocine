@@ -37,7 +37,7 @@ public class News extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("pageCount")
     private Integer pageCount;
     @JsonProperty("category")
-    private List<Category> category;
+    private List<CodeName> category;
     @JsonProperty("picture")
     private Picture picture;
 
@@ -83,11 +83,11 @@ public class News extends AbstractJsonUnknownHandleMapping {
         this.pageCount = pageCount;
     }
 
-    public List<Category> getCategory() {
+    public List<CodeName> getCategory() {
         return category;
     }
 
-    public void setCategory(List<Category> category) {
+    public void setCategory(List<CodeName> category) {
         this.category = category;
     }
 

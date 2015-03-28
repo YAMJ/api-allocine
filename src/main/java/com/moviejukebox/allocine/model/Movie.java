@@ -45,11 +45,11 @@ public class Movie extends AbstractBaseMapping {
     @JsonProperty("festivalAward")
     private List<FestivalAward> festivalAwards = new ArrayList<>();
     @JsonProperty("movieType")
-    private MovieType movieType;
+    private CodeName movieType;
     @JsonProperty("color")
     private String color;
     @JsonProperty("language")
-    private List<Language> languages = new ArrayList<>();
+    private List<CodeName> languages = new ArrayList<>();
     @JsonProperty("budget")
     private String budget;
     @JsonProperty("hasVOD")
@@ -77,7 +77,7 @@ public class Movie extends AbstractBaseMapping {
     @JsonProperty("trivia")
     private List<Trivia> trivia;
     @JsonProperty("tag")
-    private List<Tag> tags;
+    private List<CodeName> tags;
     @JsonProperty("boxOffice")
     private List<BoxOffice> boxOffice;
     @JsonProperty("helpfulPositiveReview")
@@ -125,11 +125,11 @@ public class Movie extends AbstractBaseMapping {
         this.festivalAwards = festivalAwards;
     }
 
-    public MovieType getMovieType() {
+    public CodeName getMovieType() {
         return movieType;
     }
 
-    public void setMovieType(MovieType movieType) {
+    public void setMovieType(CodeName movieType) {
         this.movieType = movieType;
     }
 
@@ -141,11 +141,11 @@ public class Movie extends AbstractBaseMapping {
         this.color = color.getName();
     }
 
-    public List<Language> getLanguages() {
+    public List<CodeName> getLanguages() {
         return languages;
     }
 
-    public void setLanguages(List<Language> languages) {
+    public void setLanguages(List<CodeName> languages) {
         this.languages = languages;
     }
 
@@ -261,11 +261,11 @@ public class Movie extends AbstractBaseMapping {
         this.trivia = trivia;
     }
 
-    public List<Tag> getTags() {
+    public List<CodeName> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(List<CodeName> tags) {
         this.tags = tags;
     }
 

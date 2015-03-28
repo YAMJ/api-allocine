@@ -30,32 +30,32 @@ import org.apache.commons.lang3.math.NumberUtils;
 @JsonRootName("festivalAward")
 public class FestivalAward extends AbstractJsonUnknownHandleMapping {
 
-    private static final long serialVersionUID = 6122348929992079547L;
+    private static final long serialVersionUID = 2L;
 
     @JsonProperty("parentFestival")
-    private ParentFestival parentFestival;
+    private CodeName parentFestival;
     @JsonProperty("parentEdition")
-    private ParentEdition parentEdition;
+    private CodeName parentEdition;
     @JsonProperty("name")
     private String name;
     @JsonProperty("code")
     private int code;
     @JsonProperty("awardType")
-    private AwardType awardType;
+    private CodeName awardType;
 
-    public ParentFestival getParentFestival() {
+    public CodeName getParentFestival() {
         return parentFestival;
     }
 
-    public void setParentFestival(ParentFestival parentFestival) {
+    public void setParentFestival(CodeName parentFestival) {
         this.parentFestival = parentFestival;
     }
 
-    public ParentEdition getParentEdition() {
+    public CodeName getParentEdition() {
         return parentEdition;
     }
 
-    public void setParentEdition(ParentEdition parentEdition) {
+    public void setParentEdition(CodeName parentEdition) {
         this.parentEdition = parentEdition;
     }
 
@@ -76,5 +76,21 @@ public class FestivalAward extends AbstractJsonUnknownHandleMapping {
             return NumberUtils.toInt(parentEdition.getName(), -1);
         }
         return -1;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public CodeName getAwardType() {
+        return awardType;
+    }
+
+    public void setAwardType(CodeName awardType) {
+        this.awardType = awardType;
     }
 }

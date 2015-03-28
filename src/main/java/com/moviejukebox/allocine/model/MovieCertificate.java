@@ -29,15 +29,15 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class MovieCertificate extends AbstractJsonUnknownHandleMapping {
 
     private static final long serialVersionUID = -4813154639075145528L;
-    
-    @JsonProperty("certificate")
-    private Certificate certificate;
 
-    public Certificate getCertificate() {
+    @JsonProperty("certificate")
+    private CodeName certificate;
+
+    public CodeName getCertificate() {
         return certificate;
     }
 
-    public void setCertificate(Certificate certificate) {
+    public void setCertificate(CodeName certificate) {
         this.certificate = certificate;
     }
 }

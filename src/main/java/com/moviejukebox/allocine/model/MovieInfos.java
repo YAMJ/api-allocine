@@ -115,7 +115,7 @@ public class MovieInfos extends AbstractBaseInfos {
         // Default value
         String certification = "All";
         if (movie != null && movie.getMovieCertificate() != null) {
-            Certificate certificate = movie.getMovieCertificate().getCertificate();
+            CodeName certificate = movie.getMovieCertificate().getCertificate();
             if (certificate != null) {
                 Matcher match = AGE_REGEXP.matcher(certificate.getName());
                 if (match.find()) {
@@ -155,7 +155,7 @@ public class MovieInfos extends AbstractBaseInfos {
     public Set<MoviePerson> getWriters() {
         return this.getWriters(movie);
     }
-    
+
     public Set<MoviePerson> getCamera() {
         return this.getCamera(movie);
     }
@@ -163,11 +163,11 @@ public class MovieInfos extends AbstractBaseInfos {
     public Set<MoviePerson> getProducers() {
         return this.getProducers(movie);
     }
-    
+
     public Set<String> getPosterUrls() {
         return this.getPosterUrls(movie);
     }
-    
+
     public List<FestivalAward> getFestivalAwards() {
         if (movie != null)  {
             return movie.getFestivalAwards();
