@@ -24,30 +24,80 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.List;
 
 @JsonRootName("person")
-public class ShortPerson extends AbstractJsonUnknownHandleMapping {
+public class ShortPerson extends CodeName {
 
-    private static final long serialVersionUID = 6405799546704312370L;
-    
-    @JsonProperty("code")
-    private int code;
-    @JsonProperty("name")
-    private String name;
+    private static final long serialVersionUID = 2L;
 
-    public int getCode() {
-        return code;
+    @JsonProperty("gender")
+    private int gender;
+    @JsonProperty("birthDate")
+    private String birthDate;
+    @JsonProperty("activity")
+    private List<CodeName> activity;
+    @JsonProperty("nationality")
+    private List<CodeName> nationality;
+    @JsonProperty("picture")
+    private Picture picture;
+    @JsonProperty("link")
+    private List<Link> link;
+
+    public boolean isMale() {
+        return gender == 1;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public boolean isFemale() {
+        return gender == 2;
     }
 
-    public String getName() {
-        return name;
+    public int getGender() {
+        return gender;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public List<CodeName> getActivity() {
+        return activity;
+    }
+
+    public void setActivity(List<CodeName> activity) {
+        this.activity = activity;
+    }
+
+    public List<CodeName> getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(List<CodeName> nationality) {
+        this.nationality = nationality;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
+    public List<Link> getLink() {
+        return link;
+    }
+
+    public void setLink(List<Link> link) {
+        this.link = link;
+    }
+
 }

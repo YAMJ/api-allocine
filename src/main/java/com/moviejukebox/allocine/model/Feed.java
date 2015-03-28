@@ -31,7 +31,11 @@ import java.util.List;
 public class Feed extends AbstractJsonUnknownHandleMapping {
 
     private static final long serialVersionUID = 6122348929992079547L;
-    
+
+    @JsonProperty("page")
+    private int page = -1;
+    @JsonProperty("count")
+    private int count = -1;
     @JsonProperty("totalResults")
     private long totalResults = -1;
     @JsonProperty("movie")
@@ -40,6 +44,8 @@ public class Feed extends AbstractJsonUnknownHandleMapping {
     private List<TvSeries> tvseries = new ArrayList<>();
     @JsonProperty("person")
     private List<ShortPerson> persons = new ArrayList<>();
+    @JsonProperty("results")
+    private List<TypeValue> results;
 
     public long getTotalResults() {
         return totalResults;
@@ -71,5 +77,37 @@ public class Feed extends AbstractJsonUnknownHandleMapping {
 
     public void setPersons(List<ShortPerson> persons) {
         this.persons = persons;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public List<TvSeries> getTvseries() {
+        return tvseries;
+    }
+
+    public void setTvseries(List<TvSeries> tvseries) {
+        this.tvseries = tvseries;
+    }
+
+    public List<TypeValue> getResults() {
+        return results;
+    }
+
+    public void setResults(List<TypeValue> results) {
+        this.results = results;
     }
 }

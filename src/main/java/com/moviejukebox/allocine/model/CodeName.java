@@ -3,7 +3,7 @@ package com.moviejukebox.allocine.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class CodeName extends AbstractJsonMapping {
+public class CodeName extends AbstractJsonUnknownHandleMapping {
 
     @JsonProperty("code")
     private int code;
