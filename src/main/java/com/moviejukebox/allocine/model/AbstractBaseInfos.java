@@ -108,20 +108,22 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     }
 
     protected Set<MoviePerson> getActors(final AbstractBaseMapping base) {
+        if (base == null || base.getCastMember() != null) {
+            return Collections.emptySet();
+        }
+
         final Set<MoviePerson> set = new LinkedHashSet<>();
-        if (base != null && base.getCastMember() != null) {
-            for (CastMember member : base.getCastMember()) {
-                if (member.isActor()) {
-                    final MoviePerson person = new MoviePerson();
-                    person.setCode(member.getShortPerson().getCode());
-                    person.setName(member.getShortPerson().getName());
-                    person.setRole(member.getRole());
-                    person.setLeadActor(member.isLeadActor());
-                    if (member.getPicture() != null) {
-                        person.setPhotoURL(member.getPicture().getHref());
-                    }
-                    set.add(person);
+        for (CastMember member : base.getCastMember()) {
+            if (member.isActor()) {
+                final MoviePerson person = new MoviePerson();
+                person.setCode(member.getShortPerson().getCode());
+                person.setName(member.getShortPerson().getName());
+                person.setRole(member.getRole());
+                person.setLeadActor(member.isLeadActor());
+                if (member.getPicture() != null) {
+                    person.setPhotoURL(member.getPicture().getHref());
                 }
+                set.add(person);
             }
         }
         return set;
@@ -192,19 +194,22 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     }
 
     private void parseMediaList(final AbstractBaseMapping base) {
+        if (base == null) {
+            return;
+        }
+
         if (posterURLS == null) {
             posterURLS = new LinkedHashSet<>();
         }
 
-        if (base != null) {
-            if (base.getPoster() != null) {
-                posterURLS.add(base.getPoster().getHref());
-            }
-            if (base.getMedia() != null) {
-                for (Medium medium : base.getMedia()) {
-                    if (medium.isPoster() && medium.getThumbnail() != null) {
-                        posterURLS.add(medium.getThumbnail().getHref());
-                    }
+        if (base.getPoster() != null) {
+            posterURLS.add(base.getPoster().getHref());
+        }
+        
+        if (base.getMedia() != null) {
+            for (Medium medium : base.getMedia()) {
+                if (medium.isPoster() && medium.getThumbnail() != null) {
+                    posterURLS.add(medium.getThumbnail().getHref());
                 }
             }
         }
