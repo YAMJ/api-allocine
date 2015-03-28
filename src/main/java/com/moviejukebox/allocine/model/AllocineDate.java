@@ -22,11 +22,29 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonRootName("country")
-public class Country extends CodeName {
+public class AllocineDate {
 
-    private static final long serialVersionUID = -5545136582268497035L;
+    @JsonProperty("dateStart")
+    private String dateStart;
+    @JsonProperty("dateEnd")
+    private String dateEnd;
+
+    public String getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public String getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
+    }
 
 }

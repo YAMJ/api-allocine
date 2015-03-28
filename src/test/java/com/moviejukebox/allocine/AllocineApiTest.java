@@ -51,7 +51,7 @@ public class AllocineApiTest {
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
     }
 
-    @Test
+    //@Test
     public void testAccentSearch() throws Exception {
         LOG.info("testAccentSearch");
         final Search search = api.searchMovies("Mémoires de nos pères");
@@ -66,21 +66,21 @@ public class AllocineApiTest {
         assertTrue("Movie not found in search", found);
     }
 
-    @Test
+    //@Test
     public void testSearchMovies() throws Exception {
         LOG.info("testSearchMovieInfos");
         final Search search = api.searchMovies("avatar");
         assertEquals(10, search.getMovies().size());
     }
 
-    @Test
+    //@Test
     public void testSearchTvseriesInfos() throws Exception {
         LOG.info("testSearchTvseriesInfos");
         final Search search = api.searchTvSeries("glee");
         assertEquals(1, search.getTvSeries().size());
     }
 
-    @Test
+    //@Test
     public void testSearchPersons() throws Exception {
         LOG.info("testSearchPersons");
         final Search search = api.searchPersons("Sam Worthington");
@@ -115,7 +115,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+    //@Test
     public void testGetTvSeriesInfos() throws Exception {
         LOG.info("testGetTvSeriesInfos");
         final TvSeriesInfos tvseriesInfos = api.getTvSeriesInfos("132");
@@ -141,7 +141,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+    //@Test
     public void testGetTvSeasonInfos() throws Exception {
         LOG.info("testGetTvSeasonInfos");
         final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
@@ -162,7 +162,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+    //@Test
     public void testCertification() throws Exception {
         LOG.info("testCertification");
         MovieInfos movieInfos = api.getMovieInfos("21189"); // Fight club, should be a "16"
@@ -171,7 +171,7 @@ public class AllocineApiTest {
         assertEquals("Incorrect certificate", "All", movieInfos.getCertification());
     }
 
-    @Test
+    //@Test
     public void testGetPersonInfos() throws Exception {
         LOG.info("testGetPersonInfos");
         final PersonInfos personInfos = api.getPersonInfos("8504");
@@ -185,7 +185,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+    //@Test
     public void testGetPersonFilmography() throws Exception {
         LOG.info("testGetPersonFilmography");
         final FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
@@ -198,7 +198,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+    //@Test
     public void testGetEpisodeInfos() throws Exception {
         LOG.info("testGetEpisodeInfos");
         final EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");

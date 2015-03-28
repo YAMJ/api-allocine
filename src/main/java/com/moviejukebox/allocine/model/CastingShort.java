@@ -22,11 +22,33 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.Arrays;
+import java.util.List;
 
-@JsonRootName("country")
-public class Country extends CodeName {
+@JsonRootName("castingShort")
+public class CastingShort {
 
-    private static final long serialVersionUID = -5545136582268497035L;
+    private List<String> directors;
+    private List<String> actors;
+
+    public List<String> getDirectors() {
+        return directors;
+    }
+
+    @JsonProperty("directors")
+    public void setDirectors(String directors) {
+        this.directors = Arrays.asList(directors.split(","));
+    }
+
+    public List<String> getActors() {
+        return actors;
+    }
+
+    @JsonProperty("actors")
+    public void setActors(String actors) {
+        this.actors = Arrays.asList(actors.split(","));
+    }
 
 }

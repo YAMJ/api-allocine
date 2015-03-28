@@ -22,22 +22,11 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("nationality")
-public class Nationality extends AbstractJsonMapping {
+public class Nationality extends CodeName {
 
     private static final long serialVersionUID = -1227953313362477930L;
-    
-    @JsonProperty("$")
-    private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

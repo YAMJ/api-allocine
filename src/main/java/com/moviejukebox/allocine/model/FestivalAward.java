@@ -38,6 +38,10 @@ public class FestivalAward extends AbstractJsonUnknownHandleMapping {
     private ParentEdition parentEdition;
     @JsonProperty("name")
     private String name;
+    @JsonProperty("code")
+    private int code;
+    @JsonProperty("awardType")
+    private AwardType awardType;
 
     public ParentFestival getParentFestival() {
         return parentFestival;

@@ -24,9 +24,9 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-@JsonRootName("country")
-public class Country extends CodeName {
+@JsonRootName("category")
+public class Category extends CodeName {
 
-    private static final long serialVersionUID = -5545136582268497035L;
+    private static final long serialVersionUID = 7383135567796765796L;
 
 }

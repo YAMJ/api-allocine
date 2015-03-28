@@ -108,25 +108,31 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
     }
 
     protected Set<MoviePerson> getActors(final AbstractBaseMapping base) {
-        if (base == null || base.getCastMember() != null) {
-            return Collections.emptySet();
-        }
-
         final Set<MoviePerson> set = new LinkedHashSet<>();
-        for (CastMember member : base.getCastMember()) {
-            if (member.isActor()) {
-                final MoviePerson person = new MoviePerson();
-                person.setCode(member.getShortPerson().getCode());
-                person.setName(member.getShortPerson().getName());
-                person.setRole(member.getRole());
-                person.setLeadActor(member.isLeadActor());
-                if (member.getPicture() != null) {
-                    person.setPhotoURL(member.getPicture().getHref());
+        if (base != null && base.getCastMember() != null) {
+            for (CastMember member : base.getCastMember()) {
+                MoviePerson person = createPersonActor(member);
+                if (person != null) {
+                    set.add(person);
                 }
-                set.add(person);
             }
         }
         return set;
+    }
+
+    private MoviePerson createPersonActor(CastMember member) {
+        if (member.isActor()) {
+            final MoviePerson person = new MoviePerson();
+            person.setCode(member.getShortPerson().getCode());
+            person.setName(member.getShortPerson().getName());
+            person.setRole(member.getRole());
+            person.setLeadActor(member.isLeadActor());
+            if (member.getPicture() != null) {
+                person.setPhotoURL(member.getPicture().getHref());
+            }
+            return person;
+        }
+        return null;
     }
 
     protected Set<MoviePerson> getDirectors(final AbstractBaseMapping base) {
@@ -205,7 +211,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
         if (base.getPoster() != null) {
             posterURLS.add(base.getPoster().getHref());
         }
-        
+
         if (base.getMedia() != null) {
             for (Medium medium : base.getMedia()) {
                 if (medium.isPoster() && medium.getThumbnail() != null) {

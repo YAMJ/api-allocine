@@ -22,12 +22,11 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.moviejukebox.allocine.model.enumeration.Job;
 
 @JsonRootName("activity")
-public class Activity extends AbstractJsonMapping {
+public class Activity extends CodeName {
 
     private static final long serialVersionUID = 1739586583915230L;
     // Actor codes
@@ -46,18 +45,11 @@ public class Activity extends AbstractJsonMapping {
     // Camera codes
     private static final int CAMERA_CODE = 8037;
 
-    @JsonProperty("code")
-    private int code;
-    @JsonProperty("$")
-    private String name;
     private Job job = Job.UNKNOWN;
 
-    public int getCode() {
-        return code;
-    }
-
+    @Override
     public void setCode(int code) {
-        this.code = code;
+        super.setCode(code);
 
         // Populate the job with the correct value
         switch (code) {
@@ -93,35 +85,31 @@ public class Activity extends AbstractJsonMapping {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    private boolean hasJob(Job job) {
+        return this.job == job;
     }
 
     public boolean isActor() {
-        return job == Job.ACTOR;
+        return hasJob(Job.ACTOR);
     }
 
     public boolean isDirector() {
-        return job == Job.DIRECTOR;
+        return hasJob(Job.DIRECTOR);
     }
 
     public boolean isWriter() {
-        return job == Job.WRITER;
+        return hasJob(Job.WRITER);
     }
 
     public boolean isCamera() {
-        return job == Job.CAMERA;
+        return hasJob(Job.CAMERA);
     }
 
     public boolean isProducer() {
-        return job == Job.PRODUCER;
+        return hasJob(Job.PRODUCER);
     }
 
     public boolean isKnownActivity() {
-        return job != Job.UNKNOWN;
+        return hasJob(Job.UNKNOWN);
     }
 }

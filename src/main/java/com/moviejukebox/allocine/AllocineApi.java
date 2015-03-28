@@ -36,6 +36,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.protocol.HTTP;
+import org.slf4j.LoggerFactory;
 import org.yamj.api.common.exception.ApiExceptionType;
 import org.yamj.api.common.http.DigestedResponse;
 import org.yamj.api.common.http.DigestedResponseReader;
@@ -114,6 +115,7 @@ public class AllocineApi {
             try {
                 return mapper.readValue(page, object);
             } catch (IOException ex) {
+                LoggerFactory.getLogger("test").info("{}", ex);
                 throw new AllocineException(ApiExceptionType.MAPPING_FAILED, "Failed to read JSON object", url, ex);
             }
         }
@@ -369,7 +371,7 @@ public class AllocineApi {
 
             return response.getContent();
         } catch (URISyntaxException ex) {
-          throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
+            throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
         } catch (IOException ex) {
             throw new AllocineException(ApiExceptionType.CONNECTION_ERROR, "Error retrieving URL", url, ex);
         }

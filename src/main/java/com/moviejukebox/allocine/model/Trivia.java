@@ -23,32 +23,49 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-@JsonRootName("picture")
-public class Picture extends AbstractJsonMapping {
+public class Trivia extends AbstractJsonUnknownHandleMapping {
 
-    private static final long serialVersionUID = 5693427423583445696L;
+    @JsonProperty("code")
+    private String code;
+    private String publication;
+    @JsonProperty("title")
+    private String title;
+    @JsonProperty("body")
+    private String body;
 
-    @JsonProperty("href")
-    private String href;
-    @JsonProperty("path")
-    private String path;
-
-
-    public String getHref() {
-        return href;
+    public String getCode() {
+        return code;
     }
 
-    public void setHref(String href) {
-        this.href = href;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getPath() {
-        return path;
+    public String getPublication() {
+        return publication;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    @JsonSetter("publication")
+    public void setPublication(AllocineDate publication) {
+        this.publication = publication.getDateStart();
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
 }

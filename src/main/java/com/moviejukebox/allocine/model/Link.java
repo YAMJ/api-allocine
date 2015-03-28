@@ -22,11 +22,38 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonRootName("country")
-public class Country extends CodeName {
+public class Link {
 
-    private static final long serialVersionUID = -5545136582268497035L;
+    @JsonProperty("rel")
+    private String rel;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("href")
+    private String href;
 
+    public String getRel() {
+        return rel;
+    }
+
+    public void setRel(String rel) {
+        this.rel = rel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
 }
