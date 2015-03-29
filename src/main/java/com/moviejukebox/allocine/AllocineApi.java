@@ -137,13 +137,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
-        Search search;
         try {
-            search = this.readJsonObject(new URL(url), Search.class);
+            return this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-        return search;
     }
 
     /**
@@ -161,14 +159,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
-        Search search;
         try {
-            search = this.readJsonObject(new URL(url), Search.class);
+            return this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-
-        return search;
     }
 
     /**
@@ -186,14 +181,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, "biography,biographyshort");
         final String url = apiUrl.generateUrl(METHOD_SEARCH, params);
 
-        Search search;
         try {
-            search = this.readJsonObject(new URL(url), Search.class);
+            return this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-
-        return search;
     }
 
     /**
@@ -212,14 +204,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_MOVIE, params);
 
-        MovieInfos movieInfos;
         try {
-            movieInfos = this.readJsonObject(new URL(url), MovieInfos.class);
+            return this.readJsonObject(new URL(url), MovieInfos.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-
-        return movieInfos;
     }
 
     /**
@@ -239,14 +228,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_TVSERIES, params);
 
-        TvSeriesInfos tvSeriesInfo;
         try {
-            tvSeriesInfo = this.readJsonObject(new URL(url), TvSeriesInfos.class);
+            return this.readJsonObject(new URL(url), TvSeriesInfos.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-
-        return tvSeriesInfo;
     }
 
     /**
@@ -266,14 +252,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_SEASON, params);
 
-        TvSeasonInfos tvSeasonInfos;
         try {
-            tvSeasonInfos = this.readJsonObject(new URL(url), TvSeasonInfos.class);
+            return this.readJsonObject(new URL(url), TvSeasonInfos.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-
-        return tvSeasonInfos;
     }
 
     /**
@@ -291,13 +274,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, "biography,biographyshort");
         final String url = apiUrl.generateUrl(METHOD_PERSON, params);
 
-        PersonInfos personInfos;
         try {
-            personInfos = this.readJsonObject(new URL(url), PersonInfos.class);
+            return this.readJsonObject(new URL(url), PersonInfos.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-        return personInfos;
     }
 
     /**
@@ -315,13 +296,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_FILMOGRAPHY, params);
 
-        FilmographyInfos filmographyInfos;
         try {
-            filmographyInfos = this.readJsonObject(new URL(url), FilmographyInfos.class);
+            return this.readJsonObject(new URL(url), FilmographyInfos.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-        return filmographyInfos;
     }
 
     /**
@@ -339,13 +318,11 @@ public class AllocineApi {
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_EPISODE, params);
 
-        EpisodeInfos episodeInfos;
         try {
-            episodeInfos = this.readJsonObject(new URL(url), EpisodeInfos.class);
+            return this.readJsonObject(new URL(url), EpisodeInfos.class);
         } catch (MalformedURLException ex) {
             throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
-        return episodeInfos;
     }
 
     /**
