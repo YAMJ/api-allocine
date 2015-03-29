@@ -25,6 +25,7 @@ package com.moviejukebox.allocine.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +73,12 @@ public class Person extends AbstractJsonUnknownHandleMapping {
     private List<Link> link;
     @JsonProperty("media")
     private List<Medium> media;
+    @JsonProperty("news")
+    private List<News> news;
+    @JsonProperty("feature")
+    private List<News> features;
+    @JsonProperty("statistics")
+    private Statistics statistics;
 
     public int getCode() {
         return code;
@@ -175,5 +182,82 @@ public class Person extends AbstractJsonUnknownHandleMapping {
 
     public void setFestivalAwards(List<FestivalAward> festivalAwards) {
         this.festivalAwards = festivalAwards;
+    }
+
+    public List<CodeName> getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(List<CodeName> nationality) {
+        this.nationality = nationality;
+    }
+
+    public List<Activity> getActivity() {
+        return activity;
+    }
+
+    public void setActivity(List<Activity> activity) {
+        this.activity = activity;
+    }
+
+    public String getActivityShort() {
+        return activityShort;
+    }
+
+    public void setActivityShort(String activityShort) {
+        this.activityShort = activityShort;
+    }
+
+    public boolean isTopFilmography() {
+        return topFilmography;
+    }
+
+    public void setTopFilmography(boolean topFilmography) {
+        this.topFilmography = topFilmography;
+    }
+
+    public List<Link> getLink() {
+        return link;
+    }
+
+    public void setLink(List<Link> link) {
+        this.link = link;
+    }
+
+    public List<Medium> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<Medium> media) {
+        this.media = media;
+    }
+
+    public List<News> getNews() {
+        return news;
+    }
+
+    public void setNews(List<News> news) {
+        this.news = news;
+    }
+
+    public List<News> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(List<News> features) {
+        this.features = features;
+    }
+
+    @JsonSetter("festivalSection")
+    public void setFestivalSection(List<FestivalAward> festivalAwards) {
+        this.festivalAwards = festivalAwards;
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(Statistics statistics) {
+        this.statistics = statistics;
     }
 }

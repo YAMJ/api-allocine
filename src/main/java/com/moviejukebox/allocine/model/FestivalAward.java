@@ -42,6 +42,10 @@ public class FestivalAward extends AbstractJsonUnknownHandleMapping {
     private int code;
     @JsonProperty("awardType")
     private CodeName awardType;
+    @JsonProperty("entities")
+    private Entity entities;
+    @JsonProperty("sectionType")
+    private CodeName sectionType;
 
     public CodeName getParentFestival() {
         return parentFestival;
@@ -92,5 +96,21 @@ public class FestivalAward extends AbstractJsonUnknownHandleMapping {
 
     public void setAwardType(CodeName awardType) {
         this.awardType = awardType;
+    }
+
+    public Entity getEntities() {
+        return entities;
+    }
+
+    public void setEntities(Entity entities) {
+        this.entities = entities;
+    }
+
+    public CodeName getSectionType() {
+        return sectionType;
+    }
+
+    public void setSectionType(CodeName sectionType) {
+        this.sectionType = sectionType;
     }
 }

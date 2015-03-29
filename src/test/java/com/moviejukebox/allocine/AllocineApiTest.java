@@ -52,7 +52,7 @@ public class AllocineApiTest {
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
     }
 
-//    @Test
+    @Test
     public void testAccentSearch() throws Exception {
         LOG.info("testAccentSearch");
         final Search search = api.searchMovies("Mémoires de nos pères");
@@ -67,28 +67,28 @@ public class AllocineApiTest {
         assertTrue("Movie not found in search", found);
     }
 
-//    @Test
+    @Test
     public void testSearchMovies() throws Exception {
         LOG.info("testSearchMovieInfos");
         final Search search = api.searchMovies("avatar");
         assertEquals(10, search.getMovies().size());
     }
 
-//    @Test
+    @Test
     public void testSearchTvseriesInfos() throws Exception {
         LOG.info("testSearchTvseriesInfos");
         final Search search = api.searchTvSeries("glee");
         assertEquals(1, search.getTvSeries().size());
     }
 
-//    @Test
+    @Test
     public void testSearchPersons() throws Exception {
         LOG.info("testSearchPersons");
         final Search search = api.searchPersons("Sam Worthington");
         assertEquals(1, search.getPersons().size());
     }
 
-//    @Test
+    @Test
     public void testGetMovieInfos() throws Exception {
         LOG.info("testGetMovieInfos");
         final MovieInfos movieInfos = api.getMovieInfos("61282");
@@ -110,13 +110,10 @@ public class AllocineApiTest {
         assertEquals(1, movieInfos.getWriters().size());
         assertEquals(42, movieInfos.getActors().size());
         assertEquals(85, movieInfos.getUserRating());
-
-        for (FestivalAward award : movieInfos.getFestivalAwards()) {
-            LOG.trace("Award: {}", award.getName());
-        }
+        assertFalse(movieInfos.getFestivalAwards().isEmpty());
     }
 
-//    @Test
+    @Test
     public void testGetTvSeriesInfos() throws Exception {
         LOG.info("testGetTvSeriesInfos");
         final TvSeriesInfos tvseriesInfos = api.getTvSeriesInfos("132");
@@ -136,13 +133,10 @@ public class AllocineApiTest {
         assertEquals(70, tvseriesInfos.getUserRating());
         assertEquals(12, tvseriesInfos.getSeasonCount());
         assertEquals(12, tvseriesInfos.getSeasonList().size());
-
-        for (FestivalAward award : tvseriesInfos.getFestivalAwards()) {
-            LOG.trace("Award: {}", award.getName());
-        }
+        assertFalse(tvseriesInfos.getFestivalAwards().isEmpty());
     }
 
-//    @Test
+    @Test
     public void testGetTvSeasonInfos() throws Exception {
         LOG.info("testGetTvSeasonInfos");
         final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
@@ -157,7 +151,7 @@ public class AllocineApiTest {
         assertFalse("No Actor", tvseasonInfos.getActors().isEmpty());
     }
 
-//    @Test
+    @Test
     public void testCertification() throws Exception {
         LOG.info("testCertification");
         MovieInfos movieInfos = api.getMovieInfos("21189"); // Fight club, should be a "16"
@@ -174,13 +168,10 @@ public class AllocineApiTest {
         assertEquals("1954-12-28", personInfos.getBirthDate());
         assertEquals("Denzel", personInfos.getFirstName());
         assertEquals("Washington", personInfos.getLastName());
-
-        for (FestivalAward award : personInfos.getFestivalAwards()) {
-            LOG.trace("Award: {}", award.getName());
-        }
+        assertFalse(personInfos.getFestivalAwards().isEmpty());
     }
 
-//    @Test
+    @Test
     public void testGetPersonFilmography() throws Exception {
         LOG.info("testGetPersonFilmography");
         final FilmographyInfos filmographyInfos = api.getPersonFilmography("41339");
@@ -193,20 +184,14 @@ public class AllocineApiTest {
         }
     }
 
-//    @Test
+    @Test
     public void testGetEpisodeInfos() throws Exception {
         LOG.info("testGetEpisodeInfos");
         final EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");
         assertEquals(493491, episodeInfos.getCode());
 
-        for (MoviePerson person : episodeInfos.getDirectors()) {
-            LOG.trace("Director: {}", person.getName());
-        }
-        for (MoviePerson person : episodeInfos.getWriters()) {
-            LOG.trace("Writer: {}", person.getName());
-        }
-        for (MoviePerson person : episodeInfos.getActors()) {
-            LOG.trace("Actor ({}): {}", person.isLeadActor(), person.getName());
-        }
+        assertFalse("No Director", episodeInfos.getDirectors().isEmpty());
+        assertFalse("No Writer", episodeInfos.getWriters().isEmpty());
+        assertFalse("No Actor", episodeInfos.getActors().isEmpty());
     }
 }

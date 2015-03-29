@@ -205,4 +205,12 @@ public class Movie extends AbstractBaseMapping {
         this.boxOffice = boxOffice;
     }
 
+    public FormatList getFormatList() {
+        return formatList;
+    }
+
+    public void setFormatList(FormatList formatList) {
+        this.formatList = formatList;
+    }
+
 }
