@@ -62,6 +62,8 @@ public class TvSeries extends AbstractBaseMapping {
     private int episodeCount;
     @JsonProperty("topBanner")
     private Picture topBanner;
+    @JsonProperty("name")
+    private String name;
 
     public int getYearStart() {
         return yearStart;
@@ -174,6 +176,22 @@ public class TvSeries extends AbstractBaseMapping {
 
     public void setEpisodeCount(int episodeCount) {
         this.episodeCount = episodeCount;
+    }
+
+    public Picture getTopBanner() {
+        return topBanner;
+    }
+
+    public void setTopBanner(Picture topBanner) {
+        this.topBanner = topBanner;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

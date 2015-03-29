@@ -114,7 +114,7 @@ public class EpisodeInfos extends AbstractBaseInfos {
     public Set<MoviePerson> getWriters() {
         return this.getWriters(episode);
     }
-    
+
     public Set<MoviePerson> getCamera() {
         return this.getCamera(episode);
     }

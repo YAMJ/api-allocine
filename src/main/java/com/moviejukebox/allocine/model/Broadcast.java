@@ -40,6 +40,18 @@ public class Broadcast extends AbstractJsonUnknownHandleMapping {
     private int multiVersion;
     @JsonProperty("onShow")
     private OnShow onShow;
+    @JsonProperty("code")
+    private Long code;
+    @JsonProperty("picture")
+    private Picture picture;
+    @JsonProperty("CSAShortLabel")
+    private String CSAShortLabel;
+    @JsonProperty("CSALongLabel")
+    private String CSALongLabel;
+    @JsonProperty("HD")
+    private boolean hd;
+    @JsonProperty("parentChannel")
+    private Channel parentChannel;
 
     public CodeName getCountry() {
         return country;
@@ -87,5 +99,53 @@ public class Broadcast extends AbstractJsonUnknownHandleMapping {
 
     public void setOnShow(OnShow onShow) {
         this.onShow = onShow;
+    }
+
+    public Long getCode() {
+        return code;
+    }
+
+    public void setCode(Long code) {
+        this.code = code;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
+    public String getCSAShortLabel() {
+        return CSAShortLabel;
+    }
+
+    public void setCSAShortLabel(String CSAShortLabel) {
+        this.CSAShortLabel = CSAShortLabel;
+    }
+
+    public String getCSALongLabel() {
+        return CSALongLabel;
+    }
+
+    public void setCSALongLabel(String CSALongLabel) {
+        this.CSALongLabel = CSALongLabel;
+    }
+
+    public boolean isHd() {
+        return hd;
+    }
+
+    public void setHd(boolean hd) {
+        this.hd = hd;
+    }
+
+    public Channel getParentChannel() {
+        return parentChannel;
+    }
+
+    public void setParentChannel(Channel parentChannel) {
+        this.parentChannel = parentChannel;
     }
 }

@@ -24,11 +24,12 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.List;
 
 @JsonRootName("castMember")
 public class CastMember extends AbstractJsonUnknownHandleMapping {
 
-    private static final long serialVersionUID = 3303327060524088408L;
+    private static final long serialVersionUID = 3L;
 
     @JsonProperty("person")
     private ShortPerson shortPerson;
@@ -40,6 +41,8 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
     private String role;
     @JsonProperty("isLeadActor")
     private boolean isLeadActor = false;
+    @JsonProperty("episode")
+    private List<EpisodeShort> episodes;
 
     public ShortPerson getShortPerson() {
         return shortPerson;
@@ -101,7 +104,7 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
         }
         return false;
     }
-    
+
     public boolean isCamera() {
         if (this.activity != null) {
             return this.activity.isCamera();
@@ -114,5 +117,21 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
             return this.activity.isProducer();
         }
         return false;
+    }
+
+    public boolean isIsLeadActor() {
+        return isLeadActor;
+    }
+
+    public void setIsLeadActor(boolean isLeadActor) {
+        this.isLeadActor = isLeadActor;
+    }
+
+    public List<EpisodeShort> getEpisodes() {
+        return episodes;
+    }
+
+    public void setEpisodes(List<EpisodeShort> episodes) {
+        this.episodes = episodes;
     }
 }

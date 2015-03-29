@@ -22,12 +22,14 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonRootName("person")
+@JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Person extends AbstractJsonUnknownHandleMapping {
 
     private static final long serialVersionUID = 6405799546704312370L;
@@ -58,6 +60,18 @@ public class Person extends AbstractJsonUnknownHandleMapping {
     private List<Participation> participations = new ArrayList<>();
     @JsonProperty("festivalAward")
     private List<FestivalAward> festivalAwards = new ArrayList<>();
+    @JsonProperty("nationality")
+    private List<CodeName> nationality;
+    @JsonProperty("activity")
+    private List<Activity> activity;
+    @JsonProperty("activityShort")
+    private String activityShort;
+    @JsonProperty("hasTopFilmography")
+    private boolean topFilmography;
+    @JsonProperty("link")
+    private List<Link> link;
+    @JsonProperty("media")
+    private List<Medium> media;
 
     public int getCode() {
         return code;

@@ -50,6 +50,16 @@ public class Season extends AbstractBaseMapping {
     private boolean localBroadcast;
     @JsonProperty("trailerEmbed")
     private String trailerEmbed;
+    @JsonProperty("parentSeries")
+    private TvSeries parentSeries;
+    @JsonProperty("originalChannel")
+    private Channel originalChannel;
+    @JsonProperty("picture")
+    private Picture picture;
+    @JsonProperty("hasBluRay")
+    private boolean bluRay;
+    @JsonProperty("broadcast")
+    private List<Broadcast> broadcast;
 
     public int getSeasonNumber() {
         return seasonNumber;
@@ -121,5 +131,45 @@ public class Season extends AbstractBaseMapping {
 
     public void setTrailerEmbed(String trailerEmbed) {
         this.trailerEmbed = trailerEmbed;
+    }
+
+    public TvSeries getParentSeries() {
+        return parentSeries;
+    }
+
+    public void setParentSeries(TvSeries parentSeries) {
+        this.parentSeries = parentSeries;
+    }
+
+    public Channel getOriginalChannel() {
+        return originalChannel;
+    }
+
+    public void setOriginalChannel(Channel originalChannel) {
+        this.originalChannel = originalChannel;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
+    public boolean isBluRay() {
+        return bluRay;
+    }
+
+    public void setBluRay(boolean bluRay) {
+        this.bluRay = bluRay;
+    }
+
+    public List<Broadcast> getBroadcast() {
+        return broadcast;
+    }
+
+    public void setBroadcast(List<Broadcast> broadcast) {
+        this.broadcast = broadcast;
     }
 }

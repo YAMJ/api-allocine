@@ -29,6 +29,7 @@ import static org.junit.Assert.assertTrue;
 import com.moviejukebox.allocine.model.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
+import static org.junit.Assert.assertFalse;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -73,7 +74,7 @@ public class AllocineApiTest {
         assertEquals(10, search.getMovies().size());
     }
 
-    @Test
+//    @Test
     public void testSearchTvseriesInfos() throws Exception {
         LOG.info("testSearchTvseriesInfos");
         final Search search = api.searchTvSeries("glee");
@@ -141,7 +142,7 @@ public class AllocineApiTest {
         }
     }
 
-    @Test
+//    @Test
     public void testGetTvSeasonInfos() throws Exception {
         LOG.info("testGetTvSeasonInfos");
         final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
@@ -151,18 +152,12 @@ public class AllocineApiTest {
         assertEquals(2014, tvseasonInfos.getYearEnd());
         assertEquals(10, tvseasonInfos.getEpisodeList().size());
 
-        for (MoviePerson person : tvseasonInfos.getDirectors()) {
-            LOG.trace("Director: {}", person.getName());
-        }
-        for (MoviePerson person : tvseasonInfos.getWriters()) {
-            LOG.info("Writer: {}", person.getName());
-        }
-        for (MoviePerson person : tvseasonInfos.getActors()) {
-            LOG.trace("Actor ({}): {}", person.isLeadActor(), person.getName());
-        }
+        assertFalse("No Director", tvseasonInfos.getDirectors().isEmpty());
+        assertFalse("No Writer", tvseasonInfos.getWriters().isEmpty());
+        assertFalse("No Actor", tvseasonInfos.getActors().isEmpty());
     }
 
-    @Test
+//    @Test
     public void testCertification() throws Exception {
         LOG.info("testCertification");
         MovieInfos movieInfos = api.getMovieInfos("21189"); // Fight club, should be a "16"

@@ -51,6 +51,8 @@ public class Episode extends AbstractBaseMapping {
     private List<Broadcast> broadcast;
     @JsonProperty("link")
     private List<Link> link;
+    @JsonProperty("defaultMedia")
+    private Medium defaultMedia;
 
     public String getOriginalBroadcastDate() {
         return originalBroadcastDate;
