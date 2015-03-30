@@ -22,20 +22,39 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class Trivia extends AbstractNewsItem {
+public class AbstractNewsItem extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 100L;
+    @JsonProperty("code")
+    private String code;
+    private String publication;
+    @JsonProperty("title")
+    private String title;
 
-    @JsonProperty("body")
-    private String body;
-
-    public String getBody() {
-        return body;
+    public String getCode() {
+        return code;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPublication() {
+        return publication;
+    }
+
+    @JsonSetter("publication")
+    public void setPublication(AllocineDate publication) {
+        this.publication = publication.getDateStart();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

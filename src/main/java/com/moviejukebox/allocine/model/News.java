@@ -25,15 +25,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.List;
 
-public class News extends AbstractJsonMapping {
+public class News extends AbstractNewsItem {
 
     private static final long serialVersionUID = 100L;
 
-    @JsonProperty("code")
-    private String code;
-    private String publication;
-    @JsonProperty("title")
-    private String title;
     private String displayMode;
     @JsonProperty("pageCount")
     private Integer pageCount;
@@ -41,31 +36,6 @@ public class News extends AbstractJsonMapping {
     private List<CodeName> category;
     @JsonProperty("picture")
     private Artwork picture;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getPublication() {
-        return publication;
-    }
-
-    @JsonSetter("publication")
-    public void setPublication(AllocineDate publication) {
-        this.publication = publication.getDateStart();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getDisplayMode() {
         return displayMode;
