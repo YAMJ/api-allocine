@@ -23,21 +23,46 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
-@JsonRootName("thumbnail")
-public class Thumbnail extends AbstractJsonMapping {
+public class PersonMedia extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = -7614627806470573590L;
-    
-    @JsonProperty("href")
-    private String href;
+    private String type;
+    @JsonProperty("code")
+    private int code;
+    @JsonProperty("title")
+    private String title;
+    @JsonProperty("poster")
+    private Artwork poster;
 
-    public String getHref() {
-        return href;
+    public String getType() {
+        return type;
     }
 
-    public void setHref(String href) {
-        this.href = href;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Artwork getPoster() {
+        return poster;
+    }
+
+    public void setPoster(Artwork poster) {
+        this.poster = poster;
     }
 }

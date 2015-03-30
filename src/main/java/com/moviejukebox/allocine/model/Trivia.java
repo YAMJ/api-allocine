@@ -25,7 +25,7 @@ package com.moviejukebox.allocine.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class Trivia extends AbstractJsonUnknownHandleMapping {
+public class Trivia extends AbstractJsonMapping {
 
     @JsonProperty("code")
     private String code;

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonRootName("feed")
-public class Feed extends AbstractJsonUnknownHandleMapping {
+public class Feed extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 6122348929992079547L;
 

@@ -24,7 +24,7 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Link {
+public class Link extends AbstractJsonMapping {
 
     @JsonProperty("rel")
     private String rel;

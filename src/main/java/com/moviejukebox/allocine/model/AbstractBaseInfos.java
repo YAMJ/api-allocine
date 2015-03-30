@@ -29,7 +29,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @SuppressWarnings("serial")
-public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping {
+public abstract class AbstractBaseInfos extends AbstractJsonMapping {
 
     // Constants
     private static final double PERCENT_OUT_OF_5 = 5.0;
@@ -64,7 +64,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
             return -1;
         }
 
-        final double userRating = base.getStatistics().getUserRating();
+        final double userRating = base.getStatistics().getDoubleStatistic("userRating");
         return (int) ((userRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
 
@@ -73,7 +73,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
             return -1;
         }
 
-        final double pressRating = base.getStatistics().getPressRating();
+        final double pressRating = base.getStatistics().getDoubleStatistic("pressRating");
         return (int) ((pressRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
 
@@ -212,13 +212,14 @@ public abstract class AbstractBaseInfos extends AbstractJsonUnknownHandleMapping
             posterURLS.add(base.getPoster().getHref());
         }
 
-        if (base.getMedia() != null) {
-            for (Medium medium : base.getMedia()) {
-                if (medium.isPoster() && medium.getThumbnail() != null) {
-                    posterURLS.add(medium.getThumbnail().getHref());
-                }
-            }
-        }
+        // FIXME
+//        if (base.getMedia() != null) {
+//            for (Medium medium : base.getMedia()) {
+//                if (medium.isPoster() && medium.getThumbnail() != null) {
+//                    posterURLS.add(medium.getThumbnail().getHref());
+//                }
+//            }
+//        }
     }
 
     protected Set<String> getPosterUrls(final AbstractBaseMapping base) {

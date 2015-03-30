@@ -20,24 +20,26 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine.model;
+package com.moviejukebox.allocine.model.media;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.moviejukebox.allocine.model.PersonMedia;
+import java.util.ArrayList;
+import java.util.List;
 
-@JsonRootName("poster")
-public class Poster extends AbstractJsonMapping {
+public class MediaVideoPerson extends MediaVideo {
 
-    private static final long serialVersionUID = 871996088317620377L;
-    
-    @JsonProperty("href")
-    private String href;
+    private final List<PersonMedia> media = new ArrayList<>();
 
-    public String getHref() {
-        return href;
+    public List<PersonMedia> getSubject() {
+        return media;
     }
 
-    public void setHref(String href) {
-        this.href = href;
+    @JsonSetter("subject")
+    public void setSubject(List<Subject> subjectList) {
+        for (Subject subject : subjectList) {
+            media.add(subject.getMedia());
+        }
     }
+
 }

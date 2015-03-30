@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("broadcast")
-public class Broadcast extends AbstractJsonUnknownHandleMapping {
+public class Broadcast extends AbstractJsonMapping {
 
     @JsonProperty("country")
     private CodeName country;
@@ -43,7 +43,7 @@ public class Broadcast extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("code")
     private Long code;
     @JsonProperty("picture")
-    private Picture picture;
+    private Artwork picture;
     @JsonProperty("CSAShortLabel")
     private String CSAShortLabel;
     @JsonProperty("CSALongLabel")
@@ -109,11 +109,11 @@ public class Broadcast extends AbstractJsonUnknownHandleMapping {
         this.code = code;
     }
 
-    public Picture getPicture() {
+    public Artwork getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(Artwork picture) {
         this.picture = picture;
     }
 

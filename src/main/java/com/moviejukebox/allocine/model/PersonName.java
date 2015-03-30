@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("name")
-public class PersonName extends AbstractJsonUnknownHandleMapping {
+public class PersonName extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 5419009075596998290L;
 

@@ -42,7 +42,7 @@ public class Episode extends AbstractBaseMapping {
     @JsonProperty("parentSeason")
     private CodeName parentSeason;
     @JsonProperty("picture")
-    private Picture picture;
+    private Artwork picture;
     @JsonProperty("trailer")
     private Trailer trailer;
     @JsonProperty("trailerEmbed")
@@ -51,8 +51,8 @@ public class Episode extends AbstractBaseMapping {
     private List<Broadcast> broadcast;
     @JsonProperty("link")
     private List<Link> link;
-    @JsonProperty("defaultMedia")
-    private Medium defaultMedia;
+//    @JsonProperty("defaultMedia")
+//    private MediaBasic defaultMedia;
 
     public String getOriginalBroadcastDate() {
         return originalBroadcastDate;
@@ -94,11 +94,11 @@ public class Episode extends AbstractBaseMapping {
         this.parentSeason = parentSeason;
     }
 
-    public Picture getPicture() {
+    public Artwork getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(Artwork picture) {
         this.picture = picture;
     }
 
@@ -133,4 +133,5 @@ public class Episode extends AbstractBaseMapping {
     public void setLink(List<Link> link) {
         this.link = link;
     }
+
 }

@@ -26,12 +26,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.moviejukebox.allocine.model.media.MediaBasic;
+import com.moviejukebox.allocine.model.media.MediaPicture;
+import com.moviejukebox.allocine.model.media.MediaVideoPerson;
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonRootName("person")
 @JsonIgnoreProperties(value = {"trailerEmbed"})
-public class Person extends AbstractJsonUnknownHandleMapping {
+public class Person extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 6405799546704312370L;
 
@@ -56,7 +61,7 @@ public class Person extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("deathPlace")
     private String deathPlace;
     @JsonProperty("picture")
-    private Picture picture;
+    private Artwork picture;
     @JsonProperty("participation")
     private List<Participation> participations = new ArrayList<>();
     @JsonProperty("festivalAward")
@@ -71,8 +76,7 @@ public class Person extends AbstractJsonUnknownHandleMapping {
     private boolean topFilmography;
     @JsonProperty("link")
     private List<Link> link;
-    @JsonProperty("media")
-    private List<Medium> media;
+    private List<MediaBasic> media;
     @JsonProperty("news")
     private List<News> news;
     @JsonProperty("feature")
@@ -160,11 +164,11 @@ public class Person extends AbstractJsonUnknownHandleMapping {
         this.deathPlace = deathPlace;
     }
 
-    public Picture getPicture() {
+    public Artwork getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(Artwork picture) {
         this.picture = picture;
     }
 
@@ -224,11 +228,21 @@ public class Person extends AbstractJsonUnknownHandleMapping {
         this.link = link;
     }
 
-    public List<Medium> getMedia() {
+    public List<MediaBasic> getMedia() {
         return media;
     }
 
-    public void setMedia(List<Medium> media) {
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.NAME,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "class"
+    )
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value = MediaPicture.class, name = "picture"),
+        @JsonSubTypes.Type(value = MediaVideoPerson.class, name = "video")
+    })
+    @JsonSetter("media")
+    public void setMedia(List<MediaBasic> media) {
         this.media = media;
     }
 

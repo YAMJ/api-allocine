@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.List;
 
-public class News extends AbstractJsonUnknownHandleMapping {
+public class News extends AbstractJsonMapping {
 
     @JsonProperty("code")
     private String code;
@@ -39,7 +39,7 @@ public class News extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("category")
     private List<CodeName> category;
     @JsonProperty("picture")
-    private Picture picture;
+    private Artwork picture;
 
     public String getCode() {
         return code;
@@ -91,11 +91,11 @@ public class News extends AbstractJsonUnknownHandleMapping {
         this.category = category;
     }
 
-    public Picture getPicture() {
+    public Artwork getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(Artwork picture) {
         this.picture = picture;
     }
 

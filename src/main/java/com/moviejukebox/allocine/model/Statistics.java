@@ -22,52 +22,48 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @JsonRootName("statistics")
-public class Statistics extends AbstractJsonMapping {
+public class Statistics {
 
-    private static final long serialVersionUID = -228388571068687852L;
+    private static final long serialVersionUID = 1L;
 
-    @JsonProperty("pressRating")
-    private double pressRating;
-    @JsonProperty("userRating")
-    private double userRating;
-    @JsonProperty("rankTopMovie")
-    private long rankTopMovie;
-    @JsonProperty("variationTopMovie")
-    private long variationTopMovie;
+    private final Map<String, Object> stats = new HashMap<>();
+    @JsonProperty("rating")
+    private List<Rating> ratings;
 
-    public double getPressRating() {
-        return pressRating;
+    @JsonAnySetter
+    public void addStat(String key, Object value) {
+        stats.put(key, value);
     }
 
-    public void setPressRating(double pressRating) {
-        this.pressRating = pressRating;
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
-    public double getUserRating() {
-        return userRating;
+    public boolean hasStatistic(String statisticName) {
+        return stats.containsKey(statisticName);
     }
 
-    public void setUserRating(double userRating) {
-        this.userRating = userRating;
+    public Object getStatistic(String statisticName) {
+        return stats.get(statisticName);
     }
 
-    public long getRankTopMovie() {
-        return rankTopMovie;
+    public Integer getIntegerStatistic(String statisticName) {
+        return getStatistic(statisticName, Integer.class);
     }
 
-    public void setRankTopMovie(long rankTopMovie) {
-        this.rankTopMovie = rankTopMovie;
+    public Double getDoubleStatistic(String statisticName) {
+        return getStatistic(statisticName, Double.class);
     }
 
-    public long getVariationTopMovie() {
-        return variationTopMovie;
-    }
-
-    public void setVariationTopMovie(long variationTopMovie) {
-        this.variationTopMovie = variationTopMovie;
+    public <T> T getStatistic(String statisticName, Class<T> clazz) {
+        return clazz.cast(stats.get(statisticName));
     }
 }

@@ -23,12 +23,18 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("serial")
 public abstract class AbstractJsonMapping implements Serializable {
+
+    @JsonIgnore
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractJsonMapping.class);
 
     /**
      * Handle unknown properties
@@ -38,7 +44,12 @@ public abstract class AbstractJsonMapping implements Serializable {
      */
     @JsonAnySetter
     protected void handleUnknown(String key, Object value) {
-        // nothing to do right now
+        if (LOG.isTraceEnabled()) {
+            StringBuilder unknown = new StringBuilder(this.getClass().getSimpleName());
+            unknown.append(": Unknown property='").append(key);
+            unknown.append("' value='").append(value).append("'");
+            LOG.trace(unknown.toString());
+        }
     }
 
     @Override

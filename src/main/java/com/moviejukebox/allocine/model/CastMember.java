@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import java.util.List;
 
 @JsonRootName("castMember")
-public class CastMember extends AbstractJsonUnknownHandleMapping {
+public class CastMember extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 3L;
 
@@ -36,7 +36,7 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
     @JsonProperty("activity")
     private Activity activity;
     @JsonProperty("picture")
-    private Picture picture;
+    private Artwork picture;
     @JsonProperty("role")
     private String role;
     @JsonProperty("isLeadActor")
@@ -60,11 +60,11 @@ public class CastMember extends AbstractJsonUnknownHandleMapping {
         this.activity = activity;
     }
 
-    public Picture getPicture() {
+    public Artwork getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(Artwork picture) {
         this.picture = picture;
     }
 

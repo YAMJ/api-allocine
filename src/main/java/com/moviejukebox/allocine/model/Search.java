@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collections;
 import java.util.List;
 
-public class Search extends AbstractJsonUnknownHandleMapping {
+public class Search extends AbstractJsonMapping {
 
     private static final long serialVersionUID = -9017972889712498870L;
 

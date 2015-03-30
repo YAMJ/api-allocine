@@ -20,35 +20,30 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine.model;
+package com.moviejukebox.allocine.model.media;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.moviejukebox.allocine.model.AbstractJsonMapping;
+import com.moviejukebox.allocine.model.PersonMedia;
 
-@JsonRootName("picture")
-public class Picture extends AbstractJsonMapping {
+public class Subject extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 5693427423583445696L;
+    private PersonMedia media;
 
-    @JsonProperty("href")
-    private String href;
-    @JsonProperty("path")
-    private String path;
-
-
-    public String getHref() {
-        return href;
+    public PersonMedia getMedia() {
+        return media;
     }
 
-    public void setHref(String href) {
-        this.href = href;
+    @JsonSetter("movie")
+    public void setMovie(PersonMedia media) {
+        this.media = media;
+        this.media.setType("movie");
     }
 
-    public String getPath() {
-        return path;
+    @JsonSetter("tvseries")
+    public void setTVSeries(PersonMedia media) {
+        this.media = media;
+        this.media.setType("tvseries");
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
 }

@@ -24,7 +24,7 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Review extends AbstractJsonUnknownHandleMapping {
+public class Review extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 1L;
 

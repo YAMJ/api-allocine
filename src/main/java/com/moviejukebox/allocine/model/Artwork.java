@@ -22,31 +22,21 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SuppressWarnings("serial")
-public abstract class AbstractJsonUnknownHandleMapping extends AbstractJsonMapping {
+public class Artwork extends Link {
 
-    @JsonIgnore
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractJsonUnknownHandleMapping.class);
+    private static final long serialVersionUID = 871996088317620377L;
 
-    /**
-     * Handle unknown properties
-     *
-     * @param key
-     * @param value
-     */
-    @JsonAnySetter
-    @Override
-    protected void handleUnknown(String key, Object value) {
-        if (LOG.isTraceEnabled()) {
-            StringBuilder unknown = new StringBuilder(this.getClass().getSimpleName());
-            unknown.append(": Unknown property='").append(key);
-            unknown.append("' value='").append(value).append("'");
-            LOG.trace(unknown.toString());
-        }
+    @JsonProperty("path")
+    private String path;
+
+    public String getPath() {
+        return path;
     }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
 }

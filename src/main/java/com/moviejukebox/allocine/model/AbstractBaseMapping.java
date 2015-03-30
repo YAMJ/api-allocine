@@ -24,11 +24,16 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.moviejukebox.allocine.model.media.MediaBasic;
+import com.moviejukebox.allocine.model.media.MediaPicture;
+import com.moviejukebox.allocine.model.media.MediaVideo;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMapping {
+public abstract class AbstractBaseMapping extends AbstractJsonMapping {
 
     @JsonProperty("code")
     private int code;
@@ -48,10 +53,9 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
     private List<CastMember> castMember = new ArrayList<>();
     @JsonProperty("statistics")
     private Statistics statistics;
-    @JsonProperty("media")
-    private List<Medium> media = new ArrayList<>();
+    private List<MediaBasic> media = new ArrayList<>();
     @JsonProperty("poster")
-    private Poster poster;
+    private Artwork poster;
     @JsonProperty("release")
     private Release release;
     @JsonProperty("hasDVD")
@@ -148,19 +152,29 @@ public abstract class AbstractBaseMapping extends AbstractJsonUnknownHandleMappi
         this.statistics = statistics;
     }
 
-    public List<Medium> getMedia() {
+    public List<MediaBasic> getMedia() {
         return media;
     }
 
-    public void setMedia(List<Medium> media) {
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.NAME,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "class"
+    )
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value = MediaPicture.class, name = "picture"),
+        @JsonSubTypes.Type(value = MediaVideo.class, name = "video")
+    })
+    @JsonSetter("media")
+    public void setMedia(List<MediaBasic> media) {
         this.media = media;
     }
 
-    public Poster getPoster() {
+    public Artwork getPoster() {
         return poster;
     }
 
-    public void setPoster(Poster poster) {
+    public void setPoster(Artwork poster) {
         this.poster = poster;
     }
 

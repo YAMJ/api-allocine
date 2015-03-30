@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 @JsonRootName("festivalAward")
-public class FestivalAward extends AbstractJsonUnknownHandleMapping {
+public class FestivalAward extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 2L;
 

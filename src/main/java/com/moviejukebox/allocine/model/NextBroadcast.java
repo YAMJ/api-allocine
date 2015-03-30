@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("broadcast")
-public class NextBroadcast extends AbstractJsonUnknownHandleMapping {
+public class NextBroadcast extends AbstractJsonMapping {
 
     @JsonProperty("broadcast")
     private Broadcast broadcast;

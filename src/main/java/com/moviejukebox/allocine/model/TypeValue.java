@@ -1,12 +1,12 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class TypeValue extends AbstractJsonMapping {
 
     @JsonProperty("type")
     private String type;
-    @JsonProperty("value")
     private String value;
 
     public String getType() {
@@ -21,7 +21,13 @@ public class TypeValue extends AbstractJsonMapping {
         return value;
     }
 
+    @JsonSetter("value")
     public void setValue(String value) {
+        this.value = value;
+    }
+
+    @JsonSetter("$")
+    public void setDollarValue(String value) {
         this.value = value;
     }
 

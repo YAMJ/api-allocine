@@ -40,7 +40,7 @@ public class ShortPerson extends CodeName {
     @JsonProperty("nationality")
     private List<CodeName> nationality;
     @JsonProperty("picture")
-    private Picture picture;
+    private Artwork picture;
     @JsonProperty("link")
     private List<Link> link;
 
@@ -84,11 +84,11 @@ public class ShortPerson extends CodeName {
         this.nationality = nationality;
     }
 
-    public Picture getPicture() {
+    public Artwork getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(Artwork picture) {
         this.picture = picture;
     }
 

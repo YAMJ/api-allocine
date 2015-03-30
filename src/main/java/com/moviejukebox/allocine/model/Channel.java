@@ -30,8 +30,20 @@ public class Channel extends AbstractJsonMapping {
 
     private static final long serialVersionUID = -5954100778647649863L;
 
+    @JsonProperty("code")
+    private int code;
     @JsonProperty("name")
     private String name;
+    @JsonProperty("country")
+    private CodeName country;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public String getName() {
         return name;
@@ -40,4 +52,13 @@ public class Channel extends AbstractJsonMapping {
     public void setName(String name) {
         this.name = name;
     }
+
+    public CodeName getCountry() {
+        return country;
+    }
+
+    public void setCountry(CodeName country) {
+        this.country = country;
+    }
+
 }

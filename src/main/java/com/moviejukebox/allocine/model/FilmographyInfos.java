@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author modmax
  */
-public class FilmographyInfos extends AbstractJsonUnknownHandleMapping {
+public class FilmographyInfos extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 1122195565082374882L;
 

@@ -24,7 +24,7 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EpisodeShort extends AbstractJsonUnknownHandleMapping {
+public class EpisodeShort extends AbstractJsonMapping {
 
     @JsonProperty("code")
     private Long code;

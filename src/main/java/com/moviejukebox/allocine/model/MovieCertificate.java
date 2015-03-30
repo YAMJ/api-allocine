@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("movieCertificate")
-public class MovieCertificate extends AbstractJsonUnknownHandleMapping {
+public class MovieCertificate extends AbstractJsonMapping {
 
     private static final long serialVersionUID = -4813154639075145528L;
 

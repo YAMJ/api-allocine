@@ -55,7 +55,7 @@ public class Season extends AbstractBaseMapping {
     @JsonProperty("originalChannel")
     private Channel originalChannel;
     @JsonProperty("picture")
-    private Picture picture;
+    private Artwork picture;
     @JsonProperty("hasBluRay")
     private boolean bluRay;
     @JsonProperty("broadcast")
@@ -149,11 +149,11 @@ public class Season extends AbstractBaseMapping {
         this.originalChannel = originalChannel;
     }
 
-    public Picture getPicture() {
+    public Artwork getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(Artwork picture) {
         this.picture = picture;
     }
 

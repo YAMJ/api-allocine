@@ -25,7 +25,7 @@ package com.moviejukebox.allocine.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-public class FormatList extends AbstractJsonUnknownHandleMapping {
+public class FormatList extends AbstractJsonMapping {
 
     @JsonProperty("productionFormat")
     private List<CodeName> productionFormat;

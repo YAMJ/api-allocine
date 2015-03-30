@@ -20,52 +20,29 @@
  *      Web: http://code.google.com/p/moviejukebox/
  *
  */
-package com.moviejukebox.allocine.model;
+package com.moviejukebox.allocine.model.media;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
-@JsonRootName("medium")
-public class Medium extends AbstractJsonMapping {
+public class MediaPicture extends MediaBasic {
 
-    private static final long serialVersionUID = 4649776514511001593L;
-    private static final int POSTER_MEDIA_CODE = 31001;
-
-    @JsonProperty("type")
-    private Type type;
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("thumbnail")
-    private Thumbnail thumbnail;
+    @JsonProperty("rcode")
+    private Long rcode;
     @JsonProperty("description")
     private String description;
     @JsonProperty("width")
-    private long width;
+    private int width;
     @JsonProperty("height")
-    private long height;
+    private int height;
+    @JsonProperty("copyrightHolder")
+    private String copyrightHolder;
 
-    public Type getType() {
-        return type;
+    public Long getRcode() {
+        return rcode;
     }
 
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Thumbnail getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(Thumbnail thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setRcode(Long rcode) {
+        this.rcode = rcode;
     }
 
     public String getDescription() {
@@ -76,26 +53,28 @@ public class Medium extends AbstractJsonMapping {
         this.description = description;
     }
 
-    public long getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(long width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public long getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(long height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public boolean isPoster() {
-        if (this.type != null) {
-            return this.type.getCode() == POSTER_MEDIA_CODE;
-        }
-        return false;
+    public String getCopyrightHolder() {
+        return copyrightHolder;
     }
+
+    public void setCopyrightHolder(String copyrightHolder) {
+        this.copyrightHolder = copyrightHolder;
+    }
+
 }
