@@ -21,6 +21,7 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.moviejukebox.allocine.model.media.MediaBasic;
 import com.moviejukebox.allocine.tools.HtmlTools;
 import java.util.Collections;
 import java.util.HashSet;
@@ -211,14 +212,13 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
             posterURLS.add(base.getPoster().getHref());
         }
 
-        // FIXME
-//        if (base.getMedia() != null) {
-//            for (Medium medium : base.getMedia()) {
-//                if (medium.isPoster() && medium.getThumbnail() != null) {
-//                    posterURLS.add(medium.getThumbnail().getHref());
-//                }
-//            }
-//        }
+        if (base.getMedia() != null) {
+            for (MediaBasic medium : base.getMedia()) {
+                if (medium.isPoster() && medium.getThumbnail() != null) {
+                    posterURLS.add(medium.getThumbnail().getHref());
+                }
+            }
+        }
     }
 
     protected Set<String> getPosterUrls(final AbstractBaseMapping base) {

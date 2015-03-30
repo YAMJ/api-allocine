@@ -23,6 +23,8 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.moviejukebox.allocine.model.enumeration.Job;
+import java.util.HashMap;
+import java.util.Map;
 
 @JsonRootName("activity")
 public class Activity extends CodeName {
@@ -46,42 +48,34 @@ public class Activity extends CodeName {
 
     private Job job = Job.UNKNOWN;
 
+    private static final Map<Integer, Job> JOB_LIST = new HashMap<>();
+
+    static {
+        // Actor codes
+        JOB_LIST.put(ACTOR_CODE, Job.ACTOR);
+        // Director codes
+        JOB_LIST.put(DIRECTOR_CODE, Job.DIRECTOR);
+        // Producer codes
+        JOB_LIST.put(PRODUCER_CODE, Job.PRODUCER);
+        JOB_LIST.put(DELEGATE_PRODUCER_CODE, Job.PRODUCER);
+        JOB_LIST.put(EXECUTIVE_PRODUCER_CODE, Job.PRODUCER);
+        JOB_LIST.put(COPRODUCER_CODE, Job.PRODUCER);
+        JOB_LIST.put(ASSOCIATE_PRODUCER_CODE, Job.PRODUCER);
+        // Writer codes
+        JOB_LIST.put(WRITER_CODE, Job.WRITER);
+        JOB_LIST.put(SCRIPT_CODE, Job.WRITER);
+        // Camera codes
+        JOB_LIST.put(CAMERA_CODE, Job.CAMERA);
+    }
+
     @Override
     public void setCode(int code) {
         super.setCode(code);
 
-        // Populate the job with the correct value
-        switch (code) {
-            // List all actor codes
-            case ACTOR_CODE:
-                this.job = Job.ACTOR;
-                break;
-            // List all director codes
-            case DIRECTOR_CODE:
-                this.job = Job.DIRECTOR;
-                break;
-            // List all producer codes
-            case PRODUCER_CODE:
-            case DELEGATE_PRODUCER_CODE:
-            case EXECUTIVE_PRODUCER_CODE:
-            case COPRODUCER_CODE:
-            case ASSOCIATE_PRODUCER_CODE:
-                this.job = Job.PRODUCER;
-                break;
-            // List all writer codes
-            case WRITER_CODE:
-            case SCRIPT_CODE:
-                this.job = Job.WRITER;
-                break;
-            // List all camera codes
-            case CAMERA_CODE:
-                this.job = Job.CAMERA;
-                break;
-            // The job is unknown
-            default:
-                this.job = Job.UNKNOWN;
+        this.job = JOB_LIST.get(code);
+        if (this.job == null) {
+            this.job = Job.UNKNOWN;
         }
-
     }
 
     private boolean hasJob(Job job) {
