@@ -21,9 +21,7 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.moviejukebox.allocine.tools.HtmlTools;
-import java.util.Collections;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,139 +30,83 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author modmax
  */
-public class PersonInfos extends AbstractJsonMapping {
+public class PersonInfos extends AbstractPersonInfo {
 
     private static final long serialVersionUID = 100L;
 
-    @JsonProperty("person")
-    private Person person;
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public boolean isValid() {
-        if (person == null) {
-            return false;
-        }
-        return person.getCode() > 0;
-    }
-
-    public boolean isNotValid() {
-        return !this.isValid();
-    }
-
-    public int getCode() {
-        if (person == null) {
-            return -1;
-        }
-        return person.getCode();
-    }
-
     public String getFullName() {
-        if (person == null || person.getPersonName() == null) {
+        if (getPerson() == null || getPerson().getPersonName() == null) {
             return null;
         }
 
         StringBuilder sb = new StringBuilder();
-        if (person.getPersonName().getGiven() != null) {
-            sb.append(person.getPersonName().getGiven());
+        if (getPerson().getPersonName().getGiven() != null) {
+            sb.append(getPerson().getPersonName().getGiven());
             sb.append(" ");
         }
-        if (person.getPersonName().getFamily() != null) {
-            sb.append(person.getPersonName().getFamily());
+        if (getPerson().getPersonName().getFamily() != null) {
+            sb.append(getPerson().getPersonName().getFamily());
         }
         return StringUtils.trimToNull(sb.toString());
     }
 
     public String getFirstName() {
-        if (person == null || person.getPersonName() == null) {
+        if (getPerson() == null || getPerson().getPersonName() == null) {
             return null;
         }
-        return person.getPersonName().getGiven();
+        return getPerson().getPersonName().getGiven();
     }
 
     public String getLastName() {
-        if (person == null || person.getPersonName() == null) {
+        if (getPerson() == null || getPerson().getPersonName() == null) {
             return null;
         }
-        return person.getPersonName().getFamily();
+        return getPerson().getPersonName().getFamily();
     }
 
     public int getGender() {
-        if (person == null) {
-            return -1;
-        }
-        return person.getGender();
+        return getPerson() == null ? -1 : getPerson().getGender();
     }
 
     public String getBiographyShort() {
-        if (person == null) {
-            return null;
-        }
-        return HtmlTools.removeLineFeeds(person.getBiographyShort());
+        return getPerson() == null ? null : HtmlTools.removeLineFeeds(getPerson().getBiographyShort());
     }
 
     public String getBiography() {
-        if (person == null) {
-            return null;
-        }
-        return HtmlTools.removeLineFeeds(person.getBiography());
+        return getPerson() == null ? null : HtmlTools.removeLineFeeds(getPerson().getBiography());
     }
 
     public String getBirthDate() {
-        if (person == null) {
-            return null;
-        }
-        return person.getBirthDate();
+        return getPerson() == null ? null : getPerson().getBirthDate();
     }
 
     public String getBirthPlace() {
-        if (person == null) {
-            return null;
-        }
-        return person.getBirthPlace();
+        return getPerson() == null ? null : getPerson().getBirthPlace();
     }
 
     public String getRealName() {
-        if (person == null) {
-            return null;
-        }
-        return person.getRealName();
+        return getPerson() == null ? null : getPerson().getRealName();
     }
 
     public String getDeathDate() {
-        if (person == null) {
-            return null;
-        }
-        return person.getDeathDate();
+        return getPerson() == null ? null : getPerson().getDeathDate();
     }
 
     public String getDeathPlace() {
-        if (person == null) {
-            return null;
-        }
-        return person.getDeathPlace();
+        return getPerson() == null ? null : getPerson().getDeathPlace();
     }
 
     public String getPhotoURL() {
-        if (person == null) {
+        if (getPerson() == null) {
             return null;
         }
-        if (person.getPicture() == null) {
+        if (getPerson().getPicture() == null) {
             return null;
         }
-        return person.getPicture().getHref();
+        return getPerson().getPicture().getHref();
     }
 
     public List<FestivalAward> getFestivalAwards() {
-        if (person != null) {
-            return person.getFestivalAwards();
-        }
-        return Collections.emptyList();
+        return getPerson() == null ? null : getPerson().getFestivalAwards();
     }
 }

@@ -48,9 +48,9 @@ public class Broadcast extends AbstractJsonMapping {
     @JsonProperty("picture")
     private Artwork picture;
     @JsonProperty("CSAShortLabel")
-    private String CsaShortLabel;
+    private String csaShortLabel;
     @JsonProperty("CSALongLabel")
-    private String CsaLongLabel;
+    private String csaLongLabel;
     @JsonProperty("HD")
     private boolean hd;
     private Channel parentChannel;
@@ -120,19 +120,19 @@ public class Broadcast extends AbstractJsonMapping {
     }
 
     public String getCsaShortLabel() {
-        return CsaShortLabel;
+        return csaShortLabel;
     }
 
-    public void setCsaShortLabel(String CsaShortLabel) {
-        this.CsaShortLabel = CsaShortLabel;
+    public void setCsaShortLabel(String csaShortLabel) {
+        this.csaShortLabel = csaShortLabel;
     }
 
     public String getCsaLongLabel() {
-        return CsaLongLabel;
+        return csaLongLabel;
     }
 
-    public void setCsaLongLabel(String CsaLongLabel) {
-        this.CsaLongLabel = CsaLongLabel;
+    public void setCsaLongLabel(String csaLongLabel) {
+        this.csaLongLabel = csaLongLabel;
     }
 
     public boolean isHd() {

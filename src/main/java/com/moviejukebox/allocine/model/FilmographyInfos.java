@@ -21,7 +21,6 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.moviejukebox.allocine.tools.HtmlTools;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,43 +31,14 @@ import java.util.List;
  *
  * @author modmax
  */
-public class FilmographyInfos extends AbstractJsonMapping {
+public class FilmographyInfos extends AbstractPersonInfo {
 
     private static final long serialVersionUID = 100L;
 
-    @JsonProperty("person")
-    private Person person;
-
     private List<Participance> participances = null;
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public boolean isValid() {
-        if (person == null) {
-            return false;
-        }
-        return person.getCode() > 0;
-    }
-
-    public boolean isNotValid() {
-        return !this.isValid();
-    }
-
-    public int getCode() {
-        if (person == null) {
-            return -1;
-        }
-        return person.getCode();
-    }
-
     public List<Participance> getParticipances() {
-        if (person == null) {
+        if (getPerson() == null) {
             return Collections.emptyList();
         }
 
@@ -88,8 +58,8 @@ public class FilmographyInfos extends AbstractJsonMapping {
     private List<Participance> processParticipance() {
         List<Participance> newParticipances = new ArrayList<>();
 
-        if (person.getParticipations() != null) {
-            for (Participation p : person.getParticipations()) {
+        if (getPerson().getParticipations() != null) {
+            for (Participation p : getPerson().getParticipations()) {
                 if (!validParticipation(p)) {
                     continue;
                 }
