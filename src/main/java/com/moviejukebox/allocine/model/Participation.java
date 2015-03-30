@@ -1,24 +1,23 @@
 /*
  *      Copyright (c) 2004-2015 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list
+ *      https://github.com/orgs/YAMJ/people
  *
- *      This file is part of the Yet Another Movie Jukebox (YAMJ).
+ *      This file is part of the Allocine API.
  *
- *      The YAMJ is free software: you can redistribute it and/or modify
+ *      The API is free software: you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
  *      the Free Software Foundation, either version 3 of the License, or
  *      any later version.
  *
- *      YAMJ is distributed in the hope that it will be useful,
+ *      The API is distributed in the hope that it will be useful,
  *      but WITHOUT ANY WARRANTY; without even the implied warranty of
  *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *      GNU General Public License for more details.
  *
  *      You should have received a copy of the GNU General Public License
- *      along with the YAMJ.  If not, see <http://www.gnu.org/licenses/>.
+ *      along with the API.  If not, see <http://www.gnu.org/licenses/>.
  *
- *      Web: http://code.google.com/p/moviejukebox/
- *
+ *      Web: https://github.com/YAMJ/api-allocine
  */
 package com.moviejukebox.allocine.model;
 
@@ -29,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Participation extends AbstractJsonMapping {
 
     private static final long serialVersionUID = 100L;
-    
+
     @JsonProperty("movie")
     private Movie movie;
     @JsonProperty("tvseries")
@@ -38,7 +37,7 @@ public class Participation extends AbstractJsonMapping {
     private String role;
     @JsonProperty("activity")
     private Activity activity;
-    
+
     public Movie getMovie() {
         return movie;
     }
@@ -54,7 +53,7 @@ public class Participation extends AbstractJsonMapping {
     public void setTvSeries(TvSeries tvSeries) {
         this.tvSeries = tvSeries;
     }
-    
+
     public String getRole() {
         return role;
     }
