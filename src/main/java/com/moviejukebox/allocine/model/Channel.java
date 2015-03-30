@@ -22,10 +22,13 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 @JsonRootName("channel")
+@JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Channel extends AbstractJsonMapping {
 
     private static final long serialVersionUID = -5954100778647649863L;
@@ -36,6 +39,7 @@ public class Channel extends AbstractJsonMapping {
     private String name;
     @JsonProperty("country")
     private CodeName country;
+    private String logo;
 
     public int getCode() {
         return code;
@@ -59,6 +63,15 @@ public class Channel extends AbstractJsonMapping {
 
     public void setCountry(CodeName country) {
         this.country = country;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    @JsonSetter("logo")
+    public void setLogo(Link link) {
+        this.logo = link.getHref();
     }
 
 }

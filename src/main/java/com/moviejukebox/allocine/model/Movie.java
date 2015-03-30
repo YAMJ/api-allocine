@@ -22,12 +22,14 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonRootName("movie")
+@JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Movie extends AbstractBaseMapping {
 
     private static final long serialVersionUID = -5673435740544636661L;
@@ -38,8 +40,6 @@ public class Movie extends AbstractBaseMapping {
     private int runtime;
     @JsonProperty("trailer")
     private Trailer trailer;
-    @JsonProperty("trailerEmbed")
-    private String trailerEmbed;
     @JsonProperty("movieCertificate")
     private MovieCertificate movieCertificate;
     @JsonProperty("festivalAward")
@@ -179,14 +179,6 @@ public class Movie extends AbstractBaseMapping {
 
     public void setBluRayReleaseDate(String bluRayReleaseDate) {
         this.bluRayReleaseDate = bluRayReleaseDate;
-    }
-
-    public String getTrailerEmbed() {
-        return trailerEmbed;
-    }
-
-    public void setTrailerEmbed(String trailerEmbed) {
-        this.trailerEmbed = trailerEmbed;
     }
 
     public String getKeywords() {

@@ -24,6 +24,8 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.moviejukebox.allocine.model.wrapper.ChannelWrapper;
 
 @JsonRootName("broadcast")
 public class Broadcast extends AbstractJsonMapping {
@@ -50,7 +52,6 @@ public class Broadcast extends AbstractJsonMapping {
     private String CSALongLabel;
     @JsonProperty("HD")
     private boolean hd;
-    @JsonProperty("parentChannel")
     private Channel parentChannel;
 
     public CodeName getCountry() {
@@ -145,7 +146,8 @@ public class Broadcast extends AbstractJsonMapping {
         return parentChannel;
     }
 
-    public void setParentChannel(Channel parentChannel) {
-        this.parentChannel = parentChannel;
+    @JsonSetter("parentChannel")
+    public void setParentChannel(ChannelWrapper cw) {
+        this.parentChannel = cw.getChannel();
     }
 }

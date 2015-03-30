@@ -22,11 +22,16 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.moviejukebox.allocine.model.media.MediaBasic;
+import com.moviejukebox.allocine.model.wrapper.DefaultMediaWrapper;
 import java.util.List;
 
 @JsonRootName("episode")
+@JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Episode extends AbstractBaseMapping {
 
     private static final long serialVersionUID = 7597888938988246976L;
@@ -45,14 +50,11 @@ public class Episode extends AbstractBaseMapping {
     private Artwork picture;
     @JsonProperty("trailer")
     private Trailer trailer;
-    @JsonProperty("trailerEmbed")
-    private String trailerEmbed;
     @JsonProperty("broadcast")
     private List<Broadcast> broadcast;
     @JsonProperty("link")
     private List<Link> link;
-//    @JsonProperty("defaultMedia")
-//    private MediaBasic defaultMedia;
+    private MediaBasic defaultMedia;
 
     public String getOriginalBroadcastDate() {
         return originalBroadcastDate;
@@ -110,14 +112,6 @@ public class Episode extends AbstractBaseMapping {
         this.trailer = trailer;
     }
 
-    public String getTrailerEmbed() {
-        return trailerEmbed;
-    }
-
-    public void setTrailerEmbed(String trailerEmbed) {
-        this.trailerEmbed = trailerEmbed;
-    }
-
     public List<Broadcast> getBroadcast() {
         return broadcast;
     }
@@ -132,6 +126,15 @@ public class Episode extends AbstractBaseMapping {
 
     public void setLink(List<Link> link) {
         this.link = link;
+    }
+
+    public MediaBasic getDefaultMedia() {
+        return defaultMedia;
+    }
+
+    @JsonSetter("defaultMedia")
+    public void setDefaultMedia(DefaultMediaWrapper defaultMedia) {
+        this.defaultMedia = defaultMedia.getMedia();
     }
 
 }

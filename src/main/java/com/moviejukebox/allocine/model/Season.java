@@ -22,12 +22,16 @@
  */
 package com.moviejukebox.allocine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.moviejukebox.allocine.model.wrapper.ChannelWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonRootName("season")
+@JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Season extends AbstractBaseMapping {
 
     private static final long serialVersionUID = -9173083320025101754L;
@@ -48,11 +52,8 @@ public class Season extends AbstractBaseMapping {
     private CodeName productionStatus;
     @JsonProperty("hasLocalBroadcast")
     private boolean localBroadcast;
-    @JsonProperty("trailerEmbed")
-    private String trailerEmbed;
     @JsonProperty("parentSeries")
     private TvSeries parentSeries;
-    @JsonProperty("originalChannel")
     private Channel originalChannel;
     @JsonProperty("picture")
     private Artwork picture;
@@ -125,14 +126,6 @@ public class Season extends AbstractBaseMapping {
         this.localBroadcast = localBroadcast;
     }
 
-    public String getTrailerEmbed() {
-        return trailerEmbed;
-    }
-
-    public void setTrailerEmbed(String trailerEmbed) {
-        this.trailerEmbed = trailerEmbed;
-    }
-
     public TvSeries getParentSeries() {
         return parentSeries;
     }
@@ -172,4 +165,12 @@ public class Season extends AbstractBaseMapping {
     public void setBroadcast(List<Broadcast> broadcast) {
         this.broadcast = broadcast;
     }
+
+    @JsonSetter("originalChannel")
+    public void setOriginalChannel(ChannelWrapper cw) {
+        this.originalChannel = cw.getChannel();
+    }
+
+
+
 }
