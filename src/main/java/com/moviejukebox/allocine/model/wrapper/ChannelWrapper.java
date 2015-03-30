@@ -23,9 +23,10 @@
 package com.moviejukebox.allocine.model.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.moviejukebox.allocine.model.AbstractJsonMapping;
 import com.moviejukebox.allocine.model.Channel;
 
-public class ChannelWrapper {
+public class ChannelWrapper extends AbstractJsonMapping {
 
     @JsonProperty("channel")
     private Channel channel;

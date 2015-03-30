@@ -25,13 +25,14 @@ package com.moviejukebox.allocine.model.wrapper;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.moviejukebox.allocine.model.AbstractJsonMapping;
 import com.moviejukebox.allocine.model.media.MediaBasic;
 import com.moviejukebox.allocine.model.media.MediaPicture;
 import com.moviejukebox.allocine.model.media.MediaVideo;
 
-public class DefaultMediaWrapper {
+public class DefaultMediaWrapper extends AbstractJsonMapping {
 
-private MediaBasic media;
+    private MediaBasic media;
 
     public MediaBasic getMedia() {
         return media;
@@ -50,6 +51,5 @@ private MediaBasic media;
     public void setMedia(MediaBasic media) {
         this.media = media;
     }
-
 
 }
