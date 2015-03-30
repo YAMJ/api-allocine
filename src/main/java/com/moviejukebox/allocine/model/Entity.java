@@ -26,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Entity extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("movie")
     private Movie movie;
 

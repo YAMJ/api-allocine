@@ -30,7 +30,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 @JsonRootName("festivalAward")
 public class FestivalAward extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("parentFestival")
     private CodeName parentFestival;

@@ -28,7 +28,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @JsonRootName("castingShort")
-public class CastingShort {
+public class CastingShort extends AbstractJsonMapping {
+
+    private static final long serialVersionUID = 100L;
 
     private List<String> directors;
     private List<String> actors;

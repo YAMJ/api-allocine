@@ -32,7 +32,7 @@ import java.util.Set;
  */
 public class EpisodeInfos extends AbstractBaseInfos {
 
-    private static final long serialVersionUID = 7745674601738810957L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("episode")
     private Episode episode;

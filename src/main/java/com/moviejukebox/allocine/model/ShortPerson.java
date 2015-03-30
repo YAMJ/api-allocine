@@ -29,7 +29,7 @@ import java.util.List;
 @JsonRootName("person")
 public class ShortPerson extends CodeName {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("gender")
     private int gender;

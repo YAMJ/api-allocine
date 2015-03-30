@@ -27,6 +27,8 @@ import java.util.List;
 
 public class FormatList extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("productionFormat")
     private List<CodeName> productionFormat;
     @JsonProperty("projectionFormat")

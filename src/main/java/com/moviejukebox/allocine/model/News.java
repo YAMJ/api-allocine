@@ -28,6 +28,8 @@ import java.util.List;
 
 public class News extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("code")
     private String code;
     private String publication;

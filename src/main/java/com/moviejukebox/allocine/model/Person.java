@@ -38,7 +38,7 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Person extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 6405799546704312370L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("code")
     private int code;

@@ -30,6 +30,8 @@ import com.moviejukebox.allocine.model.wrapper.ChannelWrapper;
 @JsonRootName("broadcast")
 public class Broadcast extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("country")
     private CodeName country;
     @JsonProperty("channel")

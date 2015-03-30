@@ -34,7 +34,7 @@ import java.util.Set;
  */
 public class TvSeriesInfos extends AbstractBaseInfos {
 
-    private static final long serialVersionUID = -4486388552369054158L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("tvseries")
     private TvSeries tvSeries;

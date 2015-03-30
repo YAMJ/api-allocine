@@ -28,6 +28,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName("broadcast")
 public class NextBroadcast extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("broadcast")
     private Broadcast broadcast;
 

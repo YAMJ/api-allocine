@@ -26,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PersonMedia extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     private String type;
     @JsonProperty("code")
     private int code;

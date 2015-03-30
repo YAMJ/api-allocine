@@ -34,7 +34,7 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Season extends AbstractBaseMapping {
 
-    private static final long serialVersionUID = -9173083320025101754L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("seasonNumber")
     private int seasonNumber;

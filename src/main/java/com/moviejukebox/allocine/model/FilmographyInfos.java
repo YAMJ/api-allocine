@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class FilmographyInfos extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 1122195565082374882L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("person")
     private Person person;

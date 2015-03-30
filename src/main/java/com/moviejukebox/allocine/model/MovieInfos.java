@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  */
 public class MovieInfos extends AbstractBaseInfos {
 
-    private static final long serialVersionUID = -7592718256970353295L;
+    private static final long serialVersionUID = 100L;
     private static final Pattern AGE_REGEXP = Pattern.compile("\\s(\\d{1,2})\\san");
 
     @JsonProperty("movie")

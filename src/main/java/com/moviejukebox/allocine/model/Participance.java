@@ -24,9 +24,11 @@ package com.moviejukebox.allocine.model;
 
 public class Participance {
 
+    private static final long serialVersionUID = 100L;
+
     private final boolean tvShow;
     private long code = -1;
-    
+
     // according to person
     private String role;
     private boolean actor = false;
@@ -34,7 +36,7 @@ public class Participance {
     private boolean writer = false;
     private boolean camera = false;
     private boolean producer = false;
-    
+
     // according to movie
     private int year = -1;
     // according to series
@@ -43,7 +45,7 @@ public class Participance {
     // accoring to season
     private long seasonCode = -1;
     private int seasonNumber = -1;
-    
+
     private String releaseDate;
     private String releaseState;
     private String title;
@@ -53,7 +55,7 @@ public class Participance {
     public Participance(boolean tvShow) {
         this.tvShow = tvShow;
     }
-    
+
     public boolean isTvShow() {
         return tvShow;
     }
@@ -97,7 +99,7 @@ public class Participance {
     public void setWriter(boolean writer) {
         this.writer = writer;
     }
-    
+
     public boolean isCamera() {
         return camera;
     }
@@ -123,7 +125,7 @@ public class Participance {
             this.year = year;
         }
     }
-    
+
     public int getYearStart() {
         return yearStart;
     }
@@ -151,7 +153,7 @@ public class Participance {
     public void setSeasonCode(long seasonCode) {
         this.seasonCode = seasonCode;
     }
-    
+
     public int getSeasonNumber() {
         return seasonNumber;
     }
@@ -167,7 +169,7 @@ public class Participance {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
-    
+
     public String getReleaseState() {
         return releaseState;
     }

@@ -35,6 +35,8 @@ import java.util.List;
 @SuppressWarnings("serial")
 public abstract class AbstractBaseMapping extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("code")
     private int code;
     @JsonProperty("title")

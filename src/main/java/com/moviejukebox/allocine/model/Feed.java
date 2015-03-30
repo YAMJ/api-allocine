@@ -30,7 +30,7 @@ import java.util.List;
 @JsonRootName("feed")
 public class Feed extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 6122348929992079547L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("page")
     private int page = -1;

@@ -26,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Link extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("rel")
     private String rel;
     @JsonProperty("name")

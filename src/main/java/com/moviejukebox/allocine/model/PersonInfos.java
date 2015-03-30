@@ -35,7 +35,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class PersonInfos extends AbstractJsonMapping {
     
-    private static final long serialVersionUID = 7745674601738810957L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("person")
     private Person person;

@@ -28,7 +28,7 @@ import java.util.List;
 
 public class Search extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = -9017972889712498870L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("feed")
     private Feed feed;

@@ -31,7 +31,7 @@ import java.util.List;
 @JsonRootName("tvseries")
 public class TvSeries extends AbstractBaseMapping {
 
-    private static final long serialVersionUID = 6553404486681341006L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("yearStart")
     private int yearStart;

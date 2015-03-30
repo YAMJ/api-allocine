@@ -34,7 +34,7 @@ import java.util.Set;
  */
 public class TvSeasonInfos extends AbstractBaseInfos {
 
-    private static final long serialVersionUID = 1357655581772310729L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("season")
     private Season season;
@@ -115,7 +115,7 @@ public class TvSeasonInfos extends AbstractBaseInfos {
     public Set<MoviePerson> getWriters() {
         return this.getWriters(season);
     }
-    
+
     public Set<MoviePerson> getCamera() {
         return this.getCamera(season);
     }
@@ -123,7 +123,7 @@ public class TvSeasonInfos extends AbstractBaseInfos {
     public Set<MoviePerson> getProducers() {
         return this.getProducers(season);
     }
-    
+
     public Set<String> getPosterUrls() {
         return this.getPosterUrls(season);
     }

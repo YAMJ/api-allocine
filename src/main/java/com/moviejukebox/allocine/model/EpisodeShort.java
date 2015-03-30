@@ -26,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EpisodeShort extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("code")
     private Long code;
     @JsonProperty("episodeNumberSeason")
@@ -46,5 +48,5 @@ public class EpisodeShort extends AbstractJsonMapping {
     public void setEpisodeNumberSeason(int episodeNumberSeason) {
         this.episodeNumberSeason = episodeNumberSeason;
     }
-    
+
 }

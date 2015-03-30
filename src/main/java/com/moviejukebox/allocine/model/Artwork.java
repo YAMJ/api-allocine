@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Artwork extends Link {
 
-    private static final long serialVersionUID = 871996088317620377L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("path")
     private String path;

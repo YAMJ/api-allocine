@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 @JsonIgnoreProperties(value = {"trailerEmbed"})
 public class Channel extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = -5954100778647649863L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("code")
     private int code;

@@ -32,7 +32,7 @@ import java.util.Map;
 @JsonRootName("statistics")
 public class Statistics {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 100L;
 
     private final Map<String, Object> stats = new HashMap<>();
     @JsonProperty("rating")

@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName("participation")
 public class Participation extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 8804738778672146178L;
+    private static final long serialVersionUID = 100L;
     
     @JsonProperty("movie")
     private Movie movie;

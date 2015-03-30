@@ -29,7 +29,7 @@ import java.util.List;
 @JsonRootName("castMember")
 public class CastMember extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("person")
     private ShortPerson shortPerson;

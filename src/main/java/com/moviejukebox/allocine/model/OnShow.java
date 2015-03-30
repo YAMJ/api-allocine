@@ -24,11 +24,9 @@ package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- *
- * @author Stuart
- */
 public class OnShow {
+
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("episode")
     private Episode episode;

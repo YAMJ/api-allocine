@@ -28,7 +28,7 @@ import org.yamj.api.common.exception.ApiExceptionType;
 
 public class AllocineException extends ApiException {
 
-    private static final long serialVersionUID = 2886118816495000659L;
+    private static final long serialVersionUID = 100L;
 
     public AllocineException(ApiExceptionType exceptionType, String response) {
         super(exceptionType, response);

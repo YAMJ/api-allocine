@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName("type")
 public class Type extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = -6009619152789104957L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("code")
     private int code;

@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName("trailer")
 public class Trailer extends AbstractJsonMapping {
     
-    private static final long serialVersionUID = 2260838566086403940L;
+    private static final long serialVersionUID = 100L;
     
     @JsonProperty("name")
     private String name;

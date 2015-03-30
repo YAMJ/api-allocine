@@ -27,6 +27,8 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class Trivia extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 100L;
+
     @JsonProperty("code")
     private String code;
     private String publication;

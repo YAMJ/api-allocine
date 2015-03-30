@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class BoxOffice extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 100L;
 
     @JsonProperty("type")
     private CodeName type;

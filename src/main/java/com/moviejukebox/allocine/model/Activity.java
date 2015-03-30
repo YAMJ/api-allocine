@@ -28,7 +28,7 @@ import com.moviejukebox.allocine.model.enumeration.Job;
 @JsonRootName("activity")
 public class Activity extends CodeName {
 
-    private static final long serialVersionUID = 1739586583915230L;
+    private static final long serialVersionUID = 100L;
     // Actor codes
     private static final int ACTOR_CODE = 8001;
     // Director codes
