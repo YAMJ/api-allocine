@@ -64,8 +64,11 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
             return -1;
         }
 
-        final double userRating = base.getStatistics().getDoubleStatistic("userRating");
-        return (int) ((userRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
+        final Double userRating = base.getStatistics().getDoubleStatistic("userRating");
+        if (userRating == null) {
+            return -1;
+        }
+        return (int) ((userRating.doubleValue() / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
 
     protected int getPressRating(final AbstractBaseMapping base) {
@@ -73,7 +76,10 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
             return -1;
         }
 
-        final double pressRating = base.getStatistics().getDoubleStatistic("pressRating");
+        final Double pressRating = base.getStatistics().getDoubleStatistic("pressRating");
+        if (pressRating == null) {
+            return -1;
+        }
         return (int) ((pressRating / PERCENT_OUT_OF_5) * PERCENT_OUT_OF_100);
     }
 
@@ -120,7 +126,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         return set;
     }
 
-    private MoviePerson createPersonActor(CastMember member) {
+    private static MoviePerson createPersonActor(CastMember member) {
         if (member.isActor()) {
             final MoviePerson person = new MoviePerson();
             person.setCode(member.getShortPerson().getCode());
