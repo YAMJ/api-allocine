@@ -55,16 +55,18 @@ public class Statistics {
     }
 
     public Integer getIntegerStatistic(String statisticName) {
-        return getStatistic(statisticName, Integer.class);
+        Integer stat = getStatistic(statisticName, Integer.class);
+        return stat == null ? -1 : stat;
     }
 
     public Double getDoubleStatistic(String statisticName) {
-        return getStatistic(statisticName, Double.class);
+        Double stat = getStatistic(statisticName, Double.class);
+        return stat == null ? -1 : stat;
     }
 
     public <T> T getStatistic(String statisticName, Class<T> clazz) {
         if (statisticName == null || statisticName.trim().equals("") || stats.get(statisticName) == null) {
-            return clazz.cast(-1);
+            return null;
         } else {
             return clazz.cast(stats.get(statisticName));
         }
