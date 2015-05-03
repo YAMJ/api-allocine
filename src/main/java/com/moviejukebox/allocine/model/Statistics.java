@@ -63,6 +63,10 @@ public class Statistics {
     }
 
     public <T> T getStatistic(String statisticName, Class<T> clazz) {
-        return clazz.cast(stats.get(statisticName));
+        if (statisticName == null || statisticName.trim().equals("") || stats.get(statisticName) == null) {
+            return clazz.cast(-1);
+        } else {
+            return clazz.cast(stats.get(statisticName));
+        }
     }
 }
