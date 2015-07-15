@@ -22,13 +22,13 @@
 package com.moviejukebox.allocine;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.moviejukebox.allocine.model.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
-import static org.junit.Assert.assertFalse;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -121,7 +121,7 @@ public class AllocineApiTest {
         assertEquals("Mon oncle Charlie", tvseriesInfos.getTitle());
         assertEquals("Two and a Half Men", tvseriesInfos.getOriginalTitle());
         assertEquals(2003, tvseriesInfos.getYearStart());
-        assertEquals(0, tvseriesInfos.getYearEnd());
+        assertEquals(2015, tvseriesInfos.getYearEnd());
         assertEquals("CBS", tvseriesInfos.getOriginalChannel());
         assertEquals("La vie d'un riche célibataire est bouleversée lorsque son frère divorcé et son neveu de 10 ans débarquent dans sa propriété de Malibu. Malgré leurs différences, les deux frères décident de co-habiter pour offrir un foyer au jeune Jake.", tvseriesInfos.getSynopsis());
         assertEquals(1, tvseriesInfos.getGenres().size());
