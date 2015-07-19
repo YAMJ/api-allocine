@@ -102,7 +102,7 @@ public class Activity extends CodeName {
         return hasJob(Job.PRODUCER);
     }
 
-    public boolean isKnownActivity() {
+    public boolean isUnknown() {
         return hasJob(Job.UNKNOWN);
     }
 }

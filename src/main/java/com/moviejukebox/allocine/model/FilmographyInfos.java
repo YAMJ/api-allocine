@@ -71,7 +71,7 @@ public class FilmographyInfos extends AbstractPersonInfo {
                 participance.setWriter(p.getActivity().isWriter());
                 participance.setCamera(p.getActivity().isCamera());
                 participance.setProducer(p.getActivity().isProducer());
-
+                
                 if (p.getTvSeries() != null) {
                     processTV(participance, p);
                 } else {
@@ -93,7 +93,7 @@ public class FilmographyInfos extends AbstractPersonInfo {
      */
     private static boolean validParticipation(Participation p) {
         // activity must be given & known
-        if (p.getActivity() == null || !p.getActivity().isKnownActivity()) {
+        if (p.getActivity() == null || p.getActivity().isUnknown()) {
             return false;
         }
 
