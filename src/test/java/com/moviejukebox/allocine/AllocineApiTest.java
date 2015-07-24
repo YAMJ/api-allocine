@@ -30,8 +30,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yamj.api.common.http.AndroidBrowserUserAgentSelector;
 import org.yamj.api.common.http.HttpClientWrapper;
-import org.yamj.api.common.http.WebBrowserUserAgentSelector;
 
 public class AllocineApiTest {
 
@@ -46,7 +46,7 @@ public class AllocineApiTest {
         // This must be the first statement in the beforeClass method
         TestLogger.Configure();
         HttpClientWrapper wrapper = new HttpClientWrapper(HttpClients.createDefault());
-        wrapper.setUserAgentSelector(new WebBrowserUserAgentSelector());
+        wrapper.setUserAgentSelector(new AndroidBrowserUserAgentSelector());
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, wrapper);
     }
 
