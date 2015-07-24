@@ -24,7 +24,6 @@ package com.moviejukebox.allocine;
 import static org.junit.Assert.*;
 
 import com.moviejukebox.allocine.model.*;
-import java.io.IOException;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -43,13 +42,13 @@ public class AllocineApiTest {
     private static AllocineApi api;
 
     @BeforeClass
-    public static void beforeClass() throws AllocineException, IOException {
+    @SuppressWarnings("resource")
+    public static void beforeClass() throws AllocineException {
         // This must be the first statement in the beforeClass method
         TestLogger.Configure();
-        try (HttpClientWrapper wrapper = new HttpClientWrapper(HttpClients.createDefault())) {
-            wrapper.setUserAgentSelector(new AndroidBrowserUserAgentSelector());
-            api = new AllocineApi(PARTNER_KEY, SECRET_KEY, wrapper);
-        }
+        HttpClientWrapper wrapper = new HttpClientWrapper(HttpClients.createDefault());
+        wrapper.setUserAgentSelector(new AndroidBrowserUserAgentSelector());
+        api = new AllocineApi(PARTNER_KEY, SECRET_KEY, wrapper);
     }
 
     @Test
