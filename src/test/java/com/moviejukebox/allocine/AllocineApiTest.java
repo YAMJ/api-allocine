@@ -21,18 +21,17 @@
  */
 package com.moviejukebox.allocine;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import com.moviejukebox.allocine.model.*;
-import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yamj.api.common.http.HttpClientWrapper;
+import org.yamj.api.common.http.WebBrowserUserAgentSelector;
 
 public class AllocineApiTest {
 
@@ -41,14 +40,14 @@ public class AllocineApiTest {
     private static final String SECRET_KEY = "29d185d98c984a359e6e6f26a0474269";
 
     private static AllocineApi api;
-    private static HttpClient httpClient;
 
     @BeforeClass
     public static void beforeClass() throws AllocineException {
         // This must be the first statement in the beforeClass method
         TestLogger.Configure();
-        httpClient = HttpClients.createDefault();
-        api = new AllocineApi(PARTNER_KEY, SECRET_KEY, httpClient);
+        HttpClientWrapper wrapper = new HttpClientWrapper(HttpClients.createDefault());
+        wrapper.setUserAgentSelector(new WebBrowserUserAgentSelector());
+        api = new AllocineApi(PARTNER_KEY, SECRET_KEY, wrapper);
     }
 
     @Test
@@ -151,6 +150,7 @@ public class AllocineApiTest {
     }
 
     @Test
+    @Ignore
     public void testCertification() throws Exception {
         LOG.info("testCertification");
         MovieInfos movieInfos = api.getMovieInfos("21189"); // Fight club, should be a "16"
