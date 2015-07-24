@@ -34,10 +34,10 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.protocol.HTTP;
 import org.slf4j.LoggerFactory;
 import org.yamj.api.common.exception.ApiExceptionType;
-import org.yamj.api.common.http.DigestedResponse;
-import org.yamj.api.common.http.DigestedResponseReader;
+import org.yamj.api.common.http.*;
 
 /**
  * Implementation for Allocine API
@@ -77,7 +77,8 @@ public class AllocineApi {
     private final HttpClient httpClient;
     private final ObjectMapper mapper;
     private final Charset charset;
-
+    private final UserAgentSelector userAgentSelector;
+    
     /**
      * Create the API
      *
@@ -95,6 +96,7 @@ public class AllocineApi {
         this.httpClient = httpClient;
         this.mapper = new ObjectMapper();
         this.charset = Charset.forName("UTF-8");
+        this.userAgentSelector = new AndroidBrowserUserAgentSelector();
     }
 
     /**
@@ -332,7 +334,9 @@ public class AllocineApi {
     private String requestWebPage(URL url) throws AllocineException {
         try {
             final HttpGet httpGet = new HttpGet(url.toURI());
-            httpGet.addHeader("accept", "application/json");
+            httpGet.setHeader("accept", "application/json");
+            httpGet.setHeader(HTTP.USER_AGENT, userAgentSelector.getUserAgent());
+
             final DigestedResponse response = DigestedResponseReader.requestContent(httpClient, httpGet, charset);
 
             if (response.getStatusCode() >= HTTP_STATUS_500) {
