@@ -35,7 +35,7 @@ public class CastingShort extends AbstractJsonMapping {
     private List<String> actors;
     private List<String> creators;
 
-    private List<String> asList(String source) {
+    private static List<String> asList(String source) {
         return Arrays.asList(source.split(","));
     }
 

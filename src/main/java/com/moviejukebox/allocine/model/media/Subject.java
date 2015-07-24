@@ -27,6 +27,8 @@ import com.moviejukebox.allocine.model.PersonMedia;
 
 public class Subject extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = -3018972377627262685L;
+    
     private PersonMedia media;
 
     public PersonMedia getMedia() {

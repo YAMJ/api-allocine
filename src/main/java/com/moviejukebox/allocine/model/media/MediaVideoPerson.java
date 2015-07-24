@@ -28,6 +28,8 @@ import java.util.List;
 
 public class MediaVideoPerson extends MediaVideo {
 
+    private static final long serialVersionUID = -2163041612142044038L;
+    
     private final List<PersonMedia> media = new ArrayList<>();
 
     public List<PersonMedia> getSubject() {

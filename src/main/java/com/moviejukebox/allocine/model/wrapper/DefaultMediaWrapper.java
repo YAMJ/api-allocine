@@ -31,6 +31,8 @@ import com.moviejukebox.allocine.model.media.MediaVideo;
 
 public class DefaultMediaWrapper extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = 8494944042108658875L;
+    
     private MediaBasic media;
 
     public MediaBasic getMedia() {

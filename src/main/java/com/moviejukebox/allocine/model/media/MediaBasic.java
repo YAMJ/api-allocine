@@ -30,6 +30,7 @@ import com.moviejukebox.allocine.model.CodeName;
 @JsonIgnoreProperties(value = {"trailerEmbed"})
 public class MediaBasic extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = -3335090963467492546L;
     private static final int POSTER_MEDIA_CODE = 31001;
 
     @JsonProperty("class")

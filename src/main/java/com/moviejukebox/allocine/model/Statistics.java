@@ -31,8 +31,6 @@ import java.util.Map;
 @JsonRootName("statistics")
 public class Statistics {
 
-    private static final long serialVersionUID = 100L;
-
     private final Map<String, Object> stats = new HashMap<>();
     @JsonProperty("rating")
     private List<Rating> ratings;
@@ -67,8 +65,7 @@ public class Statistics {
     public <T> T getStatistic(String statisticName, Class<T> clazz) {
         if (statisticName == null || statisticName.trim().equals("") || stats.get(statisticName) == null) {
             return null;
-        } else {
-            return clazz.cast(stats.get(statisticName));
         }
+        return clazz.cast(stats.get(statisticName));
     }
 }

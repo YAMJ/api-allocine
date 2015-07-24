@@ -25,6 +25,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MediaPicture extends MediaBasic {
 
+    private static final long serialVersionUID = -136097472323404136L;
+    
     @JsonProperty("rcode")
     private Long rcode;
     @JsonProperty("description")

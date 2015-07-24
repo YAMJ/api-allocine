@@ -28,8 +28,6 @@ package com.moviejukebox.allocine.model;
  */
 public class MoviePerson {
 
-    private static final long serialVersionUID = 100L;
-
     private long code;
     private String name;
     private String role;

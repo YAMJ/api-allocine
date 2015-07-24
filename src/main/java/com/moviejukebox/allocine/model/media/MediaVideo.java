@@ -23,13 +23,12 @@ package com.moviejukebox.allocine.model.media;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.moviejukebox.allocine.model.AllocineDate;
-import com.moviejukebox.allocine.model.CodeNameOriginal;
-import com.moviejukebox.allocine.model.CodeNameShort;
-import com.moviejukebox.allocine.model.Statistics;
+import com.moviejukebox.allocine.model.*;
 
 public class MediaVideo extends MediaBasic {
 
+    private static final long serialVersionUID = -889489716068147302L;
+    
     @JsonProperty("version")
     private CodeNameOriginal version;
     @JsonProperty("runtime")

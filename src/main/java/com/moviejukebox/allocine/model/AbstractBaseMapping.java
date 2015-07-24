@@ -21,21 +21,17 @@
  */
 package com.moviejukebox.allocine.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import com.moviejukebox.allocine.model.media.MediaBasic;
 import com.moviejukebox.allocine.model.media.MediaPicture;
 import com.moviejukebox.allocine.model.media.MediaVideo;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("serial")
 public abstract class AbstractBaseMapping extends AbstractJsonMapping {
 
-    private static final long serialVersionUID = 100L;
-
+    private static final long serialVersionUID = -8874020449926781406L;
+    
     @JsonProperty("code")
     private int code;
     @JsonProperty("title")

@@ -23,8 +23,6 @@ package com.moviejukebox.allocine.model;
 
 public class Participance {
 
-    private static final long serialVersionUID = 100L;
-
     private final boolean tvShow;
     private long code = -1;
 

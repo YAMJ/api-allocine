@@ -25,6 +25,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AbstractPersonInfo extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = -5328947700417021923L;
+    
     @JsonProperty("person")
     private Person person;
 

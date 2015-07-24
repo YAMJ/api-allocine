@@ -26,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class AbstractNewsItem extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = -8632809647267432537L;
+    
     @JsonProperty("code")
     private String code;
     private String publication;

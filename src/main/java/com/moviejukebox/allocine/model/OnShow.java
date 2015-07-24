@@ -25,8 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OnShow {
 
-    private static final long serialVersionUID = 100L;
-
     @JsonProperty("episode")
     private Episode episode;
 

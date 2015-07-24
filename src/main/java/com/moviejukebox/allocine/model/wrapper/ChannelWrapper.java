@@ -27,6 +27,8 @@ import com.moviejukebox.allocine.model.Channel;
 
 public class ChannelWrapper extends AbstractJsonMapping {
 
+    private static final long serialVersionUID = -2797405002978662637L;
+    
     @JsonProperty("channel")
     private Channel channel;
 

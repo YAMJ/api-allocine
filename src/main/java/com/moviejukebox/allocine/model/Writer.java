@@ -25,8 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Writer {
 
-    private static final long serialVersionUID = 100L;
-
     @JsonProperty("code")
     private String code;
     @JsonProperty("name")
