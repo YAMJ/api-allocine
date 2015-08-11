@@ -77,7 +77,7 @@ public class AllocineApi {
     private final HttpClient httpClient;
     private final ObjectMapper mapper;
     private final Charset charset;
-    private final UserAgentSelector userAgentSelector;
+    private final IUserAgentSelector userAgentSelector;
     
     /**
      * Create the API
