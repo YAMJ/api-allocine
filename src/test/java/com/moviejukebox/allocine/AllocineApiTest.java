@@ -139,6 +139,7 @@ public class AllocineApiTest {
     public void testGetTvSeasonInfos() throws Exception {
         LOG.info("testGetTvSeasonInfos");
         final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
+        System.err.println(tvseasonInfos);
         assertEquals(22242, tvseasonInfos.getCode());
         assertEquals(4, tvseasonInfos.getSeasonNumber());
         assertEquals(2014, tvseasonInfos.getYearStart());

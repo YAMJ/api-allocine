@@ -23,10 +23,7 @@ package com.moviejukebox.allocine.model;
 
 import com.moviejukebox.allocine.model.media.MediaBasic;
 import com.moviejukebox.allocine.tools.HtmlTools;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("serial")
 public abstract class AbstractBaseInfos extends AbstractJsonMapping {
@@ -37,7 +34,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
 
     private Set<String> genres;
     private Set<String> nationalities;
-    private Set<String> posterURLS;
+    private Map<String,Long> posters;
 
     protected int getCode(final AbstractBaseMapping base) {
         return base == null ? -1 : base.getCode();
@@ -210,28 +207,28 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
             return;
         }
 
-        if (posterURLS == null) {
-            posterURLS = new LinkedHashSet<>();
+        if (posters == null) {
+            posters = new LinkedHashMap<>();
         }
 
         if (base.getPoster() != null) {
-            posterURLS.add(base.getPoster().getHref());
+            posters.put(base.getPoster().getHref(), Long.valueOf(base.getCode()));
         }
 
         if (base.getMedia() != null) {
             for (MediaBasic medium : base.getMedia()) {
                 if (medium.isPoster() && medium.getThumbnail() != null) {
-                    posterURLS.add(medium.getThumbnail().getHref());
+                    posters.put(medium.getThumbnail().getHref(), medium.getCode());
                 }
             }
         }
     }
 
-    protected Set<String> getPosterUrls(final AbstractBaseMapping base) {
-        if (posterURLS == null) {
+    protected Map<String, Long> getPosters(final AbstractBaseMapping base) {
+        if (posters == null) {
             parseMediaList(base);
         }
-        return posterURLS;
+        return posters;
     }
 
     protected String getReleaseDate(final AbstractBaseMapping base) {

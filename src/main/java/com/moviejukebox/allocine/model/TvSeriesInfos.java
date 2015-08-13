@@ -22,9 +22,7 @@
 package com.moviejukebox.allocine.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This is the TvSeries Search bean for the api.allocine.fr search
@@ -148,8 +146,8 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         return this.getProducers(tvSeries);
     }
 
-    public Set<String> getPosterUrls() {
-        return this.getPosterUrls(tvSeries);
+    public Map<String, Long> getPosters() {
+        return this.getPosters(tvSeries);
     }
 
     public int getSeasonCount() {
