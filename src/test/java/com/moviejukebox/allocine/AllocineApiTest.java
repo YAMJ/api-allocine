@@ -138,7 +138,7 @@ public class AllocineApiTest {
     @Test
     public void testGetTvSeasonInfos() throws Exception {
         LOG.info("testGetTvSeasonInfos");
-        final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos(22242);
+        final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos("22242");
         System.err.println(tvseasonInfos);
         assertEquals(22242, tvseasonInfos.getCode());
         assertEquals(4, tvseasonInfos.getSeasonNumber());

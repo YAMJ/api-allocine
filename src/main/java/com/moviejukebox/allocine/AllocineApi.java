@@ -241,13 +241,13 @@ public class AllocineApi {
      * @return
      * @throws AllocineException
      */
-    public TvSeasonInfos getTvSeasonInfos(Integer seasonCode) throws AllocineException {
+    public TvSeasonInfos getTvSeasonInfos(String allocineId) throws AllocineException {
         final Map<String, String> params = new LinkedHashMap<>();
         params.put(PARAM_PROFILE, LITERAL_LARGE);
         params.put(PARAM_MEDIAFMT, "mp4-lc");
         params.put(PARAM_FILTER, FILTER_MOVIE);
         params.put(PARAM_FORMAT, PARAM_FORMAT_VALUE);
-        params.put(PARAM_CODE, String.valueOf(seasonCode));
+        params.put(PARAM_CODE, allocineId);
         params.put(PARAM_STRIPTAGS, LITERAL_SYNOPSIS);
         final String url = apiUrl.generateUrl(METHOD_SEASON, params);
 
