@@ -149,8 +149,8 @@ public class FilmographyInfos extends AbstractPersonInfo {
         participance.setYear(p.getMovie().getProductionYear());
         if (p.getMovie().getRelease() != null) {
             participance.setReleaseDate(p.getMovie().getRelease().getReleaseDate());
-            if (p.getMovie().getRelease().getReleaseState() != null) {
-                participance.setReleaseState(p.getMovie().getRelease().getReleaseState().getName());
+            if (p.getMovie().getRelease().getCountry() != null) {
+                participance.setReleaseCountry(p.getMovie().getRelease().getCountry().getName());
             }
         }
 

@@ -44,7 +44,7 @@ public class Participance {
     private int seasonNumber = -1;
 
     private String releaseDate;
-    private String releaseState;
+    private String releaseCountry;
     private String title;
     private String originalTitle;
     private String synopsisShort;
@@ -167,12 +167,12 @@ public class Participance {
         this.releaseDate = releaseDate;
     }
 
-    public String getReleaseState() {
-        return releaseState;
+    public String getReleaseCountry() {
+        return releaseCountry;
     }
 
-    public void setReleaseState(String releaseState) {
-        this.releaseState = releaseState;
+    public void setReleaseCountry(String releaseCountry) {
+        this.releaseCountry = releaseCountry;
     }
 
     public String getTitle() {
