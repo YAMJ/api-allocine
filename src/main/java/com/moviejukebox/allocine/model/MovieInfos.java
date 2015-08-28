@@ -88,8 +88,8 @@ public class MovieInfos extends AbstractBaseInfos {
         return this.getReleaseDate(movie);
     }
 
-    public String getReleaseState() {
-        return this.getReleaseState(movie);
+    public String getReleaseCountry() {
+        return this.getReleaseCountry(movie);
     }
 
     public String getSynopsis() {

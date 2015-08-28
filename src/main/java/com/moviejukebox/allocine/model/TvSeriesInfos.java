@@ -85,8 +85,8 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         return this.getReleaseDate(tvSeries);
     }
 
-    public String getReleaseState() {
-        return this.getReleaseState(tvSeries);
+    public String getReleaseCountry() {
+        return this.getReleaseCountry(tvSeries);
     }
 
     public String getSynopsis() {

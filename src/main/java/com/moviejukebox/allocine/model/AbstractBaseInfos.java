@@ -241,16 +241,16 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         return base.getRelease().getReleaseDate();
     }
 
-    protected String getReleaseState(final AbstractBaseMapping base) {
+    protected String getReleaseCountry(final AbstractBaseMapping base) {
         if (base == null) {
             return null;
         }
         if (base.getRelease() == null) {
             return null;
         }
-        if (base.getRelease().getReleaseState() == null) {
+        if (base.getRelease().getCountry() == null) {
             return null;
         }
-        return base.getRelease().getReleaseState().getName();
+        return base.getRelease().getCountry().getName();
     }
 }
