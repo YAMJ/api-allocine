@@ -37,6 +37,8 @@ public class MediaBasic extends AbstractJsonMapping {
     private String mediaClass;
     @JsonProperty("code")
     private Long code;
+    @JsonProperty("rcode")
+    private Long rcode;
     @JsonProperty("type")
     private CodeName mediaType;
     @JsonProperty("title")
@@ -58,6 +60,14 @@ public class MediaBasic extends AbstractJsonMapping {
 
     public void setCode(Long code) {
         this.code = code;
+    }
+
+    public Long getRcode() {
+        return rcode;
+    }
+
+    public void setRcode(Long rcode) {
+        this.rcode = rcode;
     }
 
     public CodeName getMediaType() {

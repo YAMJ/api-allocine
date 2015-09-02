@@ -218,7 +218,7 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         if (base.getMedia() != null) {
             for (MediaBasic medium : base.getMedia()) {
                 if (medium.isPoster() && medium.getThumbnail() != null) {
-                    posters.put(medium.getThumbnail().getHref(), medium.getCode());
+                    posters.put(medium.getThumbnail().getHref(), medium.getRcode());
                 }
             }
         }
