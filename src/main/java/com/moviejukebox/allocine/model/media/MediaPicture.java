@@ -27,8 +27,6 @@ public class MediaPicture extends MediaBasic {
 
     private static final long serialVersionUID = -136097472323404136L;
     
-    @JsonProperty("rcode")
-    private Long rcode;
     @JsonProperty("description")
     private String description;
     @JsonProperty("width")
@@ -37,14 +35,6 @@ public class MediaPicture extends MediaBasic {
     private int height;
     @JsonProperty("copyrightHolder")
     private String copyrightHolder;
-
-    public Long getRcode() {
-        return rcode;
-    }
-
-    public void setRcode(Long rcode) {
-        this.rcode = rcode;
-    }
 
     public String getDescription() {
         return description;
