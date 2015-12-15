@@ -44,15 +44,16 @@ public class AllocineApiTest {
     @BeforeClass
     @SuppressWarnings("resource")
     public static void beforeClass() throws AllocineException {
-        // This must be the first statement in the beforeClass method
-        TestLogger.Configure();
+        // this must be the first statement in the beforeClass method
+        TestLogger.configure();
+        
         HttpClientWrapper wrapper = new HttpClientWrapper(HttpClients.createDefault());
         wrapper.setUserAgentSelector(new AndroidBrowserUserAgentSelector());
         api = new AllocineApi(PARTNER_KEY, SECRET_KEY, wrapper);
     }
 
     @Test
-    public void testAccentSearch() throws Exception {
+    public void testAccentSearch() throws AllocineException {
         LOG.info("testAccentSearch");
         final Search search = api.searchMovies("Mémoires de nos pères");
         boolean found = false;
@@ -67,33 +68,34 @@ public class AllocineApiTest {
     }
 
     @Test
-    public void testSearchMovies() throws Exception {
+    public void testSearchMovies() throws AllocineException {
         LOG.info("testSearchMovieInfos");
         final Search search = api.searchMovies("avatar");
         assertEquals(10, search.getMovies().size());
     }
 
     @Test
-    public void testSearchTvseriesInfos() throws Exception {
+    public void testSearchTvseriesInfos() throws AllocineException {
         LOG.info("testSearchTvseriesInfos");
         final Search search = api.searchTvSeries("glee");
         assertEquals(1, search.getTvSeries().size());
     }
 
     @Test
-    public void testSearchPersons() throws Exception {
+    public void testSearchPersons() throws AllocineException {
         LOG.info("testSearchPersons");
         final Search search = api.searchPersons("Sam Worthington");
         assertEquals(1, search.getPersons().size());
     }
 
     @Test
-    public void testGetMovieInfos() throws Exception {
+    public void testGetMovieInfos() throws AllocineException {
         LOG.info("testGetMovieInfos");
         final MovieInfos movieInfos = api.getMovieInfos("61282");
         // 61282 - Avatar
         // 45322 - Underworld
         // 25722 - SHAFT
+        LOG.debug("Movie Infos : {}", movieInfos);
 
         assertEquals(61282, movieInfos.getCode());
         assertEquals(9720, movieInfos.getRuntime());
@@ -113,9 +115,10 @@ public class AllocineApiTest {
     }
 
     @Test
-    public void testGetTvSeriesInfos() throws Exception {
+    public void testGetTvSeriesInfos() throws AllocineException {
         LOG.info("testGetTvSeriesInfos");
         final TvSeriesInfos tvseriesInfos = api.getTvSeriesInfos("132");
+        LOG.debug("TV Series Infos : {}", tvseriesInfos);
 
         assertEquals(132, tvseriesInfos.getCode());
         assertEquals("Mon oncle Charlie", tvseriesInfos.getTitle());
@@ -126,8 +129,6 @@ public class AllocineApiTest {
         assertEquals("La vie d'un riche célibataire est bouleversée lorsque son frère divorcé et son neveu de 10 ans débarquent dans sa propriété de Malibu. Malgré leurs différences, les deux frères décident de co-habiter pour offrir un foyer au jeune Jake.", tvseriesInfos.getSynopsis());
         assertEquals(1, tvseriesInfos.getGenres().size());
         assertEquals(1, tvseriesInfos.getNationalities().size());
-        //assertEquals(1, tvseriesInfos.getDirectors().size());
-        //assertTrue(tvseriesInfos.getWriters().size() >= 12);
         assertTrue(tvseriesInfos.getActors().size() >= 5);
         assertEquals(70, tvseriesInfos.getUserRating());
         assertEquals(12, tvseriesInfos.getSeasonCount());
@@ -136,10 +137,11 @@ public class AllocineApiTest {
     }
 
     @Test
-    public void testGetTvSeasonInfos() throws Exception {
+    public void testGetTvSeasonInfos() throws AllocineException {
         LOG.info("testGetTvSeasonInfos");
         final TvSeasonInfos tvseasonInfos = api.getTvSeasonInfos("22242");
-        System.err.println(tvseasonInfos);
+        LOG.debug("TV Season Infos : {}", tvseasonInfos);
+        
         assertEquals(22242, tvseasonInfos.getCode());
         assertEquals(4, tvseasonInfos.getSeasonNumber());
         assertEquals(2014, tvseasonInfos.getYearStart());
@@ -153,7 +155,7 @@ public class AllocineApiTest {
 
     @Test
     @Ignore
-    public void testCertification() throws Exception {
+    public void testCertification() throws AllocineException {
         LOG.info("testCertification");
         MovieInfos movieInfos = api.getMovieInfos("21189"); // Fight club, should be a "16"
         assertEquals("Incorrect certificate", "16", movieInfos.getCertification());
@@ -162,7 +164,7 @@ public class AllocineApiTest {
     }
 
     @Test
-    public void testGetPersonInfos() throws Exception {
+    public void testGetPersonInfos() throws AllocineException {
         LOG.info("testGetPersonInfos");
         final PersonInfos personInfos = api.getPersonInfos("8504");
         assertEquals(8504, personInfos.getCode());
@@ -173,7 +175,7 @@ public class AllocineApiTest {
     }
 
     @Test
-    public void testGetPersonFilmography() throws Exception {
+    public void testGetPersonFilmography() throws AllocineException {
         LOG.info("testGetPersonFilmography");
         final FilmographyInfos filmographyInfos = api.getPersonFilmography("80927");
         for (Participance p : filmographyInfos.getParticipances()) {
@@ -186,7 +188,7 @@ public class AllocineApiTest {
     }
 
     @Test
-    public void testGetEpisodeInfos() throws Exception {
+    public void testGetEpisodeInfos() throws AllocineException {
         LOG.info("testGetEpisodeInfos");
         final EpisodeInfos episodeInfos = api.getEpisodeInfos("493491");
         assertEquals(493491, episodeInfos.getCode());

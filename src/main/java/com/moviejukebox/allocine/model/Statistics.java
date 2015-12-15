@@ -32,6 +32,7 @@ import java.util.Map;
 public class Statistics {
 
     private final Map<String, Object> stats = new HashMap<>();
+    
     @JsonProperty("rating")
     private List<Rating> ratings;
 
@@ -54,16 +55,16 @@ public class Statistics {
 
     public Integer getIntegerStatistic(String statisticName) {
         Integer stat = getStatistic(statisticName, Integer.class);
-        return stat == null ? -1 : stat;
+        return (stat == null) ? -1 : stat;
     }
 
     public Double getDoubleStatistic(String statisticName) {
         Double stat = getStatistic(statisticName, Double.class);
-        return stat == null ? -1 : stat;
+        return (stat == null) ? -1 : stat;
     }
 
     public <T> T getStatistic(String statisticName, Class<T> clazz) {
-        if (statisticName == null || statisticName.trim().equals("") || stats.get(statisticName) == null) {
+        if (statisticName == null || "".equals(statisticName) || stats.get(statisticName) == null) {
             return null;
         }
         return clazz.cast(stats.get(statisticName));

@@ -21,6 +21,8 @@
  */
 package com.moviejukebox.allocine;
 
+import static org.yamj.api.common.exception.ApiExceptionType.*;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviejukebox.allocine.model.*;
 import com.moviejukebox.allocine.tools.ApiUrl;
@@ -36,7 +38,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.protocol.HTTP;
 import org.slf4j.LoggerFactory;
-import org.yamj.api.common.exception.ApiExceptionType;
 import org.yamj.api.common.http.*;
 
 /**
@@ -89,7 +90,7 @@ public class AllocineApi {
      */
     public AllocineApi(final String partnerKey, final String secretKey, final HttpClient httpClient) throws AllocineException {
         if (StringUtils.isBlank(partnerKey) || StringUtils.isBlank(secretKey)) {
-            throw new AllocineException(ApiExceptionType.AUTH_FAILURE, "Must provide a Partner and Sercret key");
+            throw new AllocineException(AUTH_FAILURE, "Must provide a Partner and Sercret key");
         }
 
         this.apiUrl = new ApiUrl(partnerKey, secretKey);
@@ -115,10 +116,10 @@ public class AllocineApi {
                 return mapper.readValue(page, object);
             } catch (IOException ex) {
                 LoggerFactory.getLogger("test").info("{}", ex);
-                throw new AllocineException(ApiExceptionType.MAPPING_FAILED, "Failed to read JSON object", url, ex);
+                throw new AllocineException(MAPPING_FAILED, "Failed to read JSON object", url, ex);
             }
         }
-        throw new AllocineException(ApiExceptionType.MAPPING_FAILED, "Failed to read JSON object", url);
+        throw new AllocineException(MAPPING_FAILED, "Failed to read JSON object", url);
     }
 
     /**
@@ -139,7 +140,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -161,7 +162,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -183,7 +184,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), Search.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -206,7 +207,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), MovieInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -230,7 +231,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), TvSeriesInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -254,7 +255,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), TvSeasonInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -276,7 +277,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), PersonInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -298,7 +299,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), FilmographyInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -320,7 +321,7 @@ public class AllocineApi {
         try {
             return this.readJsonObject(new URL(url), EpisodeInfos.class);
         } catch (MalformedURLException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
+            throw new AllocineException(INVALID_URL, ERROR_FAILED_TO_CONVERT_URL, url, ex);
         }
     }
 
@@ -331,7 +332,7 @@ public class AllocineApi {
      * @return
      * @throws AllocineException
      */
-    private String requestWebPage(URL url) throws AllocineException {
+    private String requestWebPage(URL url) throws AllocineException { //NOSONAR
         try {
             final HttpGet httpGet = new HttpGet(url.toURI());
             httpGet.setHeader("accept", "application/json");
@@ -340,18 +341,18 @@ public class AllocineApi {
             final DigestedResponse response = DigestedResponseReader.requestContent(httpClient, httpGet, charset);
 
             if (response.getStatusCode() == 0) {
-                throw new AllocineException(ApiExceptionType.CONNECTION_ERROR, response.getContent(), response.getStatusCode(), url);
+                throw new AllocineException(CONNECTION_ERROR, response.getContent(), response.getStatusCode(), url);
             } else if (response.getStatusCode() >= HTTP_STATUS_500) {
-                throw new AllocineException(ApiExceptionType.HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
+                throw new AllocineException(HTTP_503_ERROR, response.getContent(), response.getStatusCode(), url);
             } else if (response.getStatusCode() >= HTTP_STATUS_300) {
-                throw new AllocineException(ApiExceptionType.HTTP_404_ERROR, response.getContent(), response.getStatusCode(), url);
+                throw new AllocineException(HTTP_404_ERROR, response.getContent(), response.getStatusCode(), url);
             }
 
             return response.getContent();
         } catch (URISyntaxException ex) {
-            throw new AllocineException(ApiExceptionType.INVALID_URL, "Invalid URL", url, ex);
+            throw new AllocineException(INVALID_URL, "Invalid URL", url, ex);
         } catch (IOException ex) {
-            throw new AllocineException(ApiExceptionType.CONNECTION_ERROR, "Error retrieving URL", url, ex);
+            throw new AllocineException(CONNECTION_ERROR, "Error retrieving URL", url, ex);
         }
     }
 }
