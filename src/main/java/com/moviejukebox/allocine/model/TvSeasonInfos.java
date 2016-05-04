@@ -112,13 +112,17 @@ public class TvSeasonInfos extends AbstractBaseInfos {
     public Set<MoviePerson> getWriters() {
         return this.getWriters(season);
     }
+    
+    public Set<MoviePerson> getProducers() {
+        return this.getProducers(season);
+    }
 
     public Set<MoviePerson> getCamera() {
         return this.getCamera(season);
     }
 
-    public Set<MoviePerson> getProducers() {
-        return this.getProducers(season);
+    public Set<MoviePerson> getArt() {
+        return this.getArt(season);
     }
 
     public Map<String, Long> getPosters() {

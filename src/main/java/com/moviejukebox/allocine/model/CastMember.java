@@ -104,6 +104,13 @@ public class CastMember extends AbstractJsonMapping {
         return false;
     }
 
+    public boolean isProducer() {
+        if (this.activity != null) {
+            return this.activity.isProducer();
+        }
+        return false;
+    }
+
     public boolean isCamera() {
         if (this.activity != null) {
             return this.activity.isCamera();
@@ -111,9 +118,9 @@ public class CastMember extends AbstractJsonMapping {
         return false;
     }
 
-    public boolean isProducer() {
+    public boolean isArt() {
         if (this.activity != null) {
-            return this.activity.isProducer();
+            return this.activity.isArt();
         }
         return false;
     }

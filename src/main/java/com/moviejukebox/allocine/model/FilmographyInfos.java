@@ -69,8 +69,9 @@ public class FilmographyInfos extends AbstractPersonInfo {
                 participance.setActor(p.getActivity().isActor());
                 participance.setDirector(p.getActivity().isDirector());
                 participance.setWriter(p.getActivity().isWriter());
-                participance.setCamera(p.getActivity().isCamera());
                 participance.setProducer(p.getActivity().isProducer());
+                participance.setCamera(p.getActivity().isCamera());
+                participance.setArt(p.getActivity().isArt());
                 
                 if (p.getTvSeries() != null) {
                     processTV(participance, p);

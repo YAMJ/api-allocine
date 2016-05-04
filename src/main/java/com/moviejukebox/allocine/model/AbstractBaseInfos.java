@@ -162,6 +162,18 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         return set;
     }
 
+    protected Set<MoviePerson> getProducers(final AbstractBaseMapping base) {
+        final Set<MoviePerson> set = new LinkedHashSet<>();
+        if (base != null && base.getCastMember() != null) {
+            for (CastMember member : base.getCastMember()) {
+                if (member.isProducer()) {
+                    addMember(member, set);
+                }
+            }
+        }
+        return set;
+    }
+
     protected Set<MoviePerson> getCamera(final AbstractBaseMapping base) {
         final Set<MoviePerson> set = new LinkedHashSet<>();
         if (base != null && base.getCastMember() != null) {
@@ -174,11 +186,11 @@ public abstract class AbstractBaseInfos extends AbstractJsonMapping {
         return set;
     }
 
-    protected Set<MoviePerson> getProducers(final AbstractBaseMapping base) {
+    protected Set<MoviePerson> getArt(final AbstractBaseMapping base) {
         final Set<MoviePerson> set = new LinkedHashSet<>();
         if (base != null && base.getCastMember() != null) {
             for (CastMember member : base.getCastMember()) {
-                if (member.isProducer()) {
+                if (member.isArt()) {
                     addMember(member, set);
                 }
             }

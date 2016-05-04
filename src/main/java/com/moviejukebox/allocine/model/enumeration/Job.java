@@ -33,5 +33,6 @@ public enum Job {
     PRODUCER,
     WRITER,
     CAMERA,
+    ART,
     UNKNOWN;
 }

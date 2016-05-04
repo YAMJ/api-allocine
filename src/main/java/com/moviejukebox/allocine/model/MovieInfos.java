@@ -153,12 +153,16 @@ public class MovieInfos extends AbstractBaseInfos {
         return this.getWriters(movie);
     }
 
+    public Set<MoviePerson> getProducers() {
+        return this.getProducers(movie);
+    }
+
     public Set<MoviePerson> getCamera() {
         return this.getCamera(movie);
     }
 
-    public Set<MoviePerson> getProducers() {
-        return this.getProducers(movie);
+    public Set<MoviePerson> getArt() {
+        return this.getArt(movie);
     }
 
     public Map<String, Long> getPosters() {

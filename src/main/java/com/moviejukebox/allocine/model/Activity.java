@@ -34,18 +34,21 @@ public class Activity extends CodeName {
     private static final int ACTOR_CODE = 8001;
     // Director codes
     private static final int DIRECTOR_CODE = 8002;
+    // Writer codes
+    private static final int WRITER_CODE = 8004;
+    private static final int SCRIPT_CODE = 8043;
+    private static final int AUTEUR_CODE = 8105;
     // Producer codes
     private static final int PRODUCER_CODE = 8029;
     private static final int DELEGATE_PRODUCER_CODE = 8061;
     private static final int EXECUTIVE_PRODUCER_CODE = 8062;
     private static final int COPRODUCER_CODE = 8063;
     private static final int ASSOCIATE_PRODUCER_CODE = 8064;
-    // Writer codes
-    private static final int WRITER_CODE = 8004;
-    private static final int SCRIPT_CODE = 8043;
     // Camera codes
     private static final int CAMERA_CODE = 8037;
-
+    // Art codes
+    private static final int CHEF_DECORATEUR_CODE = 8059;
+    
     private Job job = Job.UNKNOWN;
 
     private static final Map<Integer, Job> JOB_LIST = new HashMap<>();
@@ -55,17 +58,20 @@ public class Activity extends CodeName {
         JOB_LIST.put(ACTOR_CODE, Job.ACTOR);
         // Director codes
         JOB_LIST.put(DIRECTOR_CODE, Job.DIRECTOR);
+        // Writer codes
+        JOB_LIST.put(WRITER_CODE, Job.WRITER);
+        JOB_LIST.put(SCRIPT_CODE, Job.WRITER);
+        JOB_LIST.put(AUTEUR_CODE, Job.WRITER);
         // Producer codes
         JOB_LIST.put(PRODUCER_CODE, Job.PRODUCER);
         JOB_LIST.put(DELEGATE_PRODUCER_CODE, Job.PRODUCER);
         JOB_LIST.put(EXECUTIVE_PRODUCER_CODE, Job.PRODUCER);
         JOB_LIST.put(COPRODUCER_CODE, Job.PRODUCER);
         JOB_LIST.put(ASSOCIATE_PRODUCER_CODE, Job.PRODUCER);
-        // Writer codes
-        JOB_LIST.put(WRITER_CODE, Job.WRITER);
-        JOB_LIST.put(SCRIPT_CODE, Job.WRITER);
         // Camera codes
         JOB_LIST.put(CAMERA_CODE, Job.CAMERA);
+        // Art codes
+        JOB_LIST.put(CHEF_DECORATEUR_CODE, Job.ART);
     }
 
     @Override
@@ -94,12 +100,16 @@ public class Activity extends CodeName {
         return hasJob(Job.WRITER);
     }
 
+    public boolean isProducer() {
+        return hasJob(Job.PRODUCER);
+    }
+
     public boolean isCamera() {
         return hasJob(Job.CAMERA);
     }
 
-    public boolean isProducer() {
-        return hasJob(Job.PRODUCER);
+    public boolean isArt() {
+        return hasJob(Job.ART);
     }
 
     public boolean isUnknown() {

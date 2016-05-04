@@ -138,12 +138,16 @@ public class TvSeriesInfos extends AbstractBaseInfos {
         return this.getWriters(tvSeries);
     }
 
+    public Set<MoviePerson> getProducers() {
+        return this.getProducers(tvSeries);
+    }
+
     public Set<MoviePerson> getCamera() {
         return this.getCamera(tvSeries);
     }
 
-    public Set<MoviePerson> getProducers() {
-        return this.getProducers(tvSeries);
+    public Set<MoviePerson> getArt() {
+        return this.getArt(tvSeries);
     }
 
     public Map<String, Long> getPosters() {
